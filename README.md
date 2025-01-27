@@ -1,6 +1,6 @@
 # Introduction
 
-This repository holds the source code, documentation and tests for the file syncing library `libfilesync`.
+This repository holds the source code, documentation and tests for the <b>O</b>n <b>t</b>op <b>o</b>f cURL> <b>C++</b> library `libotocurl`.
 
 This `README` gives you the steps to build the library, the (unit and integration) tests and examples.
 You will find information regarding the project structure.
@@ -19,7 +19,7 @@ Refer to the [examples](#examples) for guidance on the use of this library.
 
 Build the library:
 ```shell
-cd libfilesync
+cd libotocurl
 mkdir build
 cd build
 cmake ..
@@ -31,7 +31,7 @@ cmake --build .
 Set the `BUILD_EXAMPLES` option to build example applications.
 
 ```shell
-cd libfilesync
+cd libotocurl
 mkdir build
 cd build
 cmake -DBUILD_EXAMPLES=ON ..
@@ -43,7 +43,7 @@ cmake --build .
 Set the `BUILD_UNIT_TESTS` and/or the `BUILD_INTEGRATION_TESTS` options to build tests.
 
 ```shell
-cd libfilesync
+cd libotocurl
 mkdir build
 cd build
 cmake -DBUILD_UNIT_TESTS=ON -DBUILD_INTEGRATION_TESTS=ON ..
@@ -62,7 +62,7 @@ Unit test names are preceded by `UT` and integration test names are preceded by 
 Use the `CMAKE_BUILD_TYPE` option to enable debug build.
 
 ```shell
-cd libfilesync
+cd libotocurl
 mkdir -p build
 cd build
 cmake -DCMAKE_BUILD_TYPE=DEBUG ..
@@ -75,17 +75,17 @@ cmake --build .
 (root)
 +- doc                      # Plant UML diagrams
 |   +- *.puml
-+- examples                 # Examples using libfilesync
++- examples                 # Examples using libotocurl
 |   +- <em>example1</em>
 |       +- CMakeLists.txt
 |       +- *.cpp
-+- libfilesync              # File sync library
++- libotocurl               # On top of cURL library
 |   +- doc
 |       +- *.puml           # UML diagram 
 |   +- CMakeLists.txt
 |   +- *.cpp
 |   +- *.hpp
-|   +- <em>component1</em>                       # File sync library component sub directory
+|   +- <em>component1</em>                       # otocurl library component sub directory
 |       +- doc
 |           +- *.puml                   # UML diagram
 |       +- CMakeLists.txt
@@ -94,7 +94,7 @@ cmake --build .
 |       +- *.tpp                        # Library template implementation file
 |       +- *.test.cpp                   # Unit tests source file
 |       +- *.test.hpp                   # Unit test header file
-|   +- <em>component2</em>                       # File sync library component sub directory
+|   +- <em>component2</em>                       # otocurl library component sub directory
 |       +- doc
 |           +- *.puml                   
 |       +- CMakeLists.txt
