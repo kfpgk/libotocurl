@@ -1,14 +1,22 @@
+add_library(libotocurl 
+    Exception.cpp
+    ProtocolClient.cpp
+    FtpClient.cpp
+)
+
+set_target_properties(libotocurl PROPERTIES PREFIX "")
+
+set(PUBLIC_INCLUDE_DIR ${CMAKE_BINARY_DIR}/libotocurl/include)
+
+target_link_libraries(libotocurl 
+    PRIVATE
+        curl
+)
+
 add_subdirectory(option)
 add_subdirectory(parser)
 add_subdirectory(storage)
 add_subdirectory(wrapper)
-
-target_sources(libotocurl 
-    PRIVATE
-        Exception.cpp
-        ProtocolClient.cpp
-        FtpClient.cpp
-)
 
 if(BUILD_UNIT_TESTS)
     enable_testing()
