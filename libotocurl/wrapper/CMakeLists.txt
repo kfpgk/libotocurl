@@ -1,4 +1,4 @@
-target_sources(libfilesync 
+target_sources(libotocurl 
     PRIVATE
         Base.cpp
         Easy.cpp

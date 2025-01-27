@@ -12,7 +12,7 @@ target_include_directories(test_curl_ftp_upload_download
 )
 target_link_libraries(test_curl_ftp_upload_download
     PRIVATE 
-        libfilesync
+        libotocurl
 )
 add_test(
     NAME "IT CURL FTP Upload and Download"
@@ -31,7 +31,7 @@ target_include_directories(test_curl_ftp_get_file_size
 )
 target_link_libraries(test_curl_ftp_get_file_size
     PRIVATE 
-        libfilesync
+        libotocurl
 )
 add_test(
     NAME "IT CURL FTP Get Remote File Size"

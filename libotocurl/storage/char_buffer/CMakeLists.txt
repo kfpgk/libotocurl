@@ -1,6 +1,6 @@
 add_subdirectory(visitor)
 
-target_sources(libfilesync
+target_sources(libotocurl
     PRIVATE
         CharBufferStub.test.cpp
         ReadBuffer.cpp
@@ -20,7 +20,7 @@ if(BUILD_UNIT_TESTS)
     )
     target_link_libraries(ReadBuffer_test
         PRIVATE
-            libfilesync
+            libotocurl
     )
     add_test(
         NAME "UT curl::storage::char_buffer::ReadBuffer"
@@ -37,7 +37,7 @@ if(BUILD_UNIT_TESTS)
     )
     target_link_libraries(ReadWriteBuffer_test
         PRIVATE
-            libfilesync
+            libotocurl
     )
     add_test(
         NAME "UT curl::storage::char_buffer::ReadWriteBuffer"

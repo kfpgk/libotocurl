@@ -12,7 +12,7 @@ target_include_directories(test_curl_memory_storage
 )
 target_link_libraries(test_curl_memory_storage
     PRIVATE
-        libfilesync
+        libotocurl
 )
 add_test(
     NAME "IT CURL Download and Upload to Memory storage"

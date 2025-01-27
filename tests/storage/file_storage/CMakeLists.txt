@@ -12,7 +12,7 @@ target_include_directories(test_curl_file_storage
 )
 target_link_libraries(test_curl_file_storage
     PRIVATE
-        libfilesync
+        libotocurl
 )
 add_test(
     NAME "IT CURL File Storage Basic Object operations"

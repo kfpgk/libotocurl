@@ -1,7 +1,7 @@
 add_subdirectory(char_buffer)
 add_subdirectory(visitor)
 
-target_sources(libfilesync
+target_sources(libotocurl
     PRIVATE   
         FileStorage.cpp
         MemoryStorage.cpp
@@ -20,7 +20,7 @@ if(BUILD_UNIT_TESTS)
     )
     target_link_libraries(FileStorage_test
         PRIVATE
-            libfilesync
+            libotocurl
     )
     add_test(
         NAME "UT curl::storage::FileStorage"
@@ -37,7 +37,7 @@ if(BUILD_UNIT_TESTS)
     )
     target_link_libraries(MemoryStorage_test
         PRIVATE
-            libfilesync
+            libotocurl
     )
     add_test(
         NAME "UT curl::storage::MemoryStorage"
@@ -54,7 +54,7 @@ if(BUILD_UNIT_TESTS)
     )
     target_link_libraries(MemoryStorageHandle_test
         PRIVATE
-            libfilesync
+            libotocurl
     )
     add_test(
         NAME "UT curl::storage::MemoryStorageHandle"

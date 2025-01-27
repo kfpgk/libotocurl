@@ -3,7 +3,7 @@ add_subdirectory(parser)
 add_subdirectory(storage)
 add_subdirectory(wrapper)
 
-target_sources(libfilesync 
+target_sources(libotocurl 
     PRIVATE
         Exception.cpp
         ProtocolClient.cpp
@@ -24,7 +24,7 @@ if(BUILD_UNIT_TESTS)
     )
     target_link_libraries(CurlProtocolClient_test
         PRIVATE
-            libfilesync
+            libotocurl
     )
     add_test(
         NAME "UT curl::ProtocolClient"
