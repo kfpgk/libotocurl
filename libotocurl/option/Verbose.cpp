@@ -1,21 +1,21 @@
-#include <libfilesync/curl/option/Verbose.hpp>
-#include <libfilesync/curl/option/Option.hpp>
+#include <libotocurl/option/Verbose.hpp>
+#include <libotocurl/option/Option.hpp>
 
 #include <curl/curl.h>
 
 namespace filesync::curl::option {
 
-    Verbose::Verbose(wrapper::Easy& interface,
+    Verbose::Verbose(wrapper::Easy& curlInterface,
         bool value) :
-        Option(interface),
+        Option(curlInterface),
         value{value} {
 
     }
 
-    Verbose::Verbose(wrapper::Easy& interface,
+    Verbose::Verbose(wrapper::Easy& curlInterface,
         bool value,
         bool resetValue) :
-        Option(interface),
+        Option(curlInterface),
         value{value},
         ResettableOption(resetValue) {
 
@@ -31,9 +31,9 @@ namespace filesync::curl::option {
 
     void Verbose::setTo(bool value) {
         if (value) {
-            interface.get().setOption(CURLOPT_VERBOSE, 1L);
+            curlInterface.get().setOption(CURLOPT_VERBOSE, 1L);
         } else {
-            interface.get().setOption(CURLOPT_VERBOSE, 0L);
+            curlInterface.get().setOption(CURLOPT_VERBOSE, 0L);
         }        
     }
 

@@ -1,5 +1,5 @@
-#include <libfilesync/curl/wrapper/Base.hpp>
-#include <libfilesync/curl/wrapper/GlobalSetup.hpp>
+#include <libotocurl/wrapper/Base.hpp>
+#include <libotocurl/wrapper/GlobalSetup.hpp>
 
 namespace filesync::curl::wrapper {
 

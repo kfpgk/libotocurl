@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_HPP
 #define LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_HPP
 
-#include <libfilesync/curl/storage/char_buffer/ReadBuffer.hpp>
+#include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
 
 #include <cstddef>
 #include <span>

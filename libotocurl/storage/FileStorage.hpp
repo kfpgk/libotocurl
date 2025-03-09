@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_FILE_STORAGE_HPP
 #define LIBFILESYNC_CURL_STORAGE_FILE_STORAGE_HPP
 
-#include <libfilesync/curl/option/Factory.hpp>
+#include <libotocurl/option/Factory.hpp>
 
 #include <cstdarg>
 #include <cstdio>

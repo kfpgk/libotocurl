@@ -1,6 +1,6 @@
-#include <tests/curl/ftp/UploadDownload.hpp>
-#include <libfilesync/curl/FtpClient.hpp>
-#include <libfilesync/FileSyncException.hpp>
+#include <tests/ftp/UploadDownload.hpp>
+#include <libotocurl/FtpClient.hpp>
+#include <libotocurl/FileSyncException.hpp>
 
 #include <iostream>
 #include <fstream>

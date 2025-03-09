@@ -1,4 +1,4 @@
-#include <libfilesync/curl/wrapper/EasyStub.test.hpp>
+#include <libotocurl/wrapper/EasyStub.test.hpp>
 
 namespace filesync::curl::wrapper::unit_test {
 

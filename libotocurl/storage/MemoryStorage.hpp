@@ -1,10 +1,10 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HPP
 #define LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HPP
 
-#include <libfilesync/curl/storage/char_buffer/ReadBuffer.hpp>
-#include <libfilesync/curl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libfilesync/curl/storage/char_buffer/CharBufferStub.test.hpp>
-#include <libfilesync/curl/option/Factory.hpp>
+#include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
+#include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
+#include <libotocurl/storage/char_buffer/CharBufferStub.test.hpp>
+#include <libotocurl/option/Factory.hpp>
 
 #include <cstddef>
 #include <span>

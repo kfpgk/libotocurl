@@ -1,7 +1,7 @@
-#include <tests/curl/storage/memory_storage/MemoryStorage.hpp>
-#include <libfilesync/curl/FtpClient.hpp>
-#include <libfilesync/FileSyncException.hpp>
-#include <libfilesync/utility/Literals.hpp>
+#include <tests/storage/memory_storage/MemoryStorage.hpp>
+#include <libotocurl/FtpClient.hpp>
+#include <libotocurl/FileSyncException.hpp>
+#include <libotocurl/utility/Literals.hpp>
 
 #include <filesystem>
 #include <fstream>

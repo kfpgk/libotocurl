@@ -1,20 +1,20 @@
-#include <libfilesync/curl/option/Quote.hpp>
-#include <libfilesync/curl/option/Option.hpp>
+#include <libotocurl/option/Quote.hpp>
+#include <libotocurl/option/Option.hpp>
 
 namespace filesync::curl::option {
 
-    Quote::Quote(wrapper::Easy& interface,
+    Quote::Quote(wrapper::Easy& curlInterface,
         const std::string& command) :
-            Option(interface),
+            Option(curlInterface),
             commands{new wrapper::SList()} {
         
         addCommand(command);
     }
 
-    Quote::Quote(wrapper::Easy& interface,
+    Quote::Quote(wrapper::Easy& curlInterface,
         const std::string& command,
         wrapper::SList* resetValue) :
-            Option(interface),
+            Option(curlInterface),
             ResettableOption(resetValue),
             commands{new wrapper::SList()}  {
 
@@ -38,9 +38,9 @@ namespace filesync::curl::option {
 
     void Quote::setTo(wrapper::SList* value) {
         if (value) {
-            interface.get().setOption(CURLOPT_QUOTE, value->getSListPointer()); 
+            curlInterface.get().setOption(CURLOPT_QUOTE, value->getSListPointer());
         } else {
-            interface.get().setOption(CURLOPT_QUOTE, NULL); 
+            curlInterface.get().setOption(CURLOPT_QUOTE, NULL);
         }
     }
 

@@ -1,6 +1,6 @@
-#include <tests/curl/ftp/GetFileSize.hpp>
-#include <libfilesync/curl/FtpClient.hpp>
-#include <libfilesync/FileSyncException.hpp>
+#include <tests/ftp/GetFileSize.hpp>
+#include <libotocurl/FtpClient.hpp>
+#include <libotocurl/FileSyncException.hpp>
 
 #include <filesystem>
 #include <fstream>

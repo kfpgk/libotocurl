@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_OPTION_UNDOABLE_OPTION_IMPL_HPP
 #define LIBFILESYNC_CURL_OPTION_UNDOABLE_OPTION_IMPL_HPP
 
-#include <libfilesync/curl/option/UndoableOption.hpp>
+#include <libotocurl/option/UndoableOption.hpp>
 
 #include <optional>
 
@@ -31,6 +31,6 @@ namespace filesync::curl::option {
 
 }
 
-#include <libfilesync/curl/option/UndoableOptionImpl.tpp>
+#include <libotocurl/option/UndoableOptionImpl.tpp>
 
 #endif

@@ -1,6 +1,6 @@
-#include <libfilesync/curl/parser/FtpNobody.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/parser/FtpNobody.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #include <cstddef>
 #include <iostream>
@@ -29,8 +29,7 @@ namespace filesync::curl::parser {
         std::string lengthID(LIBFILESYNC_CURL_PARSER_FTP_NOBODY_LENGTH_ID);
         std::size_t lengthPos =content.find(lengthID);
         if (lengthPos == std::string::npos) {
-            throw Exception("Parser error: Could not find length id '" + lengthID + "'",
-                __FILE__, __LINE__);
+            throw Exception("Parser error: Could not find length id '" + lengthID + "'");
         }
 
         std::istringstream sizeStrStream(content.substr(
@@ -39,8 +38,7 @@ namespace filesync::curl::parser {
 
         std::size_t length;
         if (!(sizeStrStream >> length)) {
-            throw Exception("Could not convert value of '" + lengthID + "' to an integer.",
-                __FILE__, __LINE__);            
+            throw Exception("Could not convert value of '" + lengthID + "' to an integer.");            
         }
           
         return length;
@@ -51,8 +49,7 @@ namespace filesync::curl::parser {
         std::string lengthUnitID(LIBFILESYNC_CURL_PARSER_FTP_NOBODY_LENGTH_UNIT_ID);
         std::size_t unitPos =content.find(lengthUnitID);
         if (unitPos == std::string::npos) {
-            throw Exception("Parser error: Could not find unit id '" + lengthUnitID + "'",
-                __FILE__, __LINE__);
+            throw Exception("Parser error: Could not find unit id '" + lengthUnitID + "'");
         }
 
         std::string lengthUnit = trim(content.substr(
@@ -65,8 +62,7 @@ namespace filesync::curl::parser {
     std::size_t FtpNobody::getRatioFromUnit(const std::string& unit) {
         auto it = unitMap.find(unit);
         if (it == unitMap.end()) {
-            throw Exception("Unknown unit '" + unit + "'",
-                __FILE__, __LINE__);            
+            throw Exception("Unknown unit '" + unit + "'");            
         }
         return it->second;
     }

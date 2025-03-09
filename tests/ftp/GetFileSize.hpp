@@ -2,7 +2,7 @@
 #define LIBFILESYNC_TESTS_CURL_FTP_GET_FILE_SIZE_HPP
 
 #include <tests/template/IntegrationTest.hpp>
-#include <libfilesync/utility/Literals.hpp>
+#include <libotocurl/utility/Literals.hpp>
 
 #include <cstddef>
 #include <string>

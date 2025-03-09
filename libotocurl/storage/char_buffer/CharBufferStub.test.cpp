@@ -1,4 +1,4 @@
-#include <libfilesync/curl/storage/char_buffer/CharBufferStub.test.hpp>
+#include <libotocurl/storage/char_buffer/CharBufferStub.test.hpp>
 
 namespace filesync::curl::storage::char_buffer::unit_test {
 

@@ -1,4 +1,4 @@
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/Exception.hpp>
 
 #include <curl/curl.h>
 
@@ -17,8 +17,7 @@ namespace filesync::curl::wrapper {
         if (rc != CURLE_OK) {
             throw Exception(::std::string("curl_easy_setopt(" \
                 + std::string(curl_easy_option_by_id(option)->name) \
-                + ") failed:"), rc, errorBuffer.data(), \
-                __FILE__, __LINE__);
+                + ") failed:"), rc, errorBuffer.data());
         }
     }
 

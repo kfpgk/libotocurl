@@ -6,11 +6,25 @@ add_library(libotocurl
 
 set_target_properties(libotocurl PROPERTIES PREFIX "")
 
-set(PUBLIC_INCLUDE_DIR ${CMAKE_BINARY_DIR}/libotocurl/include)
+find_package(curl
+    REQUIRED
+)
+
+find_path(CURL_INCLUDE_DIR
+    "curl/curl.h"
+    REQUIRED
+)
+
+target_include_directories(libotocurl
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}
+        ${CURL_INCLUDE_DIR}
+)
 
 target_link_libraries(libotocurl 
     PRIVATE
-        curl
+        CURL::libcurl
+    REQUIRED
 )
 
 add_subdirectory(option)

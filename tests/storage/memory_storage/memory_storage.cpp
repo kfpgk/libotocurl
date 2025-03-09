@@ -1,4 +1,4 @@
-#include <tests/curl/storage/memory_storage/MemoryStorage.hpp>
+#include <tests/storage/memory_storage/MemoryStorage.hpp>
 #include <tests/config/config.h>
 
 namespace test = filesync::integration_test;

@@ -1,9 +1,9 @@
 #ifndef LIBFILESYNC_CURL_PROTOCOL_CLIENT_TEST_HPP
 #define LIBFILESYNC_CURL_PROTOCOL_CLIENT_TEST_HPP
 
-#include <libfilesync/curl/ProtocolClient.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
-#include <libfilesync/curl/parser/NobodyStub.test.hpp>
+#include <libotocurl/ProtocolClient.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
+#include <libotocurl/parser/NobodyStub.test.hpp>
 
 #include <memory>
 

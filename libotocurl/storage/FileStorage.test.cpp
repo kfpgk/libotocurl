@@ -1,9 +1,9 @@
-#include <libfilesync/curl/storage/FileStorage.test.hpp>
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/curl/option/Factory.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
-#include <libfilesync/utility/Logger.hpp>
-#include <libfilesync/utility/Literals.hpp>
+#include <libotocurl/storage/FileStorage.test.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/option/Factory.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
+#include <libotocurl/utility/Logger.hpp>
+#include <libotocurl/utility/Literals.hpp>
 
 #include <cassert>
 

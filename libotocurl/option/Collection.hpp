@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_OPTION_COLLECTION_HPP
 #define LIBFILESYNC_CURL_OPTION_COLLECTION_HPP
 
-#include <libfilesync/curl/option/Option.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <memory>
 #include <deque>
@@ -17,15 +17,15 @@ namespace filesync::curl::option {
      */
     class Collection : public Option {
 
-        public:
-            explicit Collection(wrapper::Easy& interface);
-            void add(std::shared_ptr<Option> option);
-            void clear();
+    public:
+        explicit Collection(wrapper::Easy& curlInterface);
+        void add(std::shared_ptr<Option> option);
+        void clear();
 
-        private:
-            std::deque<std::shared_ptr<Option>> options;
+    private:
+        std::deque<std::shared_ptr<Option>> options;
 
-            virtual void doSet();
+        virtual void doSet();
 
     };
 

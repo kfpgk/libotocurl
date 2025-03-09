@@ -1,7 +1,7 @@
-#include <libfilesync/curl/storage/char_buffer/ReadWriteBuffer.test.hpp>
-#include <libfilesync/curl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libfilesync/utility/Logger.hpp>
-#include <libfilesync/utility/Literals.hpp>
+#include <libotocurl/storage/char_buffer/ReadWriteBuffer.test.hpp>
+#include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
+#include <libotocurl/utility/Logger.hpp>
+#include <libotocurl/utility/Literals.hpp>
 
 #include <cassert>
 #include <chrono>

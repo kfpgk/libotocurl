@@ -1,9 +1,9 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_VISITOR_GET_REFERENCE_HPP
 #define LIBFILESYNC_CURL_STORAGE_VISITOR_GET_REFERENCE_HPP
 
-#include <libfilesync/curl/storage/Storage.hpp>
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/curl/storage/MemoryStorage.hpp>
+#include <libotocurl/storage/Storage.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/storage/MemoryStorage.hpp>
 
 namespace filesync::curl::storage::visitor {
 

@@ -1,4 +1,4 @@
-#include <tests/curl/ftp/UploadDownload.hpp>
+#include <tests/ftp/UploadDownload.hpp>
 #include <tests/config/config.h>
 
 namespace test = filesync::integration_test;

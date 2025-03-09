@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_OPTION_GENERIC_HPP
 #define LIBFILESYNC_CURL_OPTION_GENERIC_HPP
 
-#include <libfilesync/curl/option/Option.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <curl/curl.h>
 
@@ -20,27 +20,27 @@ namespace filesync::curl::option {
     template<typename... Args> 
     class Generic : public Option {
 
-        public:
-            Generic(wrapper::Easy& interface,
-                CURLoption curlOption, Args&&... args);
+    public:
+        Generic(wrapper::Easy& curlInterface,
+            CURLoption curlOption, Args&&... args);
 
-        private:
-            CURLoption curlOption;
-            /**
-             * @brief Storage for variadic template arguments
-             * 
-             * Decay the types, because we cannot store some
-             * const literal types (e.g. const char[N]) in 
-             * a member. 
-             */
-            std::tuple<std::decay_t<Args>...> args;
+    private:
+        CURLoption curlOption;
+        /**
+            * @brief Storage for variadic template arguments
+            * 
+            * Decay the types, because we cannot store some
+            * const literal types (e.g. const char[N]) in 
+            * a member. 
+            */
+        std::tuple<std::decay_t<Args>...> args;
 
-            void doSet() override;
+        void doSet() override;
 
     };
 
 }
 
-#include <libfilesync/curl/option/Generic.tpp>
+#include <libotocurl/option/Generic.tpp>
 
 #endif

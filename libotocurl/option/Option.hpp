@@ -1,15 +1,14 @@
 #ifndef LIBFILESYNC_CURL_OPTION_OPTION_HPP
 #define LIBFILESYNC_CURL_OPTION_OPTION_HPP
 
-#include <libfilesync/curl/wrapper/Easy.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <functional>
 
 namespace filesync::curl::option {
 
     /**
-     * @brief: Abstract wrapper for a CURLOPT
-     * 
+     * @brief: Abstract wrapper for an arbitrary CURLOPT
      * 
      * Patterns:
      *  - Command
@@ -18,18 +17,18 @@ namespace filesync::curl::option {
      */
     class Option {
 
-        public:
-            Option(wrapper::Easy& interface);
-            virtual ~Option() = default;
-            void setEasy(wrapper::Easy& interface);
+    public:
+        Option(wrapper::Easy& curlInterface);
+        virtual ~Option() = default;
+        void setEasy(wrapper::Easy& curlInterface);
 
-            void set();
+        void set();
 
-        protected:
-            std::reference_wrapper<wrapper::Easy> interface;
+    protected:
+        std::reference_wrapper<wrapper::Easy> curlInterface;
 
-        private:
-            virtual void doSet() = 0;
+    private:
+        virtual void doSet() = 0;
 
     };
 

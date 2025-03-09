@@ -1,7 +1,7 @@
-#include <tests/curl/storage/file_storage/FileStorage.hpp>
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/data/Data.hpp>
-#include <libfilesync/FileSyncException.hpp>
+#include <tests/storage/file_storage/FileStorage.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/data/Data.hpp>
+#include <libotocurl/FileSyncException.hpp>
 
 #include <filesystem>
 #include <fstream>

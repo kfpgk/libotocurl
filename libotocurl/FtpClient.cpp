@@ -1,21 +1,21 @@
-#include <libfilesync/curl/FtpClient.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/wrapper/Url.hpp>
-#include <libfilesync/curl/option/Factory.hpp>
-#include <libfilesync/curl/option/Generic.hpp>
-#include <libfilesync/curl/option/Option.hpp>
-#include <libfilesync/curl/option/Collection.hpp>
-#include <libfilesync/curl/parser/FtpNobody.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/FtpClient.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Url.hpp>
+#include <libotocurl/option/Factory.hpp>
+#include <libotocurl/option/Generic.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/option/Collection.hpp>
+#include <libotocurl/parser/FtpNobody.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #define FILESYNC_CURL_URL_FTP_PREFIX "ftp"
 
 namespace filesync::curl {
 
     FtpClient::FtpClient(const std::string& serverAddress,
-        std::unique_ptr<wrapper::Easy> interface) :
+        std::unique_ptr<wrapper::Easy> curlInterface) :
             ProtocolClient(
-                std::move(interface),
+                std::move(curlInterface),
                 std::make_unique<parser::FtpNobody>()) {
     
         init(serverAddress);
@@ -43,12 +43,12 @@ namespace filesync::curl {
             options->add(optionFactory.createGeneric(CURLOPT_WRITEDATA, nullptr));
 
             options->set();
-            interface->perform();
+            curlInterface->perform();
 
             LIBFILESYNC_CURL_UTILITY_DEBUG("Successfully connected to '" << activeUrl.getUrl() << "'");
 
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }
         LIBFILESYNC_CURL_UTILITY_DEBUG_EXIT();   
@@ -73,9 +73,9 @@ namespace filesync::curl {
             options->add(optionFactory.createGeneric(CURLOPT_WRITEDATA, nullptr));
 
             options->set();
-            interface->perform();      
+            curlInterface->perform();
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }        
         LIBFILESYNC_CURL_UTILITY_DEBUG_EXIT();       
@@ -110,9 +110,9 @@ namespace filesync::curl {
             options->add(optionFactory.createGeneric(CURLOPT_WRITEDATA, nullptr));
 
             options->set();
-            interface->perform();      
+            curlInterface->perform();
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }
         LIBFILESYNC_CURL_UTILITY_DEBUG_EXIT();            
@@ -137,9 +137,9 @@ namespace filesync::curl {
             options->add(optionFactory.createGeneric(CURLOPT_WRITEDATA, nullptr));
 
             options->set();
-            interface->perform();      
+            curlInterface->perform();
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }   
         LIBFILESYNC_CURL_UTILITY_DEBUG_EXIT();         
@@ -154,7 +154,7 @@ namespace filesync::curl {
             options->add(optionFactory.createVolatileNobody());
             options->add(optionFactory.createGeneric(CURLOPT_WRITEDATA, nullptr));
             options->set();
-            interface->perform();
+            curlInterface->perform();
         } catch(Exception& e) {
             entryIsAccessible = false;
         }

@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_UTILITY_DEBUG_HPP
 #define LIBFILESYNC_CURL_UTILITY_DEBUG_HPP
 
-#include <libfilesync/curl/config/config.h>
+#include <libotocurl/config/config.h>
 
 #include <iostream>
 

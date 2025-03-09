@@ -2,7 +2,7 @@
 #define LIBFILESYNC_TESTS_CURL_STORAGE_MEMORY_STORAGE_MEMORY_STORAGE_HPP
 
 #include <tests/template/IntegrationTest.hpp>
-#include <libfilesync/curl/storage/MemoryStorageHandle.hpp>
+#include <libotocurl/storage/MemoryStorageHandle.hpp>
 
 #include <cstddef>
 #include <memory>

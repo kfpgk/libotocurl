@@ -1,4 +1,4 @@
-#include <tests/curl/storage/file_storage/FileStorage.hpp>
+#include <tests/storage/file_storage/FileStorage.hpp>
 
 namespace test = filesync::integration_test;
 

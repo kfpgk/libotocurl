@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_WRAPPER_URL_HPP
 #define LIBFILESYNC_CURL_WRAPPER_URL_HPP
 
-#include <libfilesync/curl/wrapper/Base.hpp>
+#include <libotocurl/wrapper/Base.hpp>
 
 #include <curl/curl.h>
 
@@ -44,6 +44,6 @@ namespace filesync::curl::wrapper {
 
 }
 
-#include <libfilesync/curl/wrapper/Url.tpp>
+#include <libotocurl/wrapper/Url.tpp>
 
 #endif

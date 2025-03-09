@@ -1,5 +1,5 @@
-#include <libfilesync/curl/wrapper/SList.hpp>
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/wrapper/SList.hpp>
+#include <libotocurl/Exception.hpp>
 
 namespace filesync::curl::wrapper {
 
@@ -20,8 +20,7 @@ namespace filesync::curl::wrapper {
                 curl_slist* tmpHandle = NULL;
                 tmpHandle = curl_slist_append(this->handle, it->c_str());
                 if (!tmpHandle) {
-                    throw Exception("Failed to append '" + *it\
-                    + "' to curl_slist.", __FILE__, __LINE__);
+                    throw Exception("Failed to append '" + *it + "' to curl_slist.");
                 }
                 this->handle = tmpHandle;            
             }
@@ -61,8 +60,7 @@ namespace filesync::curl::wrapper {
         curl_slist* tmpHandle = NULL;
         tmpHandle = curl_slist_append(handle, content.c_str());
         if (!tmpHandle) {
-            throw Exception("Failed to append '" + content\
-            + "' to curl_slist.", __FILE__, __LINE__);
+            throw Exception("Failed to append '" + content + "' to curl_slist.");
         }
         contents.push_back(content);
         handle = tmpHandle;

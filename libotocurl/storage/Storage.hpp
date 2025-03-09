@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_STORAGE_HPP
 #define LIBFILESYNC_CURL_STORAGE_STORAGE_HPP
 
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/curl/storage/MemoryStorage.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/storage/MemoryStorage.hpp>
 
 #include <filesystem>
 #include <span>

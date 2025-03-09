@@ -1,4 +1,4 @@
-#include <libfilesync/curl/parser/NobodyStub.test.hpp>
+#include <libotocurl/parser/NobodyStub.test.hpp>
 
 namespace filesync::curl::parser::unit_test {
 

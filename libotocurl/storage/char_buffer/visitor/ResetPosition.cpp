@@ -1,4 +1,4 @@
-#include <libfilesync/curl/storage/char_buffer/visitor/ResetPosition.hpp>
+#include <libotocurl/storage/char_buffer/visitor/ResetPosition.hpp>
 
 namespace filesync::curl::storage::char_buffer::visitor {
 

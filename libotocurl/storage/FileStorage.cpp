@@ -1,8 +1,8 @@
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/option/Option.hpp>
-#include <libfilesync/curl/option/Generic.hpp>
-#include <libfilesync/utility/Literals.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/option/Generic.hpp>
+#include <libotocurl/utility/Literals.hpp>
 
 #include <cstring>
 #include <filesystem>
@@ -18,10 +18,7 @@ namespace filesync::curl::storage {
     }
 
     FileStorage::FileStorage(const FileStorage& rhs) {
-        path = 
-            std::string(rhs.path.stem()) + 
-            "_copy" + 
-            std::string(rhs.path.extension());
+        path = rhs.path.stem().string() + "_copy" + rhs.path.extension().string();
         if (std::filesystem::is_regular_file(rhs.path)) {
             std::filesystem::copy_file(
                 rhs.path,
@@ -88,8 +85,7 @@ namespace filesync::curl::storage {
 
     std::FILE* FileStorage::getFilePointer(bool throwIfNull) const {
         if (!filePointer && throwIfNull) {
-            throw Exception("filePointer not set '", \
-                __FILE__, __LINE__);               
+            throw Exception("filePointer not set '");               
         }
         return filePointer;
     }
@@ -108,8 +104,7 @@ namespace filesync::curl::storage {
         filePointer = std::fopen(path.string().c_str(), fileAccessFlags.c_str());
         if (!filePointer) {
             throw Exception(std::string("fopen() failed on '" \
-                + path.string() + "' with '" + std::strerror(errno) \
-                + "'"), __FILE__, __LINE__);              
+                + path.string() + "' with '" + std::strerror(errno) + "'"));              
         }
     }
 
@@ -117,8 +112,7 @@ namespace filesync::curl::storage {
         const std::filesystem::path& path) {
         std::uintmax_t fileSize = std::filesystem::file_size(path);
         if (fileSize < 0) {
-            throw Exception(std::string("Could not get file size of '" \
-                + path.string()), __FILE__, __LINE__);  
+            throw Exception(std::string("Could not get file size of '" + path.string()));  
         }
         setInputFileSize(optionFactory, fileSize);
     }
@@ -135,7 +129,7 @@ namespace filesync::curl::storage {
             }
             option->set();
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }
     }

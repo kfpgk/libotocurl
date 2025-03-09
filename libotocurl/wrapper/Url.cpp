@@ -1,5 +1,5 @@
-#include <libfilesync/curl/wrapper/Url.hpp>
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/wrapper/Url.hpp>
+#include <libotocurl/Exception.hpp>
 
 #include <cstring>
 
@@ -54,7 +54,7 @@ namespace filesync::curl::wrapper {
         CURLUcode rc = curl_url_get(handle, CURLUPART_URL, &urlPointer, 0);
         if (rc != CURLUE_OK || !urlPointer) {
             urlPointer = nullptr;
-            throw Exception("curl_url_get(CURLUPART_URL) failed", rc, __FILE__, __LINE__);
+            throw Exception("curl_url_get(CURLUPART_URL) failed", rc);
         }
         return urlPointer; 
     }
@@ -67,7 +67,7 @@ namespace filesync::curl::wrapper {
         CURLUcode rc = curl_url_get(handle, CURLUPART_HOST, &urlPointer, 0);
         if (rc != CURLUE_OK || !urlPointer) {
             urlPointer = nullptr;
-            throw Exception("curl_url_get(CURLUPART_URL) failed", rc, __FILE__, __LINE__);
+            throw Exception("curl_url_get(CURLUPART_URL) failed", rc);
         }
         return urlPointer; 
     }
@@ -80,7 +80,7 @@ namespace filesync::curl::wrapper {
         CURLUcode rc = curl_url_get(handle, CURLUPART_SCHEME, &urlPointer, 0);
         if (rc != CURLUE_OK || !urlPointer) {
             urlPointer = nullptr;
-            throw Exception("curl_url_get(CURLUPART_URL) failed", rc, __FILE__, __LINE__);
+            throw Exception("curl_url_get(CURLUPART_URL) failed", rc);
         }
         return urlPointer; 
     }
@@ -93,7 +93,7 @@ namespace filesync::curl::wrapper {
         CURLUcode rc = curl_url_get(handle, CURLUPART_PATH, &urlPointer, 0);
         if (rc != CURLUE_OK || !urlPointer) {
             urlPointer = nullptr;
-            throw Exception("curl_url_get(CURLUPART_URL) failed", rc, __FILE__, __LINE__);
+            throw Exception("curl_url_get(CURLUPART_URL) failed", rc);
         }
         return urlPointer; 
     }
@@ -114,14 +114,13 @@ namespace filesync::curl::wrapper {
         char* localUrlPointer;
         CURLUcode rc = curl_url_get(handle, CURLUPART_URL, &localUrlPointer, 0);
         if (rc != CURLUE_OK || !localUrlPointer) {
-            throw Exception("curl_url_get(CURLUPART_URL) failed", rc, __FILE__, __LINE__);
+            throw Exception("curl_url_get(CURLUPART_URL) failed", rc);
         }
         rc = curl_url_set(handle, CURLUPART_URL, localUrlPointer, 0);
         curl_free(localUrlPointer);
         if (rc != CURLUE_OK) {           
-            throw Exception("curl_url_set(CURLUPART_URL) failed. Invalid url: '"\
-            + std::string(localUrlPointer) + "'",\
-            rc, __FILE__, __LINE__);
+            throw Exception("curl_url_set(CURLUPART_URL) failed. Invalid url: '" \
+            + std::string(localUrlPointer) + "'", rc);
         }
     }
 

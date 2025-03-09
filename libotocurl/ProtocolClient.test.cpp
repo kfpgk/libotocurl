@@ -1,7 +1,7 @@
-#include <libfilesync/curl/ProtocolClient.test.hpp>
-#include <libfilesync/curl/wrapper/EasyStub.test.hpp>
-#include <libfilesync/utility/Logger.hpp>
-#include <libfilesync/utility/Literals.hpp>
+#include <libotocurl/ProtocolClient.test.hpp>
+#include <libotocurl/wrapper/EasyStub.test.hpp>
+#include <libotocurl/utility/Logger.hpp>
+#include <libotocurl/utility/Literals.hpp>
 
 #include <cassert>
 

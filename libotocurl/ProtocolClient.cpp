@@ -1,8 +1,8 @@
-#include <libfilesync/curl/ProtocolClient.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/option/Nobody.hpp>
-#include <libfilesync/curl/option/Upload.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/ProtocolClient.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/option/Nobody.hpp>
+#include <libotocurl/option/Upload.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #include <curl/curl.h>
 
@@ -20,15 +20,14 @@ namespace filesync::curl {
     }
 
     ProtocolClient::ProtocolClient(
-        std::unique_ptr<wrapper::Easy> interface,
+        std::unique_ptr<wrapper::Easy> curlInterface,
         std::unique_ptr<parser::Nobody> nobodyParser) :
-            interface{std::move(interface)},
-            optionFactory{*this->interface},
+        curlInterface{std::move(curlInterface)},
+            optionFactory{*this->curlInterface },
             nobodyParser{std::move(nobodyParser)} {
 
         if (!this->nobodyParser) {
-            throw Exception("Invalid parser for 'Nobody' output",
-                __FILE__, __LINE__);            
+            throw Exception("Invalid parser for 'Nobody' output");            
         }
 
         std::unique_ptr<option::Collection> options = optionFactory.createCollection();
@@ -42,9 +41,9 @@ namespace filesync::curl {
     }
 
     void ProtocolClient::setInterface(
-        std::unique_ptr<wrapper::Easy> interface) {
+        std::unique_ptr<wrapper::Easy> curlInterface) {
 
-        this->interface = std::move(interface);
+        this->curlInterface = std::move(curlInterface);
     }
 
     void ProtocolClient::setCreateMissingDirs(bool value) {
@@ -64,8 +63,7 @@ namespace filesync::curl {
     void ProtocolClient::setLocalFileForUpload(const std::filesystem::path& path) {
         LIBFILESYNC_CURL_UTILITY_DEBUG("Setting file '" + path.string() + "' for upload.");
         if (!std::filesystem::is_regular_file(path)) {
-            throw Exception(std::string("Local file not found: '" \
-                + path.string() + "'"), __FILE__, __LINE__);  
+            throw Exception(std::string("Local file not found: '" + path.string() + "'"));
         }
         uploadFileStorage = std::make_unique<storage::FileStorage>(path);
         uploadFileStorage->setupRead(optionFactory);
@@ -148,9 +146,9 @@ namespace filesync::curl {
             std::unique_ptr<option::Option> option = 
                 optionFactory.createVolatileUpload(true);
             option->set();
-            interface->perform();
+            curlInterface->perform();
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }
     }
@@ -170,12 +168,12 @@ namespace filesync::curl {
             std::unique_ptr<option::Option> option = 
                 optionFactory.createVolatileUpload(false);
             option->set();
-            interface->perform();
+            curlInterface->perform();
             if (downloadFileStorage) {
                 downloadFileStorage->flush();
             }           
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }
     }
@@ -200,13 +198,13 @@ namespace filesync::curl {
             options->add(optionFactory.createVolatileNobody());
             options->add(optionFactory.createGeneric(CURLOPT_WRITEDATA, nullptr));
             options->set();
-            interface->perform();
+            curlInterface->perform();
             return true;
         } catch(Exception& e) {
             if (e.getCurlCode() == CURLE_REMOTE_FILE_NOT_FOUND) {
                 return false;
             } else {
-                e.addContext(__FILE__, __LINE__);
+                //e.addContext(__FILE__, __LINE__);
                 throw e;
             }
         }       
@@ -231,11 +229,11 @@ namespace filesync::curl {
                 optionFactory.createVolatileNobody();
             option->set();
             prepareDownloadToMemory();
-            interface->perform();
+            curlInterface->perform();
             nobodyParser->parse(getDownloadAsString());
             return nobodyParser->getFileSize();    
         } catch(Exception& e) {
-            e.addContext(__FILE__, __LINE__);
+            //e.addContext(__FILE__, __LINE__);
             throw e;
         }       
     }
@@ -274,36 +272,31 @@ namespace filesync::curl {
 
     void ProtocolClient::validateLocalDownloadDestination() const {
         if (!downloadFileStorage && !downloadMemoryStorage) {
-            throw Exception("Local download storage not set up.", \
-                __FILE__, __LINE__); 
+            throw Exception("Local download storage not set up."); 
         }
     }
 
     void ProtocolClient::validateLocalUploadSource() const {
         if (!uploadFileStorage && !uploadMemoryStorage) {
-            throw Exception("Local upload storage not set up.", \
-                __FILE__, __LINE__); 
+            throw Exception("Local upload storage not set up."); 
         }
     }
 
     void ProtocolClient::validateRemoteFilePath() const {
         if (getRemoteFilePath().empty()) {
-            throw Exception("Remote file path not set.", \
-                __FILE__, __LINE__); 
+            throw Exception("Remote file path not set."); 
         }
     }
 
     void ProtocolClient::validateRemoteDirPath() const {
         if (getRemoteDirPath().empty()) {
-            throw Exception("Remote directory path not set.", \
-                __FILE__, __LINE__); 
+            throw Exception("Remote directory path not set."); 
         }
     }
 
     void ProtocolClient::validateDownloadMemoryStorage() const {
         if (!downloadMemoryStorage) {
-            throw Exception("Download memory storage is empty",
-                __FILE__, __LINE__);
+            throw Exception("Download memory storage is empty");
         }
     }
 

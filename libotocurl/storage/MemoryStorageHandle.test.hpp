@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HANDLE_TEST_HPP
 #define LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HANDLE_TEST_HPP
 
-#include <libfilesync/curl/storage/MemoryStorageHandle.hpp>
+#include <libotocurl/storage/MemoryStorageHandle.hpp>
 
 #include <memory>
 #include <string>

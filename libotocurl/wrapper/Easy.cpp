@@ -1,6 +1,6 @@
-#include <libfilesync/curl/wrapper/Easy.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #include <curl/curl.h>
 
@@ -10,12 +10,11 @@ namespace filesync::curl::wrapper {
         LIBFILESYNC_CURL_UTILITY_DEBUG("Running curl_easy_init()");
         handle = curl_easy_init();
         if (!handle) {
-            throw Exception("curl_easy_init() failed", __FILE__, __LINE__);
+            throw Exception("curl_easy_init() failed");
         }
         rc = curl_easy_setopt(handle, CURLOPT_ERRORBUFFER, errorBuffer.data());
         if (rc != CURLE_OK) {
-            throw Exception("curl_easy_setopt(CURLOPT_ERRORBUFFER) failed:", rc, \
-                __FILE__, __LINE__);
+            throw Exception("curl_easy_setopt(CURLOPT_ERRORBUFFER) failed:", rc);
         }
         setOption(CURLOPT_WRITEFUNCTION, &easyDefaultWriteCallback);
         setOption(CURLOPT_READFUNCTION, &easyDefaultReadCallback);
@@ -56,9 +55,7 @@ namespace filesync::curl::wrapper {
         LIBFILESYNC_CURL_UTILITY_DEBUG("Running curl_easy_perform()");
         CURLcode rc = curl_easy_perform(handle);
         if (rc != CURLE_OK) {
-            throw Exception("curl_easy_perform() failed:", \
-                rc, errorBuffer.data(), \
-                __FILE__, __LINE__);
+            throw Exception("curl_easy_perform() failed:", rc, errorBuffer.data());
         }        
     }
 

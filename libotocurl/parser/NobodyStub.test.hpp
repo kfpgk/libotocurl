@@ -1,7 +1,7 @@
 #ifndef LIBFILESYNC_CURL_PARSER_NOBODY_STUB_TEST_HPP
 #define LIBFILESYNC_CURL_PARSER_NOBODY_STUB_TEST_HPP
 
-#include <libfilesync/curl/parser/Nobody.hpp>
+#include <libotocurl/parser/Nobody.hpp>
 
 #include <string>
 

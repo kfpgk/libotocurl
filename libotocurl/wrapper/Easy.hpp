@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_WRAPPER_EASY_HPP
 #define LIBFILESYNC_CURL_WRAPPER_EASY_HPP
 
-#include <libfilesync/curl/wrapper/Base.hpp>
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/wrapper/Base.hpp>
+#include <libotocurl/Exception.hpp>
 
 #include <curl/curl.h>
 
@@ -81,6 +81,6 @@ namespace filesync::curl::wrapper {
 
 }
 
-#include <libfilesync/curl/wrapper/Easy.tpp>
+#include <libotocurl/wrapper/Easy.tpp>
 
 #endif

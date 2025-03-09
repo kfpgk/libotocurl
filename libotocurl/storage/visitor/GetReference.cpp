@@ -1,4 +1,4 @@
-#include <libfilesync/curl/storage/visitor/GetReference.hpp>
+#include <libotocurl/storage/visitor/GetReference.hpp>
 
 namespace filesync::curl::storage::visitor {
 

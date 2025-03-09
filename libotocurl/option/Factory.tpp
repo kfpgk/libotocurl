@@ -1,4 +1,4 @@
-#include <libfilesync/curl/option/Generic.hpp>
+#include <libotocurl/option/Generic.hpp>
 
 namespace filesync::curl::option {
 
@@ -7,7 +7,7 @@ namespace filesync::curl::option {
         CURLoption curlOption, Args&&... args) const {
 
         return std::make_unique<option::Generic<Args...>>(
-            interface, curlOption, std::forward<Args>(args)...);
+            curlInterface, curlOption, std::forward<Args>(args)...);
     }    
 
 }

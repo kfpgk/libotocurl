@@ -1,8 +1,8 @@
-#include <libfilesync/curl/storage/MemoryStorage.hpp>
-#include <libfilesync/curl/storage/char_buffer/visitor/GetSpan.hpp>
-#include <libfilesync/curl/storage/char_buffer/visitor/ResetPosition.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/storage/MemoryStorage.hpp>
+#include <libotocurl/storage/char_buffer/visitor/GetSpan.hpp>
+#include <libotocurl/storage/char_buffer/visitor/ResetPosition.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #include <cstdio>
 #include <cstdlib>

@@ -1,9 +1,9 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_VISITOR_RESET_POSITION_HPP
 #define LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_VISITOR_RESET_POSITION_HPP
 
-#include <libfilesync/curl/storage/char_buffer/ReadBuffer.hpp>
-#include <libfilesync/curl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libfilesync/curl/storage/char_buffer/CharBufferStub.test.hpp>
+#include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
+#include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
+#include <libotocurl/storage/char_buffer/CharBufferStub.test.hpp>
 
 namespace filesync::curl::storage::char_buffer::visitor {
 

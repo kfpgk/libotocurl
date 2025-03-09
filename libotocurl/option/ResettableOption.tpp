@@ -1,4 +1,4 @@
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/Exception.hpp>
 
 #include <iostream>
 

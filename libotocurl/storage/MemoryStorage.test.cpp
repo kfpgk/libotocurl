@@ -1,7 +1,7 @@
-#include <libfilesync/curl/storage/MemoryStorage.test.hpp>
-#include <libfilesync/curl/storage/MemoryStorage.hpp>
-#include <libfilesync/curl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libfilesync/utility/Logger.hpp>
+#include <libotocurl/storage/MemoryStorage.test.hpp>
+#include <libotocurl/storage/MemoryStorage.hpp>
+#include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
+#include <libotocurl/utility/Logger.hpp>
 
 #include <cassert>
 #include <string>

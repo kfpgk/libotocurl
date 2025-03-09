@@ -1,4 +1,4 @@
-#include <libfilesync/curl/storage/visitor/SetupWrite.hpp>
+#include <libotocurl/storage/visitor/SetupWrite.hpp>
 
 namespace filesync::curl::storage::visitor {
 

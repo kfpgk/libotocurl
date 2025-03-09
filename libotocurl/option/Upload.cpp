@@ -1,19 +1,19 @@
-#include <libfilesync/curl/option/Upload.hpp>
-#include <libfilesync/curl/option/Option.hpp>
+#include <libotocurl/option/Upload.hpp>
+#include <libotocurl/option/Option.hpp>
 
 namespace filesync::curl::option {
 
-    Upload::Upload(wrapper::Easy& interface,
+    Upload::Upload(wrapper::Easy& curlInterface,
         bool value) :
-            Option(interface),
+            Option(curlInterface),
             value{value} {
 
     }
 
-    Upload::Upload(wrapper::Easy& interface,
+    Upload::Upload(wrapper::Easy& curlInterface,
         bool value,
         bool resetValue) :
-            Option(interface),
+            Option(curlInterface),
             value{value},
             ResettableOption(resetValue) {
 
@@ -29,9 +29,9 @@ namespace filesync::curl::option {
 
     void Upload::setTo(bool value) {
         if (value) {
-            interface.get().setOption(CURLOPT_UPLOAD, 1L);
+            curlInterface.get().setOption(CURLOPT_UPLOAD, 1L);
         } else {
-            interface.get().setOption(CURLOPT_UPLOAD, 0L);
+            curlInterface.get().setOption(CURLOPT_UPLOAD, 0L);
         }
         
     }

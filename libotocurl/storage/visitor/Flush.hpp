@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_VISITOR_FLUSH_HPP
 #define LIBFILESYNC_CURL_STORAGE_VISITOR_FLUSH_HPP
 
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/curl/storage/MemoryStorage.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/storage/MemoryStorage.hpp>
 
 namespace filesync::curl::storage::visitor {
 

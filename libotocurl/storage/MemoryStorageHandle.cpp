@@ -1,5 +1,5 @@
-#include <libfilesync/curl/storage/MemoryStorageHandle.hpp>
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/storage/MemoryStorageHandle.hpp>
+#include <libotocurl/Exception.hpp>
 
 namespace filesync::curl::storage {
 
@@ -36,7 +36,7 @@ namespace filesync::curl::storage {
 
     std::unique_ptr<MemoryStorage> MemoryStorageHandle::extract() {
         if (!storage) {
-            throw Exception("Trying to extract empty handle", __FILE__, __LINE__);
+            throw Exception("Trying to extract empty handle");
         }
         return std::move(storage);
     }

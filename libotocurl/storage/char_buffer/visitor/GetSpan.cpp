@@ -1,4 +1,4 @@
-#include <libfilesync/curl/storage/char_buffer/visitor/GetSpan.hpp>
+#include <libotocurl/storage/char_buffer/visitor/GetSpan.hpp>
 
 namespace filesync::curl::storage::char_buffer::visitor {
 

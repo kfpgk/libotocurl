@@ -1,21 +1,21 @@
-#include <libfilesync/curl/option/Nobody.hpp>
-#include <libfilesync/curl/option/Option.hpp>
+#include <libotocurl/option/Nobody.hpp>
+#include <libotocurl/option/Option.hpp>
 
 #include <curl/curl.h>
 
 namespace filesync::curl::option {
 
-    Nobody::Nobody(wrapper::Easy& interface,
+    Nobody::Nobody(wrapper::Easy& curlInterface,
         bool value) :
-            Option(interface),
+            Option(curlInterface),
             value{value} {
 
     }
 
-    Nobody::Nobody(wrapper::Easy& interface,
+    Nobody::Nobody(wrapper::Easy& curlInterface,
         bool value,
         bool resetValue) :
-            Option(interface),
+            Option(curlInterface),
             value{value},
             ResettableOption(resetValue) {
 
@@ -31,9 +31,9 @@ namespace filesync::curl::option {
 
     void Nobody::setTo(bool value) {
         if (value) {
-            interface.get().setOption(CURLOPT_NOBODY, 1L);
+            curlInterface.get().setOption(CURLOPT_NOBODY, 1L);
         } else {
-            interface.get().setOption(CURLOPT_NOBODY, 0L);
+            curlInterface.get().setOption(CURLOPT_NOBODY, 0L);
         }        
     }
 

@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_OPTION_INVOKER_HPP
 #define LIBFILESYNC_CURL_OPTION_INVOKER_HPP
 
-#include <libfilesync/curl/option/Option.hpp>
-#include <libfilesync/curl/option/UndoableOption.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/option/UndoableOption.hpp>
 
 #include <stack>
 #include <memory>

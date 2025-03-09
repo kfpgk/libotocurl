@@ -1,8 +1,8 @@
 #ifndef LIBFILESYNC_CURL_FTP_CLIENT_HPP
 #define LIBFILESYNC_CURL_FTP_CLIENT_HPP
 
-#include <libfilesync/curl/ProtocolClient.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
+#include <libotocurl/ProtocolClient.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <curl/curl.h>
 
@@ -16,19 +16,19 @@ namespace filesync::curl {
      */
     class FtpClient : public ProtocolClient {
 
-        public:
-            explicit FtpClient(const std::string& serverAddress);
-            FtpClient(const std::string& serverAddress,
-                std::unique_ptr<wrapper::Easy> interface);
+    public:
+        explicit FtpClient(const std::string& serverAddress);
+        FtpClient(const std::string& serverAddress,
+            std::unique_ptr<wrapper::Easy> curlInterface);
 
-        private:
-            void doCreateRemoteDir() override;
-            void doDeleteRemoteFile() override;
-            void doSetCreateMissingDirs(bool value) override;
-            void doDeleteRemoteDir() override;
-            bool doRemoteEntryExists() const override;
+    private:
+        void doCreateRemoteDir() override;
+        void doDeleteRemoteFile() override;
+        void doSetCreateMissingDirs(bool value) override;
+        void doDeleteRemoteDir() override;
+        bool doRemoteEntryExists() const override;
 
-            void init(const std::string& serverAddress);
+        void init(const std::string& serverAddress);
 
     };
 

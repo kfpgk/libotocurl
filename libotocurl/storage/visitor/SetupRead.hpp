@@ -1,10 +1,10 @@
 #ifndef LIBFILESYNC_CURL_STORAGE_VISITOR_SETUP_READ_HPP
 #define LIBFILESYNC_CURL_STORAGE_VISITOR_SETUP_READ_HPP
 
-#include <libfilesync/curl/storage/FileStorage.hpp>
-#include <libfilesync/curl/storage/MemoryStorage.hpp>
+#include <libotocurl/storage/FileStorage.hpp>
+#include <libotocurl/storage/MemoryStorage.hpp>
 
-#include <libfilesync/curl/option/Factory.hpp>
+#include <libotocurl/option/Factory.hpp>
 
 namespace filesync::curl::storage::visitor {
 

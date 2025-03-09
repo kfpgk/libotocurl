@@ -1,9 +1,9 @@
 #ifndef LIBFILESYNC_CURL_OPTION_UPLOAD_HPP
 #define LIBFILESYNC_CURL_OPTION_UPLOAD_HPP
 
-#include <libfilesync/curl/option/ResettableOption.hpp>
-#include <libfilesync/curl/option/UndoableOptionImpl.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
+#include <libotocurl/option/ResettableOption.hpp>
+#include <libotocurl/option/UndoableOptionImpl.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 namespace filesync::curl::option {
 
@@ -15,29 +15,29 @@ namespace filesync::curl::option {
      */
     class Upload : public ResettableOption<bool>, public UndoableOptionImpl<bool> {
 
-        public:
-            /**
-             * @brief Constructs a persistent option, which
-             * is not being reset upon object destruction.
-             */
-            Upload(wrapper::Easy& interface,
-                bool value);
+    public:
+        /**
+            * @brief Constructs a persistent option, which
+            * is not being reset upon object destruction.
+            */
+        Upload(wrapper::Easy& curlInterface,
+            bool value);
 
-            /**
-             * @brief Constructs a volatile option, which is
-             * being reset to "resetValue" upon object destruction.
-             */
-            Upload(wrapper::Easy& interface,
-                bool value,
-                bool resetValue);
+        /**
+            * @brief Constructs a volatile option, which is
+            * being reset to "resetValue" upon object destruction.
+            */
+        Upload(wrapper::Easy& curlInterface,
+            bool value,
+            bool resetValue);
 
-            ~Upload();
+        ~Upload();
 
-        private:
-            bool value = false;
+    private:
+        bool value = false;
 
-            [[nodiscard]] bool getValue() override;
-            void setTo(bool value) override;
+        [[nodiscard]] bool getValue() override;
+        void setTo(bool value) override;
 
     };
 

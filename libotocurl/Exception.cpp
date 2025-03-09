@@ -1,64 +1,51 @@
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/Exception.hpp>
 
 #include <sstream>
 
 namespace filesync::curl {
 
     Exception::Exception(const std::string& errorMessage) :
-            FileSyncException(errorMessage) {
-
-    }
-
-    Exception::Exception(const std::string& errorMessage,
-        const char *file,
-        int line) :
-            FileSyncException(errorMessage, file, line) {
+        std::runtime_error(errorMessage) {
 
     }
 
     Exception::Exception(
         const std::string& errorMessage,
-        CURLUcode curlUCode,
-        const char *file,
-        int line) :
-            FileSyncException(errorMessage, file, line),
-            curlUCode{curlUCode} {
+        CURLcode curlCode) :
+        std::runtime_error(errorMessage),
+        curlCode{ curlCode } {
 
         std::stringstream message;
         message << errorMessage << std::endl;
         message << getCurlUCodeMessage() << std::endl;
-        setErrorMessage(message.str());  
+        this->errorMessage = message.str();
     }
 
     Exception::Exception(
         const std::string& errorMessage,
         CURLcode curlCode,
-        const char *file,
-        int line) :
-            FileSyncException(errorMessage, file, line),
-            curlCode {curlCode} {
-
-        std::stringstream message;
-        message << errorMessage << std::endl;
-        message << getCurlCodeMessage() << std::endl;
-        setErrorMessage(message.str());  
-    }
-
-    Exception::Exception(
-        const std::string& errorMessage,
-        CURLcode curlCode,
-        const char* curlErrorBuffer,
-        const char *file,
-        int line) :
-            FileSyncException(errorMessage, file, line),
-            curlCode{curlCode},
+        const char* curlErrorBuffer) :
+            std::runtime_error(errorMessage),
+            curlCode{ curlCode },
             curlErrorBuffer{curlErrorBuffer} {
 
         std::stringstream message;
         message << errorMessage << std::endl;
         message << getCurlCodeMessage() << std::endl;
         message << getCurlErrorBufferMessage() << std::endl;
-        setErrorMessage(message.str());  
+        this->errorMessage = message.str();  
+    }
+
+    Exception::Exception(
+        const std::string& errorMessage,
+        CURLUcode curlUCode) :
+        std::runtime_error(errorMessage),
+        curlUCode{ curlUCode } {
+
+        std::stringstream message;
+        message << errorMessage << std::endl;
+        message << getCurlUCodeMessage() << std::endl;
+        this->errorMessage = message.str();
     }
 
     CURLcode Exception::getCurlCode() const {

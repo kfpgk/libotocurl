@@ -1,15 +1,15 @@
-#include <libfilesync/curl/option/Option.hpp>
-#include <libfilesync/curl/Exception.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/Exception.hpp>
 
 namespace filesync::curl::option {
 
-    Option::Option(wrapper::Easy& interface) :
-        interface{interface} {
+    Option::Option(wrapper::Easy& curlInterface) :
+        curlInterface{ curlInterface } {
 
     }
 
-    void Option::setEasy(wrapper::Easy& interface) {
-        this->interface = interface;
+    void Option::setEasy(wrapper::Easy& curlInterface) {
+        this->curlInterface = curlInterface;
     }
 
     void Option::set() {

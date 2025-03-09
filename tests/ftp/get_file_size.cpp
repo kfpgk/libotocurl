@@ -1,4 +1,4 @@
-#include <tests/curl/ftp/GetFileSize.hpp>
+#include <tests/ftp/GetFileSize.hpp>
 #include <tests/config/config.h>
 
 namespace test = filesync::integration_test;

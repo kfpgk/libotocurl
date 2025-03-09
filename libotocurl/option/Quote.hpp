@@ -1,10 +1,10 @@
 #ifndef LIBFILESYNC_CURL_OPTION_QUOTE_HPP
 #define LIBFILESYNC_CURL_OPTION_QUOTE_HPP
 
-#include <libfilesync/curl/option/ResettableOption.hpp>
-#include <libfilesync/curl/option/UndoableOptionImpl.hpp>
-#include <libfilesync/curl/wrapper/Easy.hpp>
-#include <libfilesync/curl/wrapper/SList.hpp>
+#include <libotocurl/option/ResettableOption.hpp>
+#include <libotocurl/option/UndoableOptionImpl.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
+#include <libotocurl/wrapper/SList.hpp>
 
 #include <string>
 
@@ -18,32 +18,31 @@ namespace filesync::curl::option {
      */
     class Quote : public ResettableOption<wrapper::SList*>, public UndoableOptionImpl<wrapper::SList*> {
 
-        public:
+    public:
+        /**
+            * @brief Constructs a persistent option, which
+            * is not being reset upon object destruction.
+            */
+        explicit Quote(wrapper::Easy& curlInterface,
+            const std::string& command);
 
-            /**
-             * @brief Constructs a persistent option, which
-             * is not being reset upon object destruction.
-             */
-            explicit Quote(wrapper::Easy& interface,
-                const std::string& command);
-
-            /**
-             * @brief Constructs a volatile option, which is
-             * being reset to "resetValue" upon object destruction.
-             */
-            Quote(wrapper::Easy& interface,               
-                const std::string& command,
-                wrapper::SList* resetValue);
+        /**
+            * @brief Constructs a volatile option, which is
+            * being reset to "resetValue" upon object destruction.
+            */
+        Quote(wrapper::Easy& curlInterface,
+            const std::string& command,
+            wrapper::SList* resetValue);
                 
-            ~Quote();
+        ~Quote();
 
-            void addCommand(const std::string& command);
+        void addCommand(const std::string& command);
 
-        private:
-            wrapper::SList* commands;
+    private:
+        wrapper::SList* commands;
 
-            [[nodiscard]] wrapper::SList* getValue() override;
-            void setTo(wrapper::SList* value) override;
+        [[nodiscard]] wrapper::SList* getValue() override;
+        void setTo(wrapper::SList* value) override;
 
     };
 

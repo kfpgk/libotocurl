@@ -1,6 +1,6 @@
-#include <libfilesync/curl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #include <cstdlib>
 #include <cstring>
@@ -90,8 +90,7 @@ namespace filesync::curl::storage::char_buffer {
     void ReadWriteBuffer::changeBufferSize(std::size_t size) {
         char* ptr = static_cast<char*>(std::realloc(data, size + 1));
         if(!ptr) {
-            throw Exception("Out of memory. realloc() returned NULL",
-                __FILE__, __LINE__);
+            throw Exception("Out of memory. realloc() returned NULL");
         }
 
 #       ifdef LIBFILESYNC_CURL_UTILITY_DEBUG_BUILD
@@ -134,7 +133,7 @@ namespace filesync::curl::storage::char_buffer {
         if (lhs.dataSize != rhs.dataSize) {
             return false;
         }
-        for (int i; i < lhs.dataSize; i++) {
+        for (int i = 0; i < lhs.dataSize; i++) {
             if (lhs.data[i] != rhs.data[i]) {
                 return false;
             }

@@ -1,9 +1,9 @@
-#include <libfilesync/curl/option/Collection.hpp>
+#include <libotocurl/option/Collection.hpp>
 
 namespace filesync::curl::option {
 
-    Collection::Collection(wrapper::Easy& interface) :
-            Option(interface) {
+    Collection::Collection(wrapper::Easy& curlInterface) :
+            Option(curlInterface) {
 
     }
 

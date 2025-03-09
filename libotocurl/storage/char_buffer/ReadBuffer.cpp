@@ -1,6 +1,6 @@
-#include <libfilesync/curl/storage/char_buffer/ReadBuffer.hpp>
-#include <libfilesync/curl/Exception.hpp>
-#include <libfilesync/curl/utility/Debug.hpp>
+#include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
+#include <libotocurl/Exception.hpp>
+#include <libotocurl/utility/Debug.hpp>
 
 #include <cstring>
 #include <utility>
@@ -90,7 +90,7 @@ namespace filesync::curl::storage::char_buffer {
         if (lhs.dataSize != rhs.dataSize) {
             return false;
         }
-        for (int i; i < lhs.dataSize; i++) {
+        for (int i = 0; i < lhs.dataSize; i++) {
             if (lhs.data[i] != rhs.data[i]) {
                 return false;
             }
