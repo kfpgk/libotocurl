@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_WRAPPER_EASY_HPP
-#define LIBFILESYNC_CURL_WRAPPER_EASY_HPP
+#ifndef LIBOTOCURL_WRAPPER_EASY_HPP
+#define LIBOTOCURL_WRAPPER_EASY_HPP
 
 #include <libotocurl/wrapper/Base.hpp>
 #include <libotocurl/Exception.hpp>
@@ -11,7 +11,7 @@
 #include <cstdio>
 #include <string>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     /**
      * @brief Callback function for cURL WRITEFUNCTION option

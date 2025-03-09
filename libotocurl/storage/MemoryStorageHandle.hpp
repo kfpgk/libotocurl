@@ -1,15 +1,15 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HANDLE_HPP
-#define LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HANDLE_HPP
+#ifndef LIBOTOCURL_STORAGE_MEMORY_STORAGE_HANDLE_HPP
+#define LIBOTOCURL_STORAGE_MEMORY_STORAGE_HANDLE_HPP
 
 #include <libotocurl/storage/MemoryStorage.hpp>
 
 #include <memory>
 
-namespace filesync::curl {
+namespace otocurl {
     class ProtocolClient;
 }
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     namespace unit_test {
         class MemoryStorageHandleTest;
@@ -59,7 +59,7 @@ namespace filesync::curl::storage {
 
             std::unique_ptr<MemoryStorage> extract();
 
-        friend class filesync::curl::ProtocolClient;
+        friend class otocurl::ProtocolClient;
 
         friend class unit_test::MemoryStorageHandleTest;
 

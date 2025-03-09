@@ -1,9 +1,9 @@
-#ifndef LIBFILESYNC_CURL_WRAPPER_GLOBAL_SETUP_HPP
-#define LIBFILESYNC_CURL_WRAPPER_GLOBAL_SETUP_HPP
+#ifndef LIBOTOCURL_WRAPPER_GLOBAL_SETUP_HPP
+#define LIBOTOCURL_WRAPPER_GLOBAL_SETUP_HPP
 
 #include <curl/curl.h>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     /**
      * @brief Global cURL setup class which makes sure

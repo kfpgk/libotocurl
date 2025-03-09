@@ -1,9 +1,9 @@
 #include <libotocurl/wrapper/Url.hpp>
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Exception.hpp>
 
 #include <cstring>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     Url::Url() {
         handle = curl_url();

@@ -1,6 +1,6 @@
 #include <libotocurl/storage/char_buffer/CharBufferStub.test.hpp>
 
-namespace filesync::curl::storage::char_buffer::unit_test {
+namespace otocurl::storage::char_buffer::unit_test {
 
     CharBufferStub::CharBufferStub(const std::string& data) :
         data{data} {

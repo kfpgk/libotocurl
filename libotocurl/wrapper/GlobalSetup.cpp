@@ -1,12 +1,12 @@
 #include <libotocurl/wrapper/GlobalSetup.hpp>
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Exception.hpp>
 #include <libotocurl/utility/Debug.hpp>
 
 #include <iostream>
 #include <fstream>
 #include <stdexcept>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     GlobalSetup::GlobalSetup() {
         LIBFILESYNC_CURL_UTILITY_DEBUG("Running curl_global_init()");

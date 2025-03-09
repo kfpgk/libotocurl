@@ -2,7 +2,7 @@
 
 #include <iostream>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     template<typename T>
     ResettableOption<T>::ResettableOption(const T& resetValue) :

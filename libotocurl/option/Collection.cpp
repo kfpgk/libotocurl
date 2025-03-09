@@ -1,6 +1,6 @@
 #include <libotocurl/option/Collection.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Collection::Collection(wrapper::Easy& curlInterface) :
             Option(curlInterface) {

@@ -2,7 +2,7 @@
 
 #include <memory>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Factory::Factory(wrapper::Easy& curlInterface) :
         curlInterface{ curlInterface } {

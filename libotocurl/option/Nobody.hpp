@@ -1,11 +1,11 @@
-#ifndef LIBFILESYNC_CURL_OPTION_NOBODY_HPP
-#define LIBFILESYNC_CURL_OPTION_NOBODY_HPP
+#ifndef LIBOTOCURL_OPTION_NOBODY_HPP
+#define LIBOTOCURL_OPTION_NOBODY_HPP
 
 #include <libotocurl/option/ResettableOption.hpp>
 #include <libotocurl/option/UndoableOptionImpl.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Wrapper for CURLOPT_NOBODY

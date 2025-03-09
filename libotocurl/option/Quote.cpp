@@ -1,7 +1,7 @@
 #include <libotocurl/option/Quote.hpp>
 #include <libotocurl/option/Option.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Quote::Quote(wrapper::Easy& curlInterface,
         const std::string& command) :

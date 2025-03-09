@@ -1,6 +1,6 @@
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Exception.hpp>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     template<typename... Args>
     void Url::setPart(CURLUPart part, Args&&... args) {

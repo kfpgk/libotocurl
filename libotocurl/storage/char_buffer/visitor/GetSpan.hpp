@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_VISITOR_GET_SPAN_HPP
-#define LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_VISITOR_GET_SPAN_HPP
+#ifndef LIBOTOCURL_STORAGE_CHAR_BUFFER_VISITOR_GET_SPAN_HPP
+#define LIBOTOCURL_STORAGE_CHAR_BUFFER_VISITOR_GET_SPAN_HPP
 
 #include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
 #include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
@@ -7,7 +7,7 @@
 
 #include <span>
 
-namespace filesync::curl::storage::char_buffer::visitor {
+namespace otocurl::storage::char_buffer::visitor {
 
     class GetSpan {
 

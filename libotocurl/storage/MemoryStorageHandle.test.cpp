@@ -5,8 +5,8 @@
 
 #include <cassert>
 
-using namespace filesync::utility;
-using namespace filesync::curl::storage::unit_test;
+using namespace otocurl::utility;
+using namespace otocurl::storage::unit_test;
 
 int main(int argc, char* argv[]) {
 
@@ -31,7 +31,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-namespace filesync::curl::storage::unit_test {
+namespace otocurl::storage::unit_test {
 
     void MemoryStorageHandleTest::test_swap() {
         Logger::getInstance().log(LogDomain::TestResult, 

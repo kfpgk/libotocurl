@@ -1,7 +1,7 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_TEST_HPP
-#define LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_TEST_HPP
+#ifndef LIBOTOCURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_TEST_HPP
+#define LIBOTOCURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_TEST_HPP
 
-namespace filesync::curl::storage::char_buffer::unit_test {
+namespace otocurl::storage::char_buffer::unit_test {
 
     class ReadWriteBufferTest {
 

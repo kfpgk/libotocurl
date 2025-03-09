@@ -5,7 +5,7 @@
 #include <cstring>
 #include <utility>
 
-namespace filesync::curl::storage::char_buffer {
+namespace otocurl::storage::char_buffer {
 
     ReadBuffer::ReadBuffer(char* data, std::size_t dataSize) :
         data{data},

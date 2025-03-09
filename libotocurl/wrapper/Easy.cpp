@@ -1,10 +1,10 @@
 #include <libotocurl/wrapper/Easy.hpp>
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Exception.hpp>
 #include <libotocurl/utility/Debug.hpp>
 
 #include <curl/curl.h>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     Easy::Easy() {
         LIBFILESYNC_CURL_UTILITY_DEBUG("Running curl_easy_init()");

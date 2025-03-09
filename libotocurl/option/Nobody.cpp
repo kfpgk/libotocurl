@@ -3,7 +3,7 @@
 
 #include <curl/curl.h>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Nobody::Nobody(wrapper::Easy& curlInterface,
         bool value) :

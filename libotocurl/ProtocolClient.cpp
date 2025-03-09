@@ -4,13 +4,11 @@
 #include <libotocurl/option/Upload.hpp>
 #include <libotocurl/utility/Debug.hpp>
 
-#include <curl/curl.h>
-
 #include <cstdio>
 #include <sstream>
 #include <vector>
 
-namespace filesync::curl {
+namespace otocurl {
 
     ProtocolClient::ProtocolClient(std::unique_ptr<parser::Nobody> nobodyParser) :
         ProtocolClient{
@@ -200,7 +198,7 @@ namespace filesync::curl {
             options->set();
             curlInterface->perform();
             return true;
-        } catch(Exception& e) {
+        } catch(wrapper::Exception& e) {
             if (e.getCurlCode() == CURLE_REMOTE_FILE_NOT_FOUND) {
                 return false;
             } else {

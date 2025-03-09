@@ -1,6 +1,6 @@
 #include <libotocurl/option/Generic.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     template <typename... Args>
     std::unique_ptr<Option> Factory::createGeneric(

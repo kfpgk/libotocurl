@@ -6,7 +6,7 @@
 
 #include <libotocurl/option/Factory.hpp>
 
-namespace filesync::curl::storage::visitor {
+namespace otocurl::storage::visitor {
 
     /**
      * @brief Callable object to setup a write operation
@@ -17,14 +17,14 @@ namespace filesync::curl::storage::visitor {
      */
     class SetupWrite {
 
-        public:
-            explicit SetupWrite(const option::Factory& optionFactory);
+    public:
+        explicit SetupWrite(const option::Factory& optionFactory);
 
-            void operator()(FileStorage& storage);
-            void operator()(MemoryStorage& storage);
+        void operator()(FileStorage& storage);
+        void operator()(MemoryStorage& storage);
 
-        private:
-            const option::Factory& optionFactory;
+    private:
+        const option::Factory& optionFactory;
 
     };
 

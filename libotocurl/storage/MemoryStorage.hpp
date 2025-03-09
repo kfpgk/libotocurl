@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HPP
-#define LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HPP
+#ifndef LIBOTOCURL_STORAGE_MEMORY_STORAGE_HPP
+#define LIBOTOCURL_STORAGE_MEMORY_STORAGE_HPP
 
 #include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
 #include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
@@ -10,7 +10,7 @@
 #include <span>
 #include <variant>
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     namespace unit_test {
         class MemoryStorageTest;

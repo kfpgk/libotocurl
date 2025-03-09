@@ -1,11 +1,11 @@
-#ifndef LIBFILESYNC_CURL_OPTION_UNDOABLE_OPTION_HPP
-#define LIBFILESYNC_CURL_OPTION_UNDOABLE_OPTION_HPP
+#ifndef LIBOTOCURL_OPTION_UNDOABLE_OPTION_HPP
+#define LIBOTOCURL_OPTION_UNDOABLE_OPTION_HPP
 
 #include <libotocurl/option/Option.hpp>
 
 #include <optional>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Interface class for a CURLOPT which

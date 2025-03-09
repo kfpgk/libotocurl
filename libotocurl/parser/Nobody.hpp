@@ -1,10 +1,10 @@
-#ifndef LIBFILESYNC_CURL_PARSER_NOBODY_HPP
-#define LIBFILESYNC_CURL_PARSER_NOBODY_HPP
+#ifndef LIBOTOCURL_PARSER_NOBODY_HPP
+#define LIBOTOCURL_PARSER_NOBODY_HPP
 
 #include <cstddef>
 #include <string>
 
-namespace filesync::curl::parser {
+namespace otocurl::parser {
 
     /**
      * @brief curl CURL_OPT_NOBODY output parser

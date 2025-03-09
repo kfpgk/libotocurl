@@ -1,6 +1,6 @@
 #include <libotocurl/Exception.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     template<typename T>
     void UndoableOptionImpl<T>::doUndo() {

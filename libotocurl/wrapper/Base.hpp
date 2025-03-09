@@ -1,7 +1,7 @@
-#ifndef LIBFILESYNC_CURL_WRAPPER_BASE_HPP
-#define LIBFILESYNC_CURL_WRAPPER_BASE_HPP
+#ifndef LIBOTOCURL_WRAPPER_BASE_HPP
+#define LIBOTOCURL_WRAPPER_BASE_HPP
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     /**
      * @brief Base class for all objects that

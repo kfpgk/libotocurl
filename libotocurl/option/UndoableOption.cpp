@@ -1,6 +1,6 @@
 #include <libotocurl/option/UndoableOption.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     void UndoableOption::undo() {
         doUndo();

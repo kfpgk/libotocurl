@@ -10,7 +10,7 @@
 
 #define FILESYNC_CURL_URL_FTP_PREFIX "ftp"
 
-namespace filesync::curl {
+namespace otocurl {
 
     FtpClient::FtpClient(const std::string& serverAddress,
         std::unique_ptr<wrapper::Easy> curlInterface) :

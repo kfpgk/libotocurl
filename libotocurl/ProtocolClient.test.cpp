@@ -5,8 +5,8 @@
 
 #include <cassert>
 
-using namespace filesync::curl;
-using namespace filesync::utility;
+using namespace otocurl;
+using namespace otocurl::utility;
 
 int main(int argc, char* argv[]) {
 
@@ -30,7 +30,7 @@ int main(int argc, char* argv[]) {
 
 }
 
-namespace filesync::curl::unit_test {
+namespace otocurl::unit_test {
 
     std::string dummyServerAddress = "dummy";
 

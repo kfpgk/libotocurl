@@ -6,7 +6,7 @@
 #include <iostream>
 #include <sstream>
 
-namespace filesync::curl::parser {
+namespace otocurl::parser {
 
     void FtpNobody::doParse(const std::string& content) {
 

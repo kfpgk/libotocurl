@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_FILE_STORAGE_HPP
-#define LIBFILESYNC_CURL_STORAGE_FILE_STORAGE_HPP
+#ifndef LIBOTOCURL_STORAGE_FILE_STORAGE_HPP
+#define LIBOTOCURL_STORAGE_FILE_STORAGE_HPP
 
 #include <libotocurl/option/Factory.hpp>
 
@@ -7,7 +7,7 @@
 #include <cstdio>
 #include <filesystem>
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     namespace unit_test {
         class FileStorageTest;

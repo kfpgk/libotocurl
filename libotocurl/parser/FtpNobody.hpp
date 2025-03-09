@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_PARSER_FTP_NOBODY_HPP
-#define LIBFILESYNC_CURL_PARSER_FTP_NOBODY_HPP
+#ifndef LIBOTOCURL_PARSER_FTP_NOBODY_HPP
+#define LIBOTOCURL_PARSER_FTP_NOBODY_HPP
 
 #include <libotocurl/parser/Nobody.hpp>
 
@@ -10,7 +10,7 @@
 #define LIBFILESYNC_CURL_PARSER_FTP_NOBODY_LENGTH_ID "Content-Length:"
 #define LIBFILESYNC_CURL_PARSER_FTP_NOBODY_LENGTH_UNIT_ID "Accept-ranges:"
 
-namespace filesync::curl::parser {
+namespace otocurl::parser {
 
     class FtpNobody : public Nobody {
 

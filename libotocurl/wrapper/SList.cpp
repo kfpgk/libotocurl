@@ -1,7 +1,7 @@
 #include <libotocurl/wrapper/SList.hpp>
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Exception.hpp>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     SList::SList(const std::string& content) {
         append(content);

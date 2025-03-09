@@ -7,7 +7,7 @@
 #include <iostream>
 #include <utility>
 
-namespace filesync::curl::storage::char_buffer {
+namespace otocurl::storage::char_buffer {
 
     ReadWriteBuffer::ReadWriteBuffer(std::size_t size) {
         changeBufferSize(size);

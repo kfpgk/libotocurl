@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_OPTION_FACTORY_HPP
-#define LIBFILESYNC_CURL_OPTION_FACTORY_HPP
+#ifndef LIBOTOCURL_OPTION_FACTORY_HPP
+#define LIBOTOCURL_OPTION_FACTORY_HPP
 
 #include <libotocurl/wrapper/Easy.hpp>
 #include <libotocurl/option/Option.hpp>
@@ -12,7 +12,7 @@
 
 #include <curl/curl.h>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     class Factory {
 

@@ -3,7 +3,7 @@
 
 #include <curl/curl.h>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Verbose::Verbose(wrapper::Easy& curlInterface,
         bool value) :

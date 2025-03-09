@@ -9,7 +9,7 @@
 #include <cstring>
 #include <utility>
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     MemoryStorage::MemoryStorage(std::size_t bufferSize) :
         data{char_buffer::ReadWriteBuffer(bufferSize)},

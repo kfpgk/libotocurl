@@ -2,6 +2,7 @@ target_sources(libotocurl
     PRIVATE
         Base.cpp
         Easy.cpp
+        Exception.cpp
         GlobalSetup.cpp        
         SList.cpp
         Url.cpp

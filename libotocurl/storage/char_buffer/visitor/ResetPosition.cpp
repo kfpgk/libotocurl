@@ -1,6 +1,6 @@
 #include <libotocurl/storage/char_buffer/visitor/ResetPosition.hpp>
 
-namespace filesync::curl::storage::char_buffer::visitor {
+namespace otocurl::storage::char_buffer::visitor {
 
     void ResetPosition::operator()(ReadBuffer& buffer) {
         buffer.resetPosition();

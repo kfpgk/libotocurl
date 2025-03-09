@@ -1,7 +1,7 @@
 #include <libotocurl/wrapper/Base.hpp>
 #include <libotocurl/wrapper/GlobalSetup.hpp>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     Base::Base() {
         GlobalSetup::init();

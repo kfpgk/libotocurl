@@ -8,11 +8,11 @@
 #include <variant>
 #include <vector>
 
-using namespace filesync::utility;
+using namespace otocurl::utility;
 
 int main(int argc, char* argv[]) {
 
-    filesync::curl::storage::unit_test::MemoryStorageTest test;
+    otocurl::storage::unit_test::MemoryStorageTest test;
 
     test.test_swap_one_empty();
     test.test_swap_read_write_vs_read_only();
@@ -26,7 +26,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-namespace filesync::curl::storage::unit_test {
+namespace otocurl::storage::unit_test {
 
     void MemoryStorageTest::test_swap_one_empty() {
         Logger::getInstance().log(LogDomain::TestResult, 

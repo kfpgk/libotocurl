@@ -1,13 +1,15 @@
-#include <utility>
+#include <libotocurl/wrapper/Easy.hpp>
 
-namespace filesync::curl::option {
+#include <curl/curl.h>
+
+namespace otocurl::option {
 
     /**
      * @brief Constructor that saves the variadic parameter pack
      * to a tuple for later usage.
      */
     template<typename... Args> 
-    Generic<Args...>::Generic(filesync::curl::wrapper::Easy& curlInterface,
+    Generic<Args...>::Generic(wrapper::Easy& curlInterface,
         CURLoption curlOption, Args&&... args) :
             Option(curlInterface),
             curlOption{ curlOption },

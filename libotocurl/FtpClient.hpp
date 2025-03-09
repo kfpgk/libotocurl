@@ -1,15 +1,13 @@
-#ifndef LIBFILESYNC_CURL_FTP_CLIENT_HPP
-#define LIBFILESYNC_CURL_FTP_CLIENT_HPP
+#ifndef LIBOTOCURL_FTP_CLIENT_HPP
+#define LIBOTOCURL_FTP_CLIENT_HPP
 
 #include <libotocurl/ProtocolClient.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
-#include <curl/curl.h>
-
 #include <memory>
 #include <string>
 
-namespace filesync::curl {
+namespace otocurl {
 
     /**
      * @brief FTP wrapper for cURL

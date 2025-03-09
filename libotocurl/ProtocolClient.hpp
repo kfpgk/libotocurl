@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_PROTOCOL_CLIENT_HPP
-#define LIBFILESYNC_CURL_PROTOCOL_CLIENT_HPP
+#ifndef LIBOTOCURL_PROTOCOL_CLIENT_HPP
+#define LIBOTOCURL_PROTOCOL_CLIENT_HPP
 
 #include <libotocurl/option/Factory.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
@@ -9,8 +9,6 @@
 #include <libotocurl/storage/MemoryStorageHandle.hpp>
 #include <libotocurl/parser/Nobody.hpp>
 
-#include <curl/curl.h>
-
 #include <cstddef>
 #include <string>
 #include <filesystem>
@@ -18,7 +16,7 @@
 #include <string>
 #include <vector>
 
-namespace filesync::curl {
+namespace otocurl {
 
     namespace unit_test {
         class ProtocolClientTest;

@@ -1,6 +1,6 @@
 #include <libotocurl/storage/visitor/GetReference.hpp>
 
-namespace filesync::curl::storage::visitor {
+namespace otocurl::storage::visitor {
 
     DataReference GetReference::operator()(const FileStorage& storage) {
         return storage.getPath();

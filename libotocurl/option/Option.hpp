@@ -1,11 +1,11 @@
-#ifndef LIBFILESYNC_CURL_OPTION_OPTION_HPP
-#define LIBFILESYNC_CURL_OPTION_OPTION_HPP
+#ifndef LIBOTOCURL_OPTION_OPTION_HPP
+#define LIBOTOCURL_OPTION_OPTION_HPP
 
 #include <libotocurl/wrapper/Easy.hpp>
 
 #include <functional>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief: Abstract wrapper for an arbitrary CURLOPT

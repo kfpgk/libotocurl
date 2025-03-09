@@ -1,7 +1,7 @@
 #include <libotocurl/option/Option.hpp>
 #include <libotocurl/Exception.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Option::Option(wrapper::Easy& curlInterface) :
         curlInterface{ curlInterface } {

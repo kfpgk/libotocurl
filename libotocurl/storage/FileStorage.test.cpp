@@ -7,9 +7,9 @@
 
 #include <cassert>
 
-using namespace filesync::curl;
-using namespace filesync::utility;
-using namespace filesync::utility::literals;
+using namespace otocurl;
+using namespace otocurl::utility;
+using namespace otocurl::utility::literals;
 
 int main(int argc, char* argv[]) {
 
@@ -27,7 +27,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-namespace filesync::curl::storage::unit_test {
+namespace otocurl::storage::unit_test {
 
     void FileStorageTest::set_input_filesize_to_0() {
         Logger::getInstance().log(LogDomain::TestResult, "Running set_filesize_to_0()", __FILE__, __LINE__);

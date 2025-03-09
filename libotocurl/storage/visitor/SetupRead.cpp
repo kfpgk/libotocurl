@@ -1,6 +1,6 @@
 #include <libotocurl/storage/visitor/SetupRead.hpp>
 
-namespace filesync::curl::storage::visitor {
+namespace otocurl::storage::visitor {
 
     SetupRead::SetupRead(const option::Factory& optionFactory) :
         optionFactory{optionFactory} {

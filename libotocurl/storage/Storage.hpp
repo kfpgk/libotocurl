@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_STORAGE_HPP
-#define LIBFILESYNC_CURL_STORAGE_STORAGE_HPP
+#ifndef LIBOTOCURL_STORAGE_STORAGE_HPP
+#define LIBOTOCURL_STORAGE_STORAGE_HPP
 
 #include <libotocurl/storage/FileStorage.hpp>
 #include <libotocurl/storage/MemoryStorage.hpp>
@@ -8,7 +8,7 @@
 #include <span>
 #include <variant>
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     using Storage = std::variant<FileStorage, MemoryStorage>;
 

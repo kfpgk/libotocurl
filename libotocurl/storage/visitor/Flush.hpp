@@ -1,10 +1,10 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_VISITOR_FLUSH_HPP
-#define LIBFILESYNC_CURL_STORAGE_VISITOR_FLUSH_HPP
+#ifndef LIBOTOCURL_STORAGE_VISITOR_FLUSH_HPP
+#define LIBOTOCURL_STORAGE_VISITOR_FLUSH_HPP
 
 #include <libotocurl/storage/FileStorage.hpp>
 #include <libotocurl/storage/MemoryStorage.hpp>
 
-namespace filesync::curl::storage::visitor {
+namespace otocurl::storage::visitor {
 
     /**
      * @brief Callable object to flush a storage.
@@ -15,7 +15,6 @@ namespace filesync::curl::storage::visitor {
     class Flush {
             void operator()(FileStorage& storage);
             void operator()(MemoryStorage& storage);
-
     };
 
 }

@@ -1,7 +1,7 @@
 #include <libotocurl/option/Upload.hpp>
 #include <libotocurl/option/Option.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     Upload::Upload(wrapper::Easy& curlInterface,
         bool value) :

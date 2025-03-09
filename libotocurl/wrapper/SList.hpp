@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_WRAPPER_SLIST_HPP
-#define LIBFILESYNC_CURL_WRAPPER_SLIST_HPP
+#ifndef LIBOTOCURL_WRAPPER_SLIST_HPP
+#define LIBOTOCURL_WRAPPER_SLIST_HPP
 
 #include <libotocurl/wrapper/Base.hpp>
 
@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     /**
      * @brief Wrapper for curl_slist

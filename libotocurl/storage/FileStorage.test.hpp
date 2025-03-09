@@ -1,7 +1,7 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_FILE_STORAGE_TEST_HPP
-#define LIBFILESYNC_CURL_STORAGE_FILE_STORAGE_TEST_HPP
+#ifndef LIBOTOCURL_STORAGE_FILE_STORAGE_TEST_HPP
+#define LIBOTOCURL_STORAGE_FILE_STORAGE_TEST_HPP
 
-namespace filesync::curl::storage::unit_test {
+namespace otocurl::storage::unit_test {
 
     class FileStorageTest {
 

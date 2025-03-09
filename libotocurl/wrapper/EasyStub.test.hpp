@@ -1,9 +1,9 @@
-#ifndef LIBFILESYNC_CURL_WRAPPER_UNIT_TEST_EASY_STUB_HPP
-#define LIBFILESYNC_CURL_WRAPPER_UNIT_TEST_EASY_STUB_HPP
+#ifndef LIBOTOCURL_WRAPPER_UNIT_TEST_EASY_STUB_HPP
+#define LIBOTOCURL_WRAPPER_UNIT_TEST_EASY_STUB_HPP
 
 #include <libotocurl/wrapper/Easy.hpp>
 
-namespace filesync::curl::wrapper::unit_test {
+namespace otocurl::wrapper::unit_test {
 
     class EasyStub : public Easy {
 

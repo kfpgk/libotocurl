@@ -1,11 +1,11 @@
-#ifndef LIBFILESYNC_CURL_OPTION_UPLOAD_HPP
-#define LIBFILESYNC_CURL_OPTION_UPLOAD_HPP
+#ifndef LIBOTOCURL_OPTION_UPLOAD_HPP
+#define LIBOTOCURL_OPTION_UPLOAD_HPP
 
 #include <libotocurl/option/ResettableOption.hpp>
 #include <libotocurl/option/UndoableOptionImpl.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Wrapper for CURLOPT_UPLOAD

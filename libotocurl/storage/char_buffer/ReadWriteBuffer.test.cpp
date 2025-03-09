@@ -11,8 +11,8 @@
 #include <span>
 #include <string>
 
-using namespace filesync::utility;
-using namespace filesync::utility::literals;
+using namespace otocurl::utility;
+using namespace otocurl::utility::literals;
 
 int main(int argc, char* argv[]) {
 
@@ -38,7 +38,7 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-namespace filesync::curl::storage::char_buffer::unit_test {
+namespace otocurl::storage::char_buffer::unit_test {
 
     void ReadWriteBufferTest::test_clear() {
         Logger::getInstance().log(LogDomain::TestResult, 

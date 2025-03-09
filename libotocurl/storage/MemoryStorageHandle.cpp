@@ -1,7 +1,7 @@
 #include <libotocurl/storage/MemoryStorageHandle.hpp>
 #include <libotocurl/Exception.hpp>
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     std::span<char> MemoryStorageHandle::data() {
         return storage->getDataReference();

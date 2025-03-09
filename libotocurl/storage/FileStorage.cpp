@@ -10,7 +10,7 @@
 #include <string>
 #include <utility>
 
-namespace filesync::curl::storage {
+namespace otocurl::storage {
 
     FileStorage::FileStorage(const std::filesystem::path& path) :
         path{path} {

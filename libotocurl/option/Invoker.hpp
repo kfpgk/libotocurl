@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_OPTION_INVOKER_HPP
-#define LIBFILESYNC_CURL_OPTION_INVOKER_HPP
+#ifndef LIBOTOCURL_OPTION_INVOKER_HPP
+#define LIBOTOCURL_OPTION_INVOKER_HPP
 
 #include <libotocurl/option/Option.hpp>
 #include <libotocurl/option/UndoableOption.hpp>
@@ -7,7 +7,7 @@
 #include <stack>
 #include <memory>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Manages and keeps track of Option

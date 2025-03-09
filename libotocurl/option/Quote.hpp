@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_OPTION_QUOTE_HPP
-#define LIBFILESYNC_CURL_OPTION_QUOTE_HPP
+#ifndef LIBOTOCURL_OPTION_QUOTE_HPP
+#define LIBOTOCURL_OPTION_QUOTE_HPP
 
 #include <libotocurl/option/ResettableOption.hpp>
 #include <libotocurl/option/UndoableOptionImpl.hpp>
@@ -8,7 +8,7 @@
 
 #include <string>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Wrapper for CURLOPT_QUOTE

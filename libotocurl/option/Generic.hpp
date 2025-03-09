@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_OPTION_GENERIC_HPP
-#define LIBFILESYNC_CURL_OPTION_GENERIC_HPP
+#ifndef LIBOTOCURL_OPTION_GENERIC_HPP
+#define LIBOTOCURL_OPTION_GENERIC_HPP
 
 #include <libotocurl/option/Option.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
@@ -8,7 +8,7 @@
 
 #include <tuple>
 		
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Generic CURLOPT class usable for every

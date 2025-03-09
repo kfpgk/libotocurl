@@ -1,7 +1,7 @@
-#ifndef LIBFILESYNC_UTILITY_LITERALS_HPP
-#define LIBFILESYNC_UTILITY_LITERALS_HPP
+#ifndef LIBOTOCURL_UTILITY_LITERALS_HPP
+#define LIBOTOCURL_UTILITY_LITERALS_HPP
 
-namespace filesync::utility {
+namespace otocurl::utility {
 
     namespace literals {
 

@@ -1,6 +1,6 @@
 #include <libotocurl/storage/visitor/Flush.hpp>
 
-namespace filesync::curl::storage::visitor {
+namespace otocurl::storage::visitor {
 
     void Flush::operator()(FileStorage& storage) {
         storage.flush();

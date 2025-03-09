@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_OPTION_COLLECTION_HPP
-#define LIBFILESYNC_CURL_OPTION_COLLECTION_HPP
+#ifndef LIBOTOCURL_OPTION_COLLECTION_HPP
+#define LIBOTOCURL_OPTION_COLLECTION_HPP
 
 #include <libotocurl/option/Option.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
@@ -7,7 +7,7 @@
 #include <memory>
 #include <deque>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     /**
      * @brief Collection of CURLOPTs

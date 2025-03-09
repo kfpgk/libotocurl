@@ -1,12 +1,12 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HANDLE_TEST_HPP
-#define LIBFILESYNC_CURL_STORAGE_MEMORY_STORAGE_HANDLE_TEST_HPP
+#ifndef LIBOTOCURL_STORAGE_MEMORY_STORAGE_HANDLE_TEST_HPP
+#define LIBOTOCURL_STORAGE_MEMORY_STORAGE_HANDLE_TEST_HPP
 
 #include <libotocurl/storage/MemoryStorageHandle.hpp>
 
 #include <memory>
 #include <string>
 
-namespace filesync::curl::storage::unit_test {
+namespace otocurl::storage::unit_test {
 
     /**
      * @brief MemoryStorageHandle unit test friend

@@ -2,7 +2,7 @@
 
 #include <regex>
 
-namespace filesync::curl::parser {
+namespace otocurl::parser {
 
     void Nobody::parse(const std::string& content) {
         doParse(content);

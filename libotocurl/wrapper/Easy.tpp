@@ -1,11 +1,11 @@
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Exception.hpp>
 
 #include <curl/curl.h>
 
 #include <string>
 #include <utility>
 
-namespace filesync::curl::wrapper {
+namespace otocurl::wrapper {
 
     /**
      * Sets a CURLoption to the value specified in 'args'

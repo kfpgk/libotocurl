@@ -1,6 +1,6 @@
 #include <libotocurl/storage/visitor/SetupWrite.hpp>
 
-namespace filesync::curl::storage::visitor {
+namespace otocurl::storage::visitor {
 
     SetupWrite::SetupWrite(const option::Factory& optionFactory) :
         optionFactory{optionFactory} {

@@ -1,5 +1,5 @@
-#ifndef LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_HPP
-#define LIBFILESYNC_CURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_HPP
+#ifndef LIBOTOCURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_HPP
+#define LIBOTOCURL_STORAGE_CHAR_BUFFER_READ_WRITE_BUFFER_HPP
 
 #include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
 
@@ -8,7 +8,7 @@
 #include <string>
 #include <vector>
 
-namespace filesync::curl::storage::char_buffer {
+namespace otocurl::storage::char_buffer {
 
     namespace unit_test {
         class ReadWriteTest;

@@ -1,6 +1,6 @@
 #include <libotocurl/option/Invoker.hpp>
 
-namespace filesync::curl::option {
+namespace otocurl::option {
 
     void Invoker::set(std::shared_ptr<Option> option) {
         option->set();
