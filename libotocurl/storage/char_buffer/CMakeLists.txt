@@ -16,7 +16,7 @@ if(BUILD_UNIT_TESTS)
     target_include_directories(ReadBuffer_test
         PRIVATE
             ${CMAKE_SOURCE_DIR}
-            ${CMAKE_BINARY_DIR}
+            ${LIBCURL_INCLUDE_DIR}
     )
     target_link_libraries(ReadBuffer_test
         PRIVATE
@@ -33,7 +33,7 @@ if(BUILD_UNIT_TESTS)
     target_include_directories(ReadWriteBuffer_test
         PRIVATE
             ${CMAKE_SOURCE_DIR}
-            ${CMAKE_BINARY_DIR}
+            ${LIBCURL_INCLUDE_DIR}
     )
     target_link_libraries(ReadWriteBuffer_test
         PRIVATE

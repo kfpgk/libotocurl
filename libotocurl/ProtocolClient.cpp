@@ -4,6 +4,8 @@
 #include <libotocurl/option/Upload.hpp>
 #include <libotocurl/utility/Debug.hpp>
 
+#include <libcpplog/logger/Log.hpp>
+
 #include <cstdio>
 #include <sstream>
 #include <vector>

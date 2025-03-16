@@ -9,13 +9,13 @@
 
 namespace otocurl::unit_test {
 
-    class ProtocolClientConcrete : public curl::ProtocolClient {
+    class ProtocolClientConcrete : public ProtocolClient {
 
         public:
             ProtocolClientConcrete(const std::string& serverAddress,
-                std::unique_ptr<wrapper::Easy> interface) :
+                std::unique_ptr<wrapper::Easy> curlInterface) :
                     ProtocolClient(
-                        std::move(interface),
+                        std::move(curlInterface),
                         std::make_unique<parser::unit_test::NobodyStub>()) {
 
                 activeUrl.setHost(serverAddress);

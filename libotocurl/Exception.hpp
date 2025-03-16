@@ -1,8 +1,6 @@
 #ifndef LIBOTOCURL_EXCEPTION_HPP
 #define LIBOTOCURL_EXCEPTION_HPP
 
-#include <curl/curl.h>
-
 #include <string>
 #include <optional>
 #include <stdexcept>

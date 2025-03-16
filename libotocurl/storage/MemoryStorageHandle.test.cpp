@@ -1,16 +1,16 @@
 #include <libotocurl/storage/MemoryStorageHandle.test.hpp>
 #include <libotocurl/storage/MemoryStorage.hpp>
 #include <libotocurl/storage/char_buffer/CharBufferStub.test.hpp>
-#include <libotocurl/utility/Logger.hpp>
+
+#include <libcpplog/logger/Log.hpp>
 
 #include <cassert>
 
-using namespace otocurl::utility;
-using namespace otocurl::storage::unit_test;
+using namespace cpplog::logger;
 
 int main(int argc, char* argv[]) {
 
-    MemoryStorageHandleTest test;
+    otocurl::storage::unit_test::MemoryStorageHandleTest test;
 
     test.test_swap();
     test.copy_construction();
@@ -21,21 +21,19 @@ int main(int argc, char* argv[]) {
     test.construct_from_friend();
     test.construct_from_friend_with_make_unique();
 
-    MemoryStorageHandleClassNonFriend nonFriendTest;
+    otocurl::storage::unit_test::MemoryStorageHandleClassNonFriend nonFriendTest;
 
     nonFriendTest.construct_from_non_friend();
     nonFriendTest.construct_from_non_friend_with_make_unique();
 
-    Logger::getInstance().log(LogDomain::TestResult,
-        "curl::storage::MemoryStorageHandle: passed", __FILE__, __LINE__);
+    log(LogLevel::Result, "curl::storage::MemoryStorageHandle: passed");
     return 0;
 }
 
 namespace otocurl::storage::unit_test {
 
     void MemoryStorageHandleTest::test_swap() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_swap()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string data1("Data1");
         std::unique_ptr<MemoryStorageHandle> handle1 =
@@ -55,8 +53,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageHandleTest::copy_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_construction()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string data1("Data1");
         std::unique_ptr<MemoryStorageHandle> handle1 =
@@ -71,8 +68,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageHandleTest::move_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_construction()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string data1("Data1");
         std::unique_ptr<MemoryStorageHandle> handle1 =
@@ -86,8 +82,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageHandleTest::copy_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_assignment()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string data1("Data1");
         std::unique_ptr<MemoryStorageHandle> handle1 =
@@ -106,8 +101,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageHandleTest::move_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_assignment()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string data1("Data1");
         std::unique_ptr<MemoryStorageHandle> handle1 =
@@ -125,8 +119,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageHandleTest::construct_from_friend() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running construct_from_friend()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::unique_ptr<MemoryStorage> storage = std::make_unique<MemoryStorage>();
 
@@ -137,8 +130,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageHandleTest::construct_from_friend_with_make_unique() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running construct_from_friend_with_make_unique()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::unique_ptr<MemoryStorage> storage = std::make_unique<MemoryStorage>();
 
@@ -157,8 +149,7 @@ namespace otocurl::storage::unit_test {
      * test.
      */
     void MemoryStorageHandleClassNonFriend::construct_from_non_friend() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running construct_from_non_friend()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::unique_ptr<MemoryStorage> storage = std::make_unique<MemoryStorage>();
 
@@ -179,8 +170,7 @@ namespace otocurl::storage::unit_test {
      * This does not compile, hence the #if 0. Experimental test.
      */
     void MemoryStorageHandleClassNonFriend::construct_from_non_friend_with_make_unique() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running construct_from_non_friend_with_make_unique()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::unique_ptr<MemoryStorage> storage = std::make_unique<MemoryStorage>();
 

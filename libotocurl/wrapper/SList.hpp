@@ -6,6 +6,7 @@
 #include <curl/curl.h>
 
 #include <string>
+#include <string_view>
 #include <vector>
 
 namespace otocurl::wrapper {
@@ -27,7 +28,7 @@ namespace otocurl::wrapper {
             [[nodiscard]] bool isEmpty() const;
             [[nodiscard]] curl_slist* getSListPointer() const;
 
-            void append(const std::string& content);
+            void append(const std::string_view content);
 
         private:
             curl_slist* handle = NULL;

@@ -1,14 +1,15 @@
 #include <libotocurl/storage/MemoryStorage.test.hpp>
 #include <libotocurl/storage/MemoryStorage.hpp>
 #include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libotocurl/utility/Logger.hpp>
+
+#include <libcpplog/logger/Log.hpp>
 
 #include <cassert>
 #include <string>
 #include <variant>
 #include <vector>
 
-using namespace otocurl::utility;
+using namespace cpplog::logger;
 
 int main(int argc, char* argv[]) {
 
@@ -21,16 +22,14 @@ int main(int argc, char* argv[]) {
     test.copy_assignment();
     test.move_assignment();
 
-    Logger::getInstance().log(LogDomain::TestResult,
-        "curl::storage::char_buffer::Owner: passed", __FILE__, __LINE__);
+    log(LogLevel::Result, "curl::storage::char_buffer::Owner: passed");
     return 0;
 }
 
 namespace otocurl::storage::unit_test {
 
     void MemoryStorageTest::test_swap_one_empty() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_swap_one_empty()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running test_swap_one_empty()");
 
         MemoryStorage storage1(100);
 
@@ -45,8 +44,7 @@ namespace otocurl::storage::unit_test {
         assert(storage2.getDataReference().empty());                                                                                          }
 
     void MemoryStorageTest::test_swap_read_write_vs_read_only() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_swap_read_write_vs_read_only()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running test_swap_read_write_vs_read_only()");
 
         MemoryStorage storage1(100);
         std::string initialStorage1Data("Test Content storage1");
@@ -68,8 +66,7 @@ namespace otocurl::storage::unit_test {
     
 
     void MemoryStorageTest::copy_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_construction()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running copy_construction()");
 
         MemoryStorage storage1(100);
         std::string initialStorage1Data("Test Content storage1");
@@ -86,8 +83,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageTest::move_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_construction()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running move_construction()");
         
         MemoryStorage storage1(100);
         std::string initialStorage1Data("Test Content storage1");
@@ -104,8 +100,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageTest::copy_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_assignment()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running copy_assignment()");
 
         MemoryStorage storage1(100);
         std::string initialStorage1Data("Test Content storage1");
@@ -127,8 +122,7 @@ namespace otocurl::storage::unit_test {
     }
 
     void MemoryStorageTest::move_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_assignment()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running move_assignment()");
 
         MemoryStorage storage1(100);
         std::string initialStorage1Data("Test Content storage1");

@@ -10,21 +10,40 @@ find_package(curl
     REQUIRED
 )
 
-find_path(CURL_INCLUDE_DIR
+find_path(LIBCURL_INCLUDE_DIR
     "curl/curl.h"
     REQUIRED
 )
 
-target_include_directories(libotocurl
-    PRIVATE
-        ${CMAKE_SOURCE_DIR}
-        ${CURL_INCLUDE_DIR}
+find_package(LIBCPPLOG
+    NAMES
+        cpplog
+        libcpplog
+    REQUIRED
 )
 
-target_link_libraries(libotocurl 
-    PRIVATE
-        CURL::libcurl
+find_package(LIBCPPTEST
+    NAMES
+        cpptest
+        libcpptest
     REQUIRED
+)
+
+target_include_directories(libotocurl
+    PUBLIC
+        ${LIBCPPLOG_INCLUDE_DIR}
+    PRIVATE
+        ${CMAKE_SOURCE_DIR}
+        ${LIBCURL_INCLUDE_DIR}
+        ${LIBCPPTEST_INCLUDE_DIR}
+)
+
+target_link_libraries(libotocurl
+    PUBLIC
+        ${LIBCPPLOG}
+    PRIVATE
+        ${LIBCPPTEST}
+        CURL::libcurl
 )
 
 add_subdirectory(option)
@@ -34,22 +53,23 @@ add_subdirectory(wrapper)
 
 if(BUILD_UNIT_TESTS)
     enable_testing()
-    add_executable(CurlProtocolClient_test
+
+    add_executable(ProtocolClient_test
         wrapper/EasyStub.test.cpp
         parser/NobodyStub.test.cpp
         ProtocolClient.test.cpp
     )
-    target_include_directories(CurlProtocolClient_test
+    target_include_directories(ProtocolClient_test
         PRIVATE
             ${CMAKE_SOURCE_DIR}
-            ${CMAKE_BINARY_DIR}
+            ${LIBCURL_INCLUDE_DIR}
     )
-    target_link_libraries(CurlProtocolClient_test
+    target_link_libraries(ProtocolClient_test
         PRIVATE
             libotocurl
     )
     add_test(
-        NAME "UT curl::ProtocolClient"
-        COMMAND CurlProtocolClient_test
+        NAME "UT ProtocolClient"
+        COMMAND ProtocolClient_test
     )
 endif()

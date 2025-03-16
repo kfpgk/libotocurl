@@ -1,7 +1,8 @@
 #include <libotocurl/storage/char_buffer/ReadWriteBuffer.test.hpp>
 #include <libotocurl/storage/char_buffer/ReadWriteBuffer.hpp>
-#include <libotocurl/utility/Logger.hpp>
 #include <libotocurl/utility/Literals.hpp>
+
+#include <libcpplog/logger/Log.hpp>
 
 #include <cassert>
 #include <chrono>
@@ -11,12 +12,12 @@
 #include <span>
 #include <string>
 
-using namespace otocurl::utility;
+using namespace cpplog::logger;
 using namespace otocurl::utility::literals;
 
 int main(int argc, char* argv[]) {
 
-    filesync::curl::storage::char_buffer::unit_test::ReadWriteBufferTest test;
+    otocurl::storage::char_buffer::unit_test::ReadWriteBufferTest test;
 
     test.test_clear();
     test.test_byte_array_and_string_write();
@@ -33,16 +34,14 @@ int main(int argc, char* argv[]) {
     test.write_1MB_at_once_with_pre_alloc();
     test.read_1MB_at_once();
 
-    Logger::getInstance().log(LogDomain::TestResult,
-        "curl::storage::char_buffer::ReadWriteBuffer: passed", __FILE__, __LINE__);
+    log(LogLevel::Result, "curl::storage::char_buffer::ReadWriteBuffer: passed");
     return 0;
 }
 
 namespace otocurl::storage::char_buffer::unit_test {
 
     void ReadWriteBufferTest::test_clear() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_clear()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer data1;
         std::size_t sizeBefore = data1.getSize();
@@ -57,8 +56,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::test_byte_array_and_string_write() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_byte_array_and_string_write()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer data1;
         ReadWriteBuffer data2;
@@ -78,8 +76,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::test_swap() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_swap()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         ReadWriteBuffer data1{"data1"};
         ReadWriteBuffer data2{"data2"};
@@ -92,8 +89,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::copy_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_construction()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         ReadWriteBuffer data1{"data1"};
         ReadWriteBuffer data2{data1};
@@ -103,8 +99,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::move_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_construction()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer data1{"data1"};
         ReadWriteBuffer data2{std::move(data1)};
@@ -114,8 +109,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::copy_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_assignment()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         ReadWriteBuffer data1{"data1"};
         ReadWriteBuffer data2{"data2"};
@@ -126,8 +120,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::move_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_assignment()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         ReadWriteBuffer data1{"data1"};
         ReadWriteBuffer data2{"data2"};
@@ -138,8 +131,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadWriteBufferTest::write_1MB_in_1KB_chunks_no_pre_alloc() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running write_1MB_in_1KB_chunks_no_pre_alloc()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer buffer;
 
@@ -159,15 +151,13 @@ namespace otocurl::storage::char_buffer::unit_test {
         auto end = steady_clock::now();
         duration<float, std::milli> executionTime = end - start;
 
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Test time: " + std::to_string(executionTime.count()) + "ms");
+        log(LogLevel::Result, "Test time: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 200ms);
     }
 
     void ReadWriteBufferTest::write_1MB_in_1KB_chunks_with_pre_alloc() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running write_1MB_in_1KB_chunks_with_pre_alloc()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer buffer(1_MB);
 
@@ -187,15 +177,13 @@ namespace otocurl::storage::char_buffer::unit_test {
         auto end = steady_clock::now();
         duration<float, std::milli> executionTime = end - start;
 
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Test time: " + std::to_string(executionTime.count()) + "ms");
+        log(LogLevel::Result, "Test time: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 10ms);
     }
 
     void ReadWriteBufferTest::read_1MB_in_1KB_chunks() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running read_1MB_in_1KB_chunks()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer buffer(1_MB);
 
@@ -227,15 +215,13 @@ namespace otocurl::storage::char_buffer::unit_test {
 
         delete[] readToData;
 
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Test time: " + std::to_string(executionTime.count()) + "ms");
+        log(LogLevel::Result, "Test time: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 10ms);
     }
 
     void ReadWriteBufferTest::write_1MB_at_once_with_pre_alloc() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running write_1MB_at_once_with_pre_alloc()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer buffer(1_MB);
 
@@ -250,15 +236,14 @@ namespace otocurl::storage::char_buffer::unit_test {
         duration<float, std::milli> executionTime = end - start;
 
         delete[] byteArrayData;
-        Logger::getInstance().log(LogDomain::TestResult, 
+        log(LogLevel::Result, 
             "Test time 1MB write: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 10ms);
     }
 
     void ReadWriteBufferTest::read_1MB_at_once() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running read_1MB_at_once()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         ReadWriteBuffer buffer(1_MB);
 
@@ -278,7 +263,7 @@ namespace otocurl::storage::char_buffer::unit_test {
 
         delete[] byteArrayData;
         delete[] readToData;
-        Logger::getInstance().log(LogDomain::TestResult, 
+        log(LogLevel::Result, 
             "Test time 1MB read: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 10ms);

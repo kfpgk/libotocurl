@@ -1,7 +1,8 @@
 #include <libotocurl/storage/char_buffer/ReadBuffer.test.hpp>
 #include <libotocurl/storage/char_buffer/ReadBuffer.hpp>
-#include <libotocurl/utility/Logger.hpp>
 #include <libotocurl/utility/Literals.hpp>
+
+#include <libcpplog/logger/Log.hpp>
 
 #include <cassert>
 #include <chrono>
@@ -12,12 +13,12 @@
 #include <string>
 #include <vector>
 
-using namespace otocurl::utility;
+using namespace cpplog::logger;
 using namespace otocurl::utility::literals;
 
 int main(int argc, char* argv[]) {
 
-    filesync::curl::storage::char_buffer::unit_test::ReadBufferTest test;
+    otocurl::storage::char_buffer::unit_test::ReadBufferTest test;
 
     test.test_get_size();
     test.test_get_span();
@@ -32,16 +33,14 @@ int main(int argc, char* argv[]) {
     test.read_1MB_in_1KB_chunks();
     test.read_1MB_at_once();
 
-    Logger::getInstance().log(LogDomain::TestResult,
-        "curl::storage::char_buffer::ReadBuffer: passed", __FILE__, __LINE__);
+    log(LogLevel::Result, "curl::storage::char_buffer::ReadBuffer: passed");
     return 0;
 }
 
 namespace otocurl::storage::char_buffer::unit_test {
 
     void ReadBufferTest::test_get_size() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_get_size()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         std::vector<char> data{'t','e','s','t',' ','c','o','n','t','e','n','t'};
         ReadBuffer data1{data};
@@ -50,8 +49,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::test_get_span() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_get_span()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string stringData {"Test content"};
         ReadBuffer data1(stringData);
@@ -77,8 +75,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::test_get_string() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_get_string()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string stringData {"Test content"};
         ReadBuffer data1(stringData);
@@ -89,8 +86,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::test_swap() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running test_swap()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string string1("data1");
         std::string string2("data2");
@@ -105,8 +101,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::copy_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_construction()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string string1("data1");
         ReadBuffer data1{string1};
@@ -117,8 +112,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::move_construction() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_construction()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         std::string string1("data1");
         ReadBuffer data1{string1};
@@ -129,8 +123,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::copy_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running copy_assignment()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string string1("data1");
         std::string string2("data2");
@@ -143,8 +136,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::move_assignment() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running move_assignment()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
 
         std::string string1("data1");
         std::string string2("data2");
@@ -157,8 +149,7 @@ namespace otocurl::storage::char_buffer::unit_test {
     }
 
     void ReadBufferTest::read_1MB_in_1KB_chunks() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running read_1MB_in_1KB_chunks()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         std::string bufferData(1_MB, 'x');
         ReadBuffer buffer(bufferData);
@@ -181,15 +172,13 @@ namespace otocurl::storage::char_buffer::unit_test {
 
         delete[] readToData;
 
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Test time: " + std::to_string(executionTime.count()) + "ms");
+        log(LogLevel::Result, "Test time: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 10ms);
     }
 
     void ReadBufferTest::read_1MB_at_once() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running read_1MB_at_once()", __FILE__, __LINE__);
+        log("Running ", LogRequest::functionName());
         
         std::string bufferData(1_MB, 'x');
         ReadBuffer buffer(bufferData);
@@ -205,7 +194,8 @@ namespace otocurl::storage::char_buffer::unit_test {
         duration<float, std::milli> executionTime = end - start;
 
         delete[] readToData;
-        Logger::getInstance().log(LogDomain::TestResult, 
+        
+        log(LogLevel::Result, 
             "Test time 1MB read: " + std::to_string(executionTime.count()) + "ms");
 
         assert(executionTime < 10ms);

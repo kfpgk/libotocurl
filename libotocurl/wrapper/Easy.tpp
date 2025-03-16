@@ -15,7 +15,7 @@ namespace otocurl::wrapper {
     void Easy::setOption(CURLoption option, Args&&... args) {
         CURLcode rc = curl_easy_setopt(handle, option, std::forward<Args>(args)...);
         if (rc != CURLE_OK) {
-            throw Exception(::std::string("curl_easy_setopt(" \
+            throw Exception(std::string("curl_easy_setopt(" \
                 + std::string(curl_easy_option_by_id(option)->name) \
                 + ") failed:"), rc, errorBuffer.data());
         }

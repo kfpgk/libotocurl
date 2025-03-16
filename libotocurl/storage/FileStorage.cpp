@@ -122,13 +122,15 @@ namespace otocurl::storage {
         try {
             using namespace utility::literals;
             std::unique_ptr<option::Option> option;
-            if (size > 2_GB) {
-                option = optionFactory.createGeneric(CURLOPT_INFILESIZE_LARGE, size);
+            if (size >= 2_GB) {
+                option = optionFactory.createGeneric(
+                    CURLOPT_INFILESIZE_LARGE, static_cast<curl_off_t>(size));
             } else {
-                option = optionFactory.createGeneric(CURLOPT_INFILESIZE, size);
+                option = optionFactory.createGeneric(
+                    CURLOPT_INFILESIZE, static_cast<long>(size));
             }
             option->set();
-        } catch(Exception& e) {
+        } catch(std::exception& e) {
             //e.addContext(__FILE__, __LINE__);
             throw e;
         }

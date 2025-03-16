@@ -56,13 +56,13 @@ namespace otocurl::wrapper {
      * sure not to lose previous list when appending
      * fails.
      */
-    void SList::append(const std::string& content) {            
+    void SList::append(const std::string_view content) {            
         curl_slist* tmpHandle = NULL;
-        tmpHandle = curl_slist_append(handle, content.c_str());
+        tmpHandle = curl_slist_append(handle, content.data());
         if (!tmpHandle) {
-            throw Exception("Failed to append '" + content + "' to curl_slist.");
+            throw Exception("Failed to append '" + std::string(content) + "' to curl_slist.");
         }
-        contents.push_back(content);
+        contents.push_back(content.data());
         handle = tmpHandle;
     }
 

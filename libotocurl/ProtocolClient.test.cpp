@@ -1,16 +1,16 @@
 #include <libotocurl/ProtocolClient.test.hpp>
 #include <libotocurl/wrapper/EasyStub.test.hpp>
-#include <libotocurl/utility/Logger.hpp>
 #include <libotocurl/utility/Literals.hpp>
+
+#include <libcpplog/logger/Log.hpp>
 
 #include <cassert>
 
-using namespace otocurl;
-using namespace otocurl::utility;
+using namespace cpplog::logger;
 
 int main(int argc, char* argv[]) {
 
-    unit_test::ProtocolClientTest test;
+    otocurl::unit_test::ProtocolClientTest test;
 
     test.set_bad_host_name();
 
@@ -24,8 +24,7 @@ int main(int argc, char* argv[]) {
     test.upload_uninitialized_easy_stubbed();
     test.upload_with_uninitialized_local_path_easy_stubbed();
 
-    Logger::getInstance().log(LogDomain::TestResult,
-        "curl::ProtocolClient: passed", __FILE__, __LINE__);
+    log(LogLevel::Result, "ProtocolClient: passed");
     return 0;
 
 }
@@ -35,12 +34,13 @@ namespace otocurl::unit_test {
     std::string dummyServerAddress = "dummy";
 
     void ProtocolClientTest::set_bad_host_name() {
-        Logger::getInstance().log(LogDomain::TestResult, "Running set_bad_host_name()", __FILE__, __LINE__);
+		log(LogLevel::Info, "Running set_bad_host_name()");
+        
         bool curlExceptionThrown = false;
         try {
             ProtocolClientConcrete client("::dummy::",
                 std::make_unique<wrapper::unit_test::EasyStub>());
-        } catch (Exception& e) {
+        } catch (std::exception& e) {
             curlExceptionThrown = true;
         }
         assert(true == curlExceptionThrown);   
@@ -48,41 +48,38 @@ namespace otocurl::unit_test {
     }
 
     void ProtocolClientTest::set_valid_remote_file() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running set_valid_remote_file()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running set_valid_remote_file()");
+
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
         client.setRemoteFile("dir-path/file");
     }
 
     void ProtocolClientTest::set_remote_file_with_special_chars() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running set_remote_file_with_special_chars()", __FILE__, __LINE__);
+        log(LogLevel::Info, "Running set_remote_file_with_special_chars()");
+
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
         client.setRemoteFile("!./%/:kla");
     }
 
     void ProtocolClientTest::set_non_existing_local_file_for_upload() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running set_non_existing_local_file_for_upload()", __FILE__, __LINE__);
+		log(LogLevel::Info, "Running set_non_existing_local_file_for_upload()");
+
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
         bool curlExceptionThrown = false;
         try {
             client.setLocalFileForUpload("this_file_does_not_exist.txt");
         } catch (const Exception& e) {
-            Logger::getInstance().log(LogDomain::Info,
-                e.what(), __FILE__, __LINE__);
+            log(e.what());
             curlExceptionThrown = true;
         }
         assert(true == curlExceptionThrown);      
     }
 
     void ProtocolClientTest::download_uninitialized_easy_stubbed() {
-        Logger::getInstance().log(LogDomain::TestResult,
-            "Running download_uninitialized_easy_stubbed()",
-            __FILE__, __LINE__);
+		log(LogLevel::Info, "Running download_uninitialized_easy_stubbed()");
 
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
@@ -90,17 +87,14 @@ namespace otocurl::unit_test {
         try {
             client.download();
         } catch (const Exception& e) {
-            Logger::getInstance().log(LogDomain::Info,
-                e.what(), __FILE__, __LINE__);
+            log(e.what());
             curlExceptionThrown = true;
         }
         assert(true == curlExceptionThrown);           
     }
 
     void ProtocolClientTest::download_with_uninitialized_local_path_easy_stubbed() {
-        Logger::getInstance().log(LogDomain::TestResult,
-            "Running download_with_uninitialized_local_path_easy_stubbed()",
-            __FILE__, __LINE__);
+		log(LogLevel::Info, "Running download_with_uninitialized_local_path_easy_stubbed()");
 
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
@@ -109,17 +103,14 @@ namespace otocurl::unit_test {
             client.setRemoteFile("remotefile");
             client.download();
         } catch (const Exception& e) {
-            Logger::getInstance().log(LogDomain::Info,
-                e.what(), __FILE__, __LINE__);
+            log(e.what());
             curlExceptionThrown = true;
         }
         assert(true == curlExceptionThrown);           
     }
 
     void ProtocolClientTest::upload_uninitialized_easy_stubbed() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running upload_uninitialized_easy_stubbed()",
-            __FILE__, __LINE__);
+		log(LogLevel::Info, "Running upload_uninitialized_easy_stubbed()");
 
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
@@ -127,17 +118,14 @@ namespace otocurl::unit_test {
         try {
             client.upload();
         } catch (const Exception& e) {
-            Logger::getInstance().log(LogDomain::Info,
-                e.what(), __FILE__, __LINE__);
+            log(e.what());
             curlExceptionThrown = true;
         }
         assert(true == curlExceptionThrown);        
     }
 
     void ProtocolClientTest::upload_with_uninitialized_local_path_easy_stubbed() {
-        Logger::getInstance().log(LogDomain::TestResult, 
-            "Running upload_with_uninitialized_local_path_easy_stubbed()",
-            __FILE__, __LINE__);
+		log(LogLevel::Info, "Running upload_with_uninitialized_local_path_easy_stubbed()");
             
         ProtocolClientConcrete client(dummyServerAddress,
             std::make_unique<wrapper::unit_test::EasyStub>());
@@ -146,8 +134,7 @@ namespace otocurl::unit_test {
             client.setRemoteFile("remotefile");
             client.upload();
         } catch (const Exception& e) {
-            Logger::getInstance().log(LogDomain::Info,
-                e.what(), __FILE__, __LINE__);
+			log(e.what());
             curlExceptionThrown = true;
         }
         assert(true == curlExceptionThrown);        
