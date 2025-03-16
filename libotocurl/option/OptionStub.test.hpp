@@ -1,48 +1,56 @@
-#ifndef LIBOTOCURL_OPTION_NOBODY_HPP
-#define LIBOTOCURL_OPTION_NOBODY_HPP
+#ifndef LIBOTOCURL_OPTION_OPTION_STUB_TEST_HPP
+#define LIBOTOCURL_OPTION_OPTION_STUB_TEST_HPP
 
 #include <libotocurl/option/ResettableOption.hpp>
 #include <libotocurl/option/UndoableOptionImpl.hpp>
-#include <libotocurl/wrapper/Easy.hpp>
+#include <libotocurl/wrapper/EasyStub.test.hpp>
 
-namespace otocurl::option {
+namespace otocurl::option::unit_test {
 
     /**
-     * @brief Wrapper for CURLOPT_NOBODY
-     * 
+     * @brief Stub object for a resttable and undoable CURLOPT wrapper
+     *  
      * @details
      * Patterns:
      *  - Command
      */
-    class Nobody : public ResettableOption<bool>, public UndoableOptionImpl<bool>  {
+    class OptionStub : public ResettableOption<bool>, public UndoableOptionImpl<bool>  {
 
     public:
         /**
          * @brief Constructs a persistent option, which is not being reset upon object 
          * destruction.
          * 
-         * @param[in] curlInterface The curl interface for which this option shall be set 
          * @param[in] value The target value of the option when being set
          */
-        explicit Nobody(wrapper::Easy& curlInterface, bool value) noexcept;
+        explicit OptionStub(bool value) noexcept;
 
         /**
          * @brief Constructs a volatile option, which is being reset to \p resetValue upon
          * object destruction.
          * 
-         * @param[in] curlInterface The curl interface for which this option shall be set 
          * @param[in] value The target value of the option when being set
          * @param[in] resetValue The reset value of the option when being destructed
          */
-        Nobody(wrapper::Easy& curlInterface, bool value, bool resetValue) noexcept;
+        OptionStub(bool value, bool resetValue) noexcept;
         
         /**
          * @brief Destructor
          */
-        ~Nobody();
+        ~OptionStub();
+
+        /**
+         * @brief Returns the simulated actual value
+         */
+        bool getCURLOPTvalue() const;
 
     private:
         bool value; ///< The target value of the option when being set
+
+        bool stubbedCURLOPTvalue; ///< Represents the value of a CURLOPT in libcurl for testing
+
+        ///< Stub for curl easys interface, needed by base class
+        wrapper::unit_test::EasyStub easyStub; 
 
         /**
          * @brief Returns the target value

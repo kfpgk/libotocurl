@@ -23,7 +23,7 @@ namespace otocurl::option {
         reset();   
     }
 
-    bool Upload::getValue() {
+    bool Upload::getValue() const {
         return value;
     }
 

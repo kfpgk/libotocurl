@@ -25,7 +25,7 @@ namespace otocurl::option {
         reset();  
     }
 
-    bool Verbose::getValue() {
+    bool Verbose::getValue() const {
         return value;
     }
 

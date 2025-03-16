@@ -1,4 +1,9 @@
 #include <libotocurl/option/Invoker.hpp>
+#include <libotocurl/option/Option.hpp>
+#include <libotocurl/option/UndoableOption.hpp>
+
+#include <stack>
+#include <memory>
 
 namespace otocurl::option {
 

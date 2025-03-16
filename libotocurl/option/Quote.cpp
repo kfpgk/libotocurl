@@ -1,10 +1,14 @@
 #include <libotocurl/option/Quote.hpp>
 #include <libotocurl/option/Option.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
+#include <libotocurl/wrapper/SList.hpp>
+
+#include <string_view>
 
 namespace otocurl::option {
 
     Quote::Quote(wrapper::Easy& curlInterface,
-        const std::string& command) :
+        const std::string_view command) :
             Option(curlInterface),
             commands{new wrapper::SList()} {
         
@@ -12,7 +16,7 @@ namespace otocurl::option {
     }
 
     Quote::Quote(wrapper::Easy& curlInterface,
-        const std::string& command,
+        const std::string_view command,
         wrapper::SList* resetValue) :
             Option(curlInterface),
             ResettableOption(resetValue),
@@ -26,13 +30,13 @@ namespace otocurl::option {
         delete commands;   
     }
 
-    void Quote::addCommand(const std::string& command) {
+    void Quote::addCommand(const std::string_view command) {
         if (!command.empty()) {
             commands->append(command);
         }
     }    
 
-    wrapper::SList* Quote::getValue() {
+    wrapper::SList* Quote::getValue() const {
         return commands;
     }
 

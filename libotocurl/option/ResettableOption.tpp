@@ -1,6 +1,4 @@
-#include <libotocurl/Exception.hpp>
-
-#include <iostream>
+#include <libotocurl/option/ResettableOption.hpp>
 
 namespace otocurl::option {
 

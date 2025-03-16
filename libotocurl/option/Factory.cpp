@@ -1,10 +1,17 @@
 #include <libotocurl/option/Factory.hpp>
+#include <libotocurl/option/Collection.hpp>
+#include <libotocurl/option/Generic.hpp>
+#include <libotocurl/option/Nobody.hpp>
+#include <libotocurl/option/Upload.hpp>
+#include <libotocurl/option/Quote.hpp>
+#include <libotocurl/option/Verbose.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <memory>
 
 namespace otocurl::option {
 
-    Factory::Factory(wrapper::Easy& curlInterface) :
+    Factory::Factory(wrapper::Easy& curlInterface) noexcept :
         curlInterface{ curlInterface } {
 
     }

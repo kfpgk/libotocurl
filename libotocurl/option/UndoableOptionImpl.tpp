@@ -1,4 +1,6 @@
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/option/UndoableOptionImpl.hpp>
+
+#include <optional>
 
 namespace otocurl::option {
 
@@ -12,7 +14,7 @@ namespace otocurl::option {
     template<typename T>
     void UndoableOptionImpl<T>::doSet() {
         setTo(getValue());
-        previous = getValue();
+        previous = getValue(); ///< TODO: This seems buggy
     }
 
 }

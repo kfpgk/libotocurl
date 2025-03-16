@@ -1,5 +1,10 @@
 #include <libotocurl/option/Generic.hpp>
 
+#include <curl/curl.h>
+
+#include <memory>
+#include <type_traits>
+
 namespace otocurl::option {
 
     template <typename... Args>

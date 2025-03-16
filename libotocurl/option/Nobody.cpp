@@ -1,23 +1,22 @@
 #include <libotocurl/option/Nobody.hpp>
 #include <libotocurl/option/Option.hpp>
+#include <libotocurl/option/ResettableOption.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <curl/curl.h>
 
 namespace otocurl::option {
 
-    Nobody::Nobody(wrapper::Easy& curlInterface,
-        bool value) :
-            Option(curlInterface),
-            value{value} {
+    Nobody::Nobody(wrapper::Easy& curlInterface, bool value) noexcept :
+        Option(curlInterface),
+        value{value} {
 
     }
 
-    Nobody::Nobody(wrapper::Easy& curlInterface,
-        bool value,
-        bool resetValue) :
-            Option(curlInterface),
-            value{value},
-            ResettableOption(resetValue) {
+    Nobody::Nobody(wrapper::Easy& curlInterface, bool value, bool resetValue) noexcept:
+        Option(curlInterface),
+        value{value},
+        ResettableOption(resetValue) {
 
     }
 
@@ -25,7 +24,7 @@ namespace otocurl::option {
         reset();
     }
 
-    bool Nobody::getValue() {
+    bool Nobody::getValue() const {
         return value;
     }
 

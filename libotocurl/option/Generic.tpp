@@ -1,6 +1,10 @@
+#include <libotocurl/option/Option.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
 #include <curl/curl.h>
+
+#include <tuple>
+#include <type_traits>
 
 namespace otocurl::option {
 

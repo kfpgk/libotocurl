@@ -1,14 +1,14 @@
 #include <libotocurl/option/Option.hpp>
-#include <libotocurl/Exception.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 namespace otocurl::option {
 
-    Option::Option(wrapper::Easy& curlInterface) :
+    Option::Option(wrapper::Easy& curlInterface) noexcept :
         curlInterface{ curlInterface } {
 
     }
 
-    void Option::setEasy(wrapper::Easy& curlInterface) {
+    void Option::setInterface(wrapper::Easy& curlInterface) noexcept {
         this->curlInterface = curlInterface;
     }
 

@@ -6,13 +6,16 @@
 #include <libotocurl/wrapper/Easy.hpp>
 #include <libotocurl/wrapper/SList.hpp>
 
-#include <string>
+#include <string_view>
 
 namespace otocurl::option {
 
     /**
      * @brief Wrapper for CURLOPT_QUOTE
      * 
+     * This option is both resettable and undoable.
+     * 
+     * @details
      * Patterns:
      *  - Command
      */
@@ -20,28 +23,57 @@ namespace otocurl::option {
 
     public:
         /**
-            * @brief Constructs a persistent option, which
-            * is not being reset upon object destruction.
-            */
-        explicit Quote(wrapper::Easy& curlInterface,
-            const std::string& command);
+         * @brief Constructs a persistent option, which is not being reset upon object 
+         * destruction.
+         * 
+         * @param[in] curlInterface The curl interface for which this option shall be set 
+         * @param[in] value The target value of the option when being set
+         */
+        explicit Quote(wrapper::Easy& curlInterface, const std::string_view command);
 
         /**
-            * @brief Constructs a volatile option, which is
-            * being reset to "resetValue" upon object destruction.
-            */
+         * @brief Constructs a volatile option, which is being reset to \p resetValue upon
+         * object destruction.
+         * 
+         * @param[in] curlInterface The curl interface for which this option shall be set 
+         * @param[in] value The target value of the option when being set
+         * @param[in] resetValue The reset value of the option when being destructed
+         */
         Quote(wrapper::Easy& curlInterface,
-            const std::string& command,
+            const std::string_view command,
             wrapper::SList* resetValue);
-                
+            
+        /**
+         * @brief Destructor
+         */
         ~Quote();
 
-        void addCommand(const std::string& command);
+        /**
+         * @brief Add a command to the CURLOPT_QUOTE option
+         */
+        void addCommand(const std::string_view command);
 
     private:
-        wrapper::SList* commands;
+        wrapper::SList* commands; ///< Container for commands
 
-        [[nodiscard]] wrapper::SList* getValue() override;
+        /**
+         * @brief Returns the target value
+         * 
+         * Needed for undo functionality
+         */
+        [[nodiscard]] wrapper::SList* getValue() const override;
+
+        /**
+         * @brief Sets the option to the specified value \p value
+         * 
+         * @param[in] value Option will be set to this value
+         * 
+         * @details This override `UndoableOption`. `UndoableOption`
+         * frees us from overriding the original `Option` method `doSet()`
+         * and requires us to provide `setTo()` instead. 
+         * `UndoableOption` calls `setTo()` parameterized to specify if a command
+         * shall be done or undone.
+         */        
         void setTo(wrapper::SList* value) override;
 
     };

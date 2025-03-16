@@ -2,11 +2,11 @@
 
 title CURL Option Sequence Diagram
 
-box "filesync::curl"
+box "client"
     actor Client
 end box
 
-box filesync::curl::option #lightblue
+box otocurl::option #lightblue
     participant Factory
     participant Invoker
     participant "Option<volatile>" as volatileOption
@@ -32,7 +32,7 @@ deactivate volatileOption
 deactivate Invoker
 ... Some other operations ...
 volatileOption -> volatileOption ++ : goesOutOfScope()
-volatileOption -> libcurl : setop(resetValue)
+volatileOption -> libcurl : setopt(resetValue)
 destroy volatileOption
 
 == Persistent Option keeps libcurl state upon destruction ==

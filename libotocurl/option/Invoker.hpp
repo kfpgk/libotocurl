@@ -10,22 +10,37 @@
 namespace otocurl::option {
 
     /**
-     * @brief Manages and keeps track of Option
-     * objects
+     * @brief Manages and keeps track of `Option` objects to
+     * provide undo and redo functionality
      * 
+     * @details
      * Patterns:
      *  - Invoker of the command pattern
      */
     class Invoker {
 
-        public:
-            void set(std::shared_ptr<Option> option);
-            void undo();
-            void redo();
+    public:
+        /**
+         * @brief Set the \p option and keep track to enable `undo()` and `redo()`
+         */
+        void set(std::shared_ptr<Option> option);
 
-        private:
-            std::stack<std::shared_ptr<UndoableOption>> undoStack;
-            std::stack<std::shared_ptr<UndoableOption>> redoStack;
+        /**
+         * @brief Undo the most recent action which was invoked by the Invoker object
+         */
+        void undo();
+
+        /**
+         * @brief Redo the most recent action which has been undone by the Invoker object
+         */
+        void redo();
+
+    private:
+        ///< The stack that stores recently set objects that can be undone
+        std::stack<std::shared_ptr<UndoableOption>> undoStack;
+
+        ///< The stack that stores recently undon objects that can be redone
+        std::stack<std::shared_ptr<UndoableOption>> redoStack;
 
     };
 

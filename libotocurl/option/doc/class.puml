@@ -3,63 +3,124 @@
 title CURL Option Class Diagram
 
 package option {
+
     interface "Option" as CurlOption {
-        - curlEasy : Easy&
-        + {abstract} set() : void
+        == public ==
+        Option(wrapper::Easy&)
+        ..
+        + setInterface(wrapper::Easy&) : void
+        + set() : void
+        == private ==
+        - curlInterface : wrapper::Easy&
+        
     }
+
     class "OptionFactory" as CurlOptionFactory {
-        - curlEasy : Easy&
-        + createCollection() : OptionCollection
-        + createOption1() : Option1
-        + createOption2() : Option2
-        + createOption3() : Option3
-        + createOption4() : Option4
+        == public ==
+        + createCollection() : OptionCollection*
+        + create<<Option1>>() : <<Option1>>*
+        + create<<Option2>>() : <<Option2>>*
+        + create<<Option3>>() : <<Option3>>*
+        + create<<Option4>>() : <<Option4>>*
+        == private ==
+        - curlInterface : wrapper::Easy&
     }
-    class "OptionInvoker" as CurlOptionInvoker {
-        - undoStack : UndoableOption[]
-        - redoStack : UndoableOption[]
-        + set(Option) : void
+
+    class "Invoker" as CurlOptionInvoker {
+        == public ==
+        + set(Option) : void 
         + undo() : void
         + redo() : void
+        == private ==
+        - undoStack : UndoableOption[]
+        - redoStack : UndoableOption[]
     }
+
     abstract class "ResettableOption<T>" as CurlResettableOption {
-        - resetValue : T
+        == public ==
+        + ResettableOption()
+        + ResettableOption(T)
+        ..
+        + set() : void
         + reset() : void
+        == private ==
+        - resetValue : T
         - {abstract} setTo(T) : void
     }
     
-    abstract class "UndoableOption<T>" as CurlUndoableOption {
-        - previous : T
+    interface "UndoableOption<T>" as CurlUndoableOption {
+        == public ==
         + set() : void
         + undo() : void
+    }
+
+    abstract class "UndoableOptionImpl<T>" as CurlUndoableOptionImpl {
+        == public ==
+        + set() : void
+        + undo() : void  
+        == private ==
+        - previous : T
         - {abstract} setTo(T) : void
         - {abstract} getValue() : T
     }
+
     class "OptionCollection" as CurlOptionCollection {
-        - options : Option[]
+        == public ==
         + set() : void
         + add(Option) : void
         + clear() : void
+        == private ==
+        - options : Option[]
     }
-    class "Option1" as CurlConcreteOption1 {
+    class "<<Option1>>" as CurlConcreteOption1 {
+        == public ==
+        <<Option1>>(wrapper::Easy, bool)
+        ..
+        + set() : void
+        == private ==
         - value : string
-        + set() : void
     }
-    class "Option2" as CurlConcreteOption2 {
-        - value : bool
+    class "<<Option2>>" as CurlConcreteOption2 {
+        == public ==
+        <<Option2>>(wrapper::Easy, bool)
+        <<Option2>>(wrapper::Easy, bool, bool)
+        ..
         + set() : void
+        + reset() : void
+        == private ==
+        - value : bool
         - setTo(bool) : void
     }
-    class "Option3" as CurlConcreteOption3 {
+    class "<<Option3>>" as CurlConcreteOption3 {
+        == public ==
+        <<Option3>>(wrapper::Easy, A)
+        <<Option3>>(wrapper::Easy, A, A)
+        ..
+        + set() : void
+        + undo() : void
+        + reset() : void
+        == private ==
         - value : A
         - setTo(A) : void
         - getValue() : A
     }
-    class "Option4" as CurlConcreteOption4 {
+    class "<<Option4>>" as CurlConcreteOption4 {
+        == public ==
+        <<Option4>>(wrapper::Easy, string)
+        ..
+        + set() : void
+        + undo() : void
+        == private ==
         - value : string
         - setTo(string) : void
         - getValue() : string
     }
+}
+
+package wrapper {
+    class Easy
+    hide Easy attributes
+    hide Easy methods
 }
 
 CurlOption <|.. CurlOptionCollection
@@ -67,12 +128,13 @@ CurlOption "*" --o CurlOptionCollection
 
 CurlOption <|.. CurlResettableOption 
 CurlOption <|.. CurlUndoableOption
+CurlUndoableOption <|.. CurlUndoableOptionImpl
 
 CurlOption <|.. CurlConcreteOption1
 CurlResettableOption <|-- CurlConcreteOption2
 CurlResettableOption <|-- CurlConcreteOption3
-CurlUndoableOption <|-- CurlConcreteOption3
-CurlUndoableOption <|-- CurlConcreteOption4
+CurlUndoableOptionImpl <|-- CurlConcreteOption3
+CurlUndoableOptionImpl <|-- CurlConcreteOption4
 
 CurlOptionCollection <-- "creates" CurlOptionFactory
 CurlConcreteOption1 <-- "creates" CurlOptionFactory
@@ -82,5 +144,7 @@ CurlConcreteOption4 <-- "creates" CurlOptionFactory
 
 CurlOptionInvoker --> CurlOption
 CurlOptionInvoker o-- "*" CurlUndoableOption
+
+option --> Easy
 
 @enduml
