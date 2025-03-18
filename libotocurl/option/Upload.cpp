@@ -4,17 +4,17 @@
 namespace otocurl::option {
 
     Upload::Upload(wrapper::Easy& curlInterface,
-        bool value) :
+        bool targetValue) :
             Option(curlInterface),
-            value{value} {
+            targetValue{targetValue} {
 
     }
 
     Upload::Upload(wrapper::Easy& curlInterface,
-        bool value,
+        bool targetValue,
         bool resetValue) :
             Option(curlInterface),
-            value{value},
+            targetValue{targetValue},
             ResettableOption(resetValue) {
 
     }
@@ -23,12 +23,12 @@ namespace otocurl::option {
         reset();   
     }
 
-    bool Upload::getValue() const {
-        return value;
+    bool Upload::getTargetValue() const {
+        return targetValue;
     }
 
-    void Upload::setTo(bool value) {
-        if (value) {
+    void Upload::setTo(bool targetValue) {
+        if (targetValue) {
             curlInterface.get().setOption(CURLOPT_UPLOAD, 1L);
         } else {
             curlInterface.get().setOption(CURLOPT_UPLOAD, 0L);

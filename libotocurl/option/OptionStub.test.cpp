@@ -4,15 +4,15 @@
 
 namespace otocurl::option::unit_test {
 
-    OptionStub::OptionStub(bool value) noexcept :
+    OptionStub::OptionStub(bool targetValue) noexcept :
         Option(easyStub),
-        value{value} {
+        targetValue{targetValue} {
 
     }
 
-    OptionStub::OptionStub(bool value, bool resetValue) noexcept:
+    OptionStub::OptionStub(bool targetValue, bool resetValue) noexcept:
         Option(easyStub),
-        value{value},
+        targetValue{targetValue},
         ResettableOption(resetValue) {
 
     }
@@ -21,16 +21,16 @@ namespace otocurl::option::unit_test {
         reset();
     }
 
-    bool OptionStub::getValue() const {
-        return value;
+    bool OptionStub::getTargetValue() const {
+        return targetValue;
     }
 
     bool OptionStub::getCURLOPTvalue() const {
         return stubbedCURLOPTvalue;
     }
 
-    void OptionStub::setTo(bool value) {
-        stubbedCURLOPTvalue = value;       
+    void OptionStub::setTo(bool targetValue) {
+        stubbedCURLOPTvalue = targetValue;       
     }
 
 }

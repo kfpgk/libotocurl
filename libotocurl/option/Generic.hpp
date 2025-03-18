@@ -35,8 +35,7 @@ namespace otocurl::option {
         Generic(wrapper::Easy& curlInterface, CURLoption curlOption, Args&&... args);
 
     private:
-        ///< The CURLOPT that shall be set
-        CURLoption curlOption;
+        CURLoption curlOption; ///< The CURLOPT that shall be set
 
         /**
          * @brief Storage for variadic template arguments

@@ -7,15 +7,15 @@
 
 namespace otocurl::option {
 
-    Nobody::Nobody(wrapper::Easy& curlInterface, bool value) noexcept :
+    Nobody::Nobody(wrapper::Easy& curlInterface, bool targetValue) noexcept :
         Option(curlInterface),
-        value{value} {
+        targetValue{targetValue} {
 
     }
 
-    Nobody::Nobody(wrapper::Easy& curlInterface, bool value, bool resetValue) noexcept:
+    Nobody::Nobody(wrapper::Easy& curlInterface, bool targetValue, bool resetValue) noexcept:
         Option(curlInterface),
-        value{value},
+        targetValue{targetValue},
         ResettableOption(resetValue) {
 
     }
@@ -24,12 +24,12 @@ namespace otocurl::option {
         reset();
     }
 
-    bool Nobody::getValue() const {
-        return value;
+    bool Nobody::getTargetValue() const {
+        return targetValue;
     }
 
-    void Nobody::setTo(bool value) {
-        if (value) {
+    void Nobody::setTo(bool targetValue) {
+        if (targetValue) {
             curlInterface.get().setOption(CURLOPT_NOBODY, 1L);
         } else {
             curlInterface.get().setOption(CURLOPT_NOBODY, 0L);

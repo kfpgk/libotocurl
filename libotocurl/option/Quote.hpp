@@ -27,7 +27,7 @@ namespace otocurl::option {
          * destruction.
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set 
-         * @param[in] value The target value of the option when being set
+         * @param[in] targetValue The target value of the option when being set
          */
         explicit Quote(wrapper::Easy& curlInterface, const std::string_view command);
 
@@ -36,7 +36,7 @@ namespace otocurl::option {
          * object destruction.
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set 
-         * @param[in] value The target value of the option when being set
+         * @param[in] targetValue The target value of the option when being set
          * @param[in] resetValue The reset value of the option when being destructed
          */
         Quote(wrapper::Easy& curlInterface,
@@ -57,16 +57,16 @@ namespace otocurl::option {
         wrapper::SList* commands; ///< Container for commands
 
         /**
-         * @brief Returns the target value
+         * @brief Returns the target targetValue
          * 
          * Needed for undo functionality
          */
-        [[nodiscard]] wrapper::SList* getValue() const override;
+        [[nodiscard]] wrapper::SList* getTargetValue() const override;
 
         /**
-         * @brief Sets the option to the specified value \p value
+         * @brief Sets the option to the specified targetValue \p targetValue
          * 
-         * @param[in] value Option will be set to this value
+         * @param[in] targetValue Option will be set to this targetValue
          * 
          * @details This override `UndoableOption`. `UndoableOption`
          * frees us from overriding the original `Option` method `doSet()`
@@ -74,7 +74,7 @@ namespace otocurl::option {
          * `UndoableOption` calls `setTo()` parameterized to specify if a command
          * shall be done or undone.
          */        
-        void setTo(wrapper::SList* value) override;
+        void setTo(wrapper::SList* targetValue) override;
 
     };
 

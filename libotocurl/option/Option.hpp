@@ -46,7 +46,7 @@ namespace otocurl::option {
         void set();
 
     protected:
-        ///< The curl interface for which this option shall be set
+        /// @brief The curl interface for which this option shall be set
         std::reference_wrapper<wrapper::Easy> curlInterface; 
 
     private:

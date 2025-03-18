@@ -36,10 +36,10 @@ namespace otocurl::option {
         void redo();
 
     private:
-        ///< The stack that stores recently set objects that can be undone
+        /// @brief The stack that stores recently set objects that can be undone
         std::stack<std::shared_ptr<UndoableOption>> undoStack;
 
-        ///< The stack that stores recently undon objects that can be redone
+        /// @brief The stack that stores recently undon objects that can be redone
         std::stack<std::shared_ptr<UndoableOption>> redoStack;
 
     };

@@ -36,13 +36,13 @@ namespace otocurl::option {
         }
     }    
 
-    wrapper::SList* Quote::getValue() const {
+    wrapper::SList* Quote::getTargetValue() const {
         return commands;
     }
 
-    void Quote::setTo(wrapper::SList* value) {
-        if (value) {
-            curlInterface.get().setOption(CURLOPT_QUOTE, value->getSListPointer());
+    void Quote::setTo(wrapper::SList* targetValue) {
+        if (targetValue) {
+            curlInterface.get().setOption(CURLOPT_QUOTE, targetValue->getSListPointer());
         } else {
             curlInterface.get().setOption(CURLOPT_QUOTE, NULL);
         }

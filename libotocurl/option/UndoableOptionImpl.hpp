@@ -20,6 +20,14 @@ namespace otocurl::option {
             UndoableOptionImpl() = default;
 
             /**
+             * @brief Constructor
+             * 
+             * @param[in] initialValue The initial targetValue used when
+             * undoing a command
+             */
+            UndoableOptionImpl(T initialValue);
+
+            /**
              * @brief Virtual default destructor
              * 
              * Object may be deleted through derived pointer
@@ -27,30 +35,31 @@ namespace otocurl::option {
             virtual ~UndoableOptionImpl() = default;
 
         private:
-            std::optional<T> previous; ///< Holds undo value if available
+            std::optional<T> current; ///< Holds current targetValue which will transition to `previous`
+            std::optional<T> previous; ///< Holds undo targetValue if available
             
             /**
-             * @brief Perform command to set the CURLOPT to the given value and remember
-             * previous value to enable undo
+             * @brief Perform command to set the CURLOPT to the given targetValue and remember
+             * previous targetValue to enable undo
              */
             void doSet() final;
 
             /**
-             * @brief Perform the undo operator if previous value is available
+             * @brief Perform the undo operator if previous targetValue is available
              */
             void doUndo() final;
 
             /**
-             * @brief Pure virtual method to get the target value from concrete class
+             * @brief Pure virtual method to get the target targetValue from concrete class
              */
-            [[nodiscard]] virtual T getValue() const = 0;
+            [[nodiscard]] virtual T getTargetValue() const = 0;
 
             /**
-             * @brief Pure virtual method to set the option to a specific value
+             * @brief Pure virtual method to set the option to a specific targetValue
              * 
-             * @param[in] value Option will be set to this value
+             * @param[in] targetValue Option will be set to this targetValue
              */
-            virtual void setTo(T value) = 0;
+            virtual void setTo(T targetValue) = 0;
 
     };
 

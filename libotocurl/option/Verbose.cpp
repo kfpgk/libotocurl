@@ -6,17 +6,17 @@
 namespace otocurl::option {
 
     Verbose::Verbose(wrapper::Easy& curlInterface,
-        bool value) :
+        bool targetValue) :
         Option(curlInterface),
-        value{value} {
+        targetValue{targetValue} {
 
     }
 
     Verbose::Verbose(wrapper::Easy& curlInterface,
-        bool value,
+        bool targetValue,
         bool resetValue) :
         Option(curlInterface),
-        value{value},
+        targetValue{targetValue},
         ResettableOption(resetValue) {
 
     }
@@ -25,12 +25,12 @@ namespace otocurl::option {
         reset();  
     }
 
-    bool Verbose::getValue() const {
-        return value;
+    bool Verbose::getTargetValue() const {
+        return targetValue;
     }
 
-    void Verbose::setTo(bool value) {
-        if (value) {
+    void Verbose::setTo(bool targetValue) {
+        if (targetValue) {
             curlInterface.get().setOption(CURLOPT_VERBOSE, 1L);
         } else {
             curlInterface.get().setOption(CURLOPT_VERBOSE, 0L);

@@ -21,18 +21,18 @@ namespace otocurl::option::unit_test {
          * @brief Constructs a persistent option, which is not being reset upon object 
          * destruction.
          * 
-         * @param[in] value The target value of the option when being set
+         * @param[in] targetValue The target targetValue of the option when being set
          */
-        explicit OptionStub(bool value) noexcept;
+        explicit OptionStub(bool targetValue) noexcept;
 
         /**
          * @brief Constructs a volatile option, which is being reset to \p resetValue upon
          * object destruction.
          * 
-         * @param[in] value The target value of the option when being set
-         * @param[in] resetValue The reset value of the option when being destructed
+         * @param[in] targetValue The target targetValue of the option when being set
+         * @param[in] resetValue The reset targetValue of the option when being destructed
          */
-        OptionStub(bool value, bool resetValue) noexcept;
+        OptionStub(bool targetValue, bool resetValue) noexcept;
         
         /**
          * @brief Destructor
@@ -40,29 +40,29 @@ namespace otocurl::option::unit_test {
         ~OptionStub();
 
         /**
-         * @brief Returns the simulated actual value
+         * @brief Returns the simulated actual targetValue
          */
         bool getCURLOPTvalue() const;
 
     private:
-        bool value; ///< The target value of the option when being set
+        bool targetValue; ///< The target targetValue of the option when being set
 
-        bool stubbedCURLOPTvalue; ///< Represents the value of a CURLOPT in libcurl for testing
+        bool stubbedCURLOPTvalue; ///< Represents the targetValue of a CURLOPT in libcurl for testing
 
-        ///< Stub for curl easys interface, needed by base class
+        /// @brief Stub for curl easys interface, needed by base class
         wrapper::unit_test::EasyStub easyStub; 
 
         /**
-         * @brief Returns the target value
+         * @brief Returns the target targetValue
          * 
          * Needed for undo functionality
          */
-        [[nodiscard]] bool getValue() const override;
+        [[nodiscard]] bool getTargetValue() const override;
 
         /**
-         * @brief Sets the option to the specified value \p value
+         * @brief Sets the option to the specified targetValue \p targetValue
          * 
-         * @param[in] value Option will be set to this value
+         * @param[in] targetValue Option will be set to this targetValue
          * 
          * @details This override `UndoableOption`. `UndoableOption`
          * frees us from overriding the original `Option` method `doSet()`
@@ -70,7 +70,7 @@ namespace otocurl::option::unit_test {
          * `UndoableOption` calls `setTo()` parameterized to specify if a command
          * shall be done or undone.
          */
-        void setTo(bool value) override;
+        void setTo(bool targetValue) override;
 
     };
 

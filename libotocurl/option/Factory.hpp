@@ -96,22 +96,22 @@ namespace otocurl::option {
         [[nodiscard]] std::unique_ptr<Quote> createVolatileQuote(const std::string& command) const;
 
        /**
-         * @brief Create a persistent CURLOPT_UPLOAD option with target value \p value 
+         * @brief Create a persistent CURLOPT_UPLOAD option with target value \p targetValue 
          * 
          * The option does not get reset to default upon going out of scope
          * 
-         * @param[in] value Target value of the CURLOPT_UPLOAD option
+         * @param[in] targetValue Target value of the CURLOPT_UPLOAD option
          */
-        [[nodiscard]] std::unique_ptr<Upload> createUpload(bool value) const;
+        [[nodiscard]] std::unique_ptr<Upload> createUpload(bool targetValue) const;
 
         /**
-         * @brief Create a volatile CURLOPT_UPLOAD option with target value \p value 
+         * @brief Create a volatile CURLOPT_UPLOAD option with target value \p targetValue 
          * 
          * The option will get reset to default upon going out of scope
          * 
-         * @param[in] value Target value of the CURLOPT_UPLOAD option
+         * @param[in] targetValue Target value of the CURLOPT_UPLOAD option
          */
-        [[nodiscard]] std::unique_ptr<Upload> createVolatileUpload(bool value) const;
+        [[nodiscard]] std::unique_ptr<Upload> createVolatileUpload(bool targetValue) const;
 
         /**
          * @brief Create a persistent CURLOPT_VERBOSE option that enables verbosity
@@ -128,7 +128,8 @@ namespace otocurl::option {
         [[nodiscard]] std::unique_ptr<Verbose> createVolatileVerbose() const;
 
     private:
-        ///< The curl interface instance that is being given to all options created by this factory
+        /// @brief The curl interface instance that is being given to all options 
+        /// created by this factory
         wrapper::Easy& curlInterface; 
 
     };

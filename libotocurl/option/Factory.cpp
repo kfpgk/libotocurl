@@ -51,15 +51,15 @@ namespace otocurl::option {
     }
 
     std::unique_ptr<Upload> Factory::createUpload(
-        bool value) const {
+        bool targetValue) const {
         
-        return std::make_unique<Upload>(curlInterface, value);
+        return std::make_unique<Upload>(curlInterface, targetValue);
     }
 
     std::unique_ptr<Upload> Factory::createVolatileUpload(
-        bool value) const {
+        bool targetValue) const {
         
-        return std::make_unique<Upload>(curlInterface, value, false);
+        return std::make_unique<Upload>(curlInterface, targetValue, false);
     }
 
     std::unique_ptr<Verbose> Factory::createVerbose() const {

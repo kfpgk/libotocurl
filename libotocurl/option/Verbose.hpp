@@ -21,19 +21,19 @@ namespace otocurl::option {
          * destruction.
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set 
-         * @param[in] value The target value of the option when being set
+         * @param[in] targetValue The target value of the option when being set
          */
-        explicit Verbose(wrapper::Easy& curlInterface, bool value);
+        explicit Verbose(wrapper::Easy& curlInterface, bool targetValue);
 
         /**
          * @brief Constructs a volatile option, which is being reset to \p resetValue upon
          * object destruction.
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set 
-         * @param[in] value The target value of the option when being set
+         * @param[in] targetValue The target value of the option when being set
          * @param[in] resetValue The reset value of the option when being destructed
          */
-        Verbose(wrapper::Easy& curlInterface, bool value, bool resetValue);
+        Verbose(wrapper::Easy& curlInterface, bool targetValue, bool resetValue);
 
         /**
          * @brief Destructor
@@ -41,19 +41,19 @@ namespace otocurl::option {
         ~Verbose();
 
     private:
-        bool value; ///< The target value of the option when being set
+        bool targetValue; ///< The target targetValue of the option when being set
 
         /**
-         * @brief Returns the target value
+         * @brief Returns the target targetValue
          * 
          * Needed for undo functionality
          */
-        [[nodiscard]] bool getValue() const override;
+        [[nodiscard]] bool getTargetValue() const override;
 
         /**
-         * @brief Sets the option to the specified value \p value
+         * @brief Sets the option to the specified targetValue \p targetValue
          * 
-         * @param[in] value Option will be set to this value
+         * @param[in] targetValue Option will be set to this targetValue
          * 
          * @details This override `UndoableOption`. `UndoableOption`
          * frees us from overriding the original `Option` method `doSet()`
@@ -61,7 +61,7 @@ namespace otocurl::option {
          * `UndoableOption` calls `setTo()` parameterized to specify if a command
          * shall be done or undone.
          */
-        void setTo(bool value) override;
+        void setTo(bool targetValue) override;
     };
 
 }

@@ -5,16 +5,25 @@
 namespace otocurl::option {
 
     template<typename T>
+    UndoableOptionImpl<T>::UndoableOptionImpl(T initialValue) : 
+        current{ initialValue } {
+
+    }
+
+    template<typename T>
     void UndoableOptionImpl<T>::doUndo() {
         if (previous) {
-            setTo(previous.value());
+            current = previous;
+            setTo(current.value());
+            previous.reset();
         }  
     }
 
     template<typename T>
     void UndoableOptionImpl<T>::doSet() {
-        setTo(getValue());
-        previous = getValue(); ///< TODO: This seems buggy
+        previous = current;
+        current = getTargetValue();
+        setTo(current.value());
     }
 
 }
