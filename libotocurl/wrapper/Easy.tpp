@@ -19,6 +19,7 @@ namespace otocurl::wrapper {
                 + std::string(curl_easy_option_by_id(option)->name) \
                 + ") failed:"), rc, errorBuffer.data());
         }
+		storeOptionValue(option, std::forward<Args>(args)...);
     }
 
 }

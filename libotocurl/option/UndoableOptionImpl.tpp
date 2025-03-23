@@ -11,6 +11,11 @@ namespace otocurl::option {
     }
 
     template<typename T>
+    void UndoableOptionImpl<T>::setCurrentValue(T value) {
+        current = value;
+    }
+
+    template<typename T>
     void UndoableOptionImpl<T>::doUndo() {
         if (previous) {
             current = previous;

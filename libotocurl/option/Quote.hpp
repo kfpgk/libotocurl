@@ -10,6 +10,10 @@
 
 namespace otocurl::option {
 
+    namespace unit_test {
+        class QuoteTest; ///< Forward declaration for unit test
+    }
+
     /**
      * @brief Wrapper for CURLOPT_QUOTE
      * 
@@ -18,8 +22,11 @@ namespace otocurl::option {
      * @details
      * Patterns:
      *  - Command
+     *  - Template
      */
-    class Quote : public ResettableOption<wrapper::SList*>, public UndoableOptionImpl<wrapper::SList*> {
+    class Quote : 
+        public ResettableOption<wrapper::SList*>, 
+        public UndoableOptionImpl<wrapper::SList*> {
 
     public:
         /**
@@ -54,6 +61,9 @@ namespace otocurl::option {
         void addCommand(const std::string_view command);
 
     private:
+        /// @brief The CURLOPT identifier
+        static constexpr CURLoption curlOption = CURLOPT_QUOTE;
+
         wrapper::SList* commands; ///< Container for commands
 
         /**
@@ -68,7 +78,7 @@ namespace otocurl::option {
          * 
          * @param[in] targetValue Option will be set to this targetValue
          * 
-         * @details This override `UndoableOption`. `UndoableOption`
+         * @details This overrides `UndoableOption`. `UndoableOption`
          * frees us from overriding the original `Option` method `doSet()`
          * and requires us to provide `setTo()` instead. 
          * `UndoableOption` calls `setTo()` parameterized to specify if a command
@@ -76,6 +86,15 @@ namespace otocurl::option {
          */        
         void setTo(wrapper::SList* targetValue) override;
 
+        /**
+		 * @brief Returns whether the CURLOPT_QUOTE option in the curl interface
+         * holds a list or not
+         *
+		 * @return true if the option holds a list, false otherwise (NULL)
+         */
+        [[nodiscard]] bool actualOptionHoldsList() const;
+
+        friend class unit_test::QuoteTest; ///< Allow unit test to access private members
     };
 
 }

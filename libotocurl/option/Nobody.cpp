@@ -11,13 +11,23 @@ namespace otocurl::option {
         Option(curlInterface),
         targetValue{targetValue} {
 
+        try {
+            setCurrentValue(getActualValue());
+		} catch (...) {
+            /* Do nothing */
+        }
     }
 
     Nobody::Nobody(wrapper::Easy& curlInterface, bool targetValue, bool resetValue) noexcept:
         Option(curlInterface),
-        targetValue{targetValue},
-        ResettableOption(resetValue) {
+        ResettableOption(resetValue),
+        targetValue{targetValue} {
 
+        try {
+            setCurrentValue(getActualValue());
+        } catch (...) {
+            /* Do nothing */
+        }
     }
 
     Nobody::~Nobody() {
@@ -30,10 +40,15 @@ namespace otocurl::option {
 
     void Nobody::setTo(bool targetValue) {
         if (targetValue) {
-            curlInterface.get().setOption(CURLOPT_NOBODY, 1L);
+            getInterface().setOption(curlOption, 1L);
         } else {
-            curlInterface.get().setOption(CURLOPT_NOBODY, 0L);
+            getInterface().setOption(curlOption, 0L);
         }        
+    }
+
+    bool Nobody::getActualValue() const {
+        auto value = std::any_cast<long>(getInterface().getOptionValue(curlOption));
+        return value == 1L;
     }
 
 }

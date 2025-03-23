@@ -1,24 +1,33 @@
 #include <libotocurl/option/Verbose.hpp>
 #include <libotocurl/option/Option.hpp>
+#include <libotocurl/option/ResettableOption.hpp>
+#include <libotocurl/wrapper/Easy.hpp>
 
 #include <curl/curl.h>
 
 namespace otocurl::option {
 
-    Verbose::Verbose(wrapper::Easy& curlInterface,
-        bool targetValue) :
+    Verbose::Verbose(wrapper::Easy& curlInterface, bool targetValue) :
         Option(curlInterface),
         targetValue{targetValue} {
 
+        try {
+            setCurrentValue(getActualValue());
+        } catch (...) {
+            /* Do nothing */
+        }
     }
 
-    Verbose::Verbose(wrapper::Easy& curlInterface,
-        bool targetValue,
-        bool resetValue) :
+    Verbose::Verbose(wrapper::Easy& curlInterface, bool targetValue, bool resetValue) :
         Option(curlInterface),
-        targetValue{targetValue},
-        ResettableOption(resetValue) {
+        ResettableOption(resetValue),
+        targetValue{targetValue} {
 
+        try {
+            setCurrentValue(getActualValue());
+        } catch (...) {
+            /* Do nothing */
+        }
     }
 
     Verbose::~Verbose() {
@@ -31,10 +40,15 @@ namespace otocurl::option {
 
     void Verbose::setTo(bool targetValue) {
         if (targetValue) {
-            curlInterface.get().setOption(CURLOPT_VERBOSE, 1L);
+            getInterface().setOption(curlOption, 1L);
         } else {
-            curlInterface.get().setOption(CURLOPT_VERBOSE, 0L);
+            getInterface().setOption(curlOption, 0L);
         }        
+    }
+
+    bool Verbose::getActualValue() const {
+        auto value = std::any_cast<long>(getInterface().getOptionValue(curlOption));
+        return value == 1L;
     }
 
 }

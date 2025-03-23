@@ -1,5 +1,5 @@
-#include <libotocurl/option/Nobody.test.hpp>
-#include <libotocurl/option/Nobody.hpp>
+#include <libotocurl/option/Verbose.test.hpp>
+#include <libotocurl/option/Verbose.hpp>
 #include <libotocurl/wrapper/EasyStub.test.hpp>
 
 #include <libcpplog/logger/Log.hpp>
@@ -10,77 +10,77 @@ using namespace cpplog::logger;
 
 int main(int argc, char* argv[]) {
 	
-	otocurl::option::unit_test::NobodyTest test;
+	otocurl::option::unit_test::VerboseTest test;
 	
 	test.testGetTargetValueFalse();
 	test.testGetTargetValueTrue();
 
 	test.testSetToFalse();
 	test.testSetToTrue();
-
-	test.testUndo();
 	
-	log(LogLevel::Result, "option::Nobody: passed");
+	test.testUndo();
+
+	log(LogLevel::Result, "option::Verbose: passed");
 	return 0;
 }
 
 namespace otocurl::option::unit_test {
 
-	void NobodyTest::testGetTargetValueFalse() const {
+	void VerboseTest::testGetTargetValueFalse() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = false;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Verbose option(option::Verbose(easyStub, value));
 
 		assert(option.getTargetValue() == value);
 	}
 
-	void NobodyTest::testGetTargetValueTrue() const {
+	void VerboseTest::testGetTargetValueTrue() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = true;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Verbose option(option::Verbose(easyStub, value));
 
 		assert(option.getTargetValue() == value);
 	}
 
-	void NobodyTest::testSetToFalse() const {
+	void VerboseTest::testSetToFalse() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = false;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Verbose option(option::Verbose(easyStub, value));
 
 		option.set();
 
 		assert(option.getActualValue() == value);
 	}
 
-	void NobodyTest::testSetToTrue() const {
+	void VerboseTest::testSetToTrue() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = true;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Verbose option(option::Verbose(easyStub, value));
 
 		option.set();
 
 		assert(option.getActualValue() == value);
 	}
 
-	void NobodyTest::testUndo() const {
+	void VerboseTest::testUndo() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = true;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Verbose option(option::Verbose(easyStub, value));
 
 		option.set();
 		option.undo();

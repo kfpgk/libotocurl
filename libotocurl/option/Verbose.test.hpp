@@ -1,12 +1,12 @@
-#ifndef LIBOTOCURL_OPTION_NOBODY_TEST_HPP
-#define LIBOTOCURL_OPTION_NOBODY_TEST_HPP
+#ifndef LIBOTOCURL_OPTION_VERBOSE_TEST_HPP
+#define LIBOTOCURL_OPTION_VERBOSE_TEST_HPP
 
 namespace otocurl::option::unit_test {
 
 	/**
-	 * @brief Unit test `Nobody` 
+	 * @brief Unit test `Verbose` 
 	 */
-	class NobodyTest {
+	class VerboseTest {
 
 	public:
 		/**

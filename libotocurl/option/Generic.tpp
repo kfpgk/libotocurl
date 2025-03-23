@@ -32,9 +32,9 @@ namespace otocurl::option {
     void Generic<Args...>::doSet() {
         auto optionAndArgs = std::tuple_cat(std::make_tuple(curlOption), args);
         std::apply([this](auto &&... args) 
-            -> decltype(curlInterface.get().setOption(std::forward<decltype(args)>(args)...))
+            -> decltype(getInterface().setOption(std::forward<decltype(args)>(args)...))
             { 
-                curlInterface.get().setOption(std::forward<decltype(args)>(args)...); 
+                getInterface().setOption(std::forward<decltype(args)>(args)...);
             },
             optionAndArgs);
     }

@@ -1,5 +1,5 @@
-#include <libotocurl/option/Nobody.test.hpp>
-#include <libotocurl/option/Nobody.hpp>
+#include <libotocurl/option/Upload.test.hpp>
+#include <libotocurl/option/Upload.hpp>
 #include <libotocurl/wrapper/EasyStub.test.hpp>
 
 #include <libcpplog/logger/Log.hpp>
@@ -10,7 +10,7 @@ using namespace cpplog::logger;
 
 int main(int argc, char* argv[]) {
 	
-	otocurl::option::unit_test::NobodyTest test;
+	otocurl::option::unit_test::UploadTest test;
 	
 	test.testGetTargetValueFalse();
 	test.testGetTargetValueTrue();
@@ -20,67 +20,67 @@ int main(int argc, char* argv[]) {
 
 	test.testUndo();
 	
-	log(LogLevel::Result, "option::Nobody: passed");
+	log(LogLevel::Result, "option::Upload: passed");
 	return 0;
 }
 
 namespace otocurl::option::unit_test {
 
-	void NobodyTest::testGetTargetValueFalse() const {
+	void UploadTest::testGetTargetValueFalse() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = false;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Upload option(option::Upload(easyStub, value));
 
 		assert(option.getTargetValue() == value);
 	}
 
-	void NobodyTest::testGetTargetValueTrue() const {
+	void UploadTest::testGetTargetValueTrue() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = true;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Upload option(option::Upload(easyStub, value));
 
 		assert(option.getTargetValue() == value);
 	}
 
-	void NobodyTest::testSetToFalse() const {
+	void UploadTest::testSetToFalse() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = false;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Upload option(option::Upload(easyStub, value));
 
 		option.set();
 
 		assert(option.getActualValue() == value);
 	}
 
-	void NobodyTest::testSetToTrue() const {
+	void UploadTest::testSetToTrue() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = true;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Upload option(option::Upload(easyStub, value));
 
 		option.set();
 
 		assert(option.getActualValue() == value);
 	}
 
-	void NobodyTest::testUndo() const {
+	void UploadTest::testUndo() const {
 		log("Running ", LogRequest::functionName());
 
 		bool value = true;
 
 		wrapper::unit_test::EasyStub easyStub;
-		option::Nobody option(option::Nobody(easyStub, value));
+		option::Upload option(option::Upload(easyStub, value));
 
 		option.set();
 		option.undo();

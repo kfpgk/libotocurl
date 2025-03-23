@@ -4,9 +4,13 @@
 
 #include <curl/curl.h>
 
+#include <memory>
+
 namespace otocurl::wrapper {
 
-    Easy::Easy() {
+    Easy::Easy() :
+        optionValues{std::make_unique<OptionValues>()} {
+
         LIBFILESYNC_CURL_UTILITY_DEBUG("Running curl_easy_init()");
         handle = curl_easy_init();
         if (!handle) {
@@ -58,6 +62,16 @@ namespace otocurl::wrapper {
             throw Exception("curl_easy_perform() failed:", rc, errorBuffer.data());
         }        
     }
+
+    std::any Easy::getOptionValue(CURLoption option) const {
+		LIBFILESYNC_CURL_UTILITY_DEBUG("Getting option value");
+		return optionValues->get(option);
+    }
+
+	void Easy::storeOptionValue(CURLoption option, std::any value) {
+		LIBFILESYNC_CURL_UTILITY_DEBUG("Storing option value");
+        optionValues->set(option, value);
+	}
 
     /**
      * @brief Default write callback function which writes incoming

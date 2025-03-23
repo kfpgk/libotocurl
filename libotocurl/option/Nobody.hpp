@@ -5,6 +5,8 @@
 #include <libotocurl/option/UndoableOptionImpl.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
+#include <curl/curl.h>
+
 namespace otocurl::option {
 
 	namespace unit_test {
@@ -17,13 +19,11 @@ namespace otocurl::option {
      * @details
      * Patterns:
      *  - Command
+     *  - Template
      */
     class Nobody : public ResettableOption<bool>, public UndoableOptionImpl<bool>  {
 
     public:
-        /// @brief The default value of the option
-        static constexpr bool defaultValue = false;
-
         /**
          * @brief Constructs a persistent option, which is not being reset upon object 
          * destruction.
@@ -49,12 +49,17 @@ namespace otocurl::option {
         ~Nobody();
 
     private:
+        /// @brief The CURLOPT identifier
+        static constexpr CURLoption curlOption = CURLOPT_NOBODY;
+
         bool targetValue; ///< The target value of the option when being set
 
         /**
          * @brief Returns the target targetValue
          * 
          * Needed for undo functionality
+         * 
+		 * @return The target value to be set
          */
         [[nodiscard]] bool getTargetValue() const override;
 
@@ -63,13 +68,20 @@ namespace otocurl::option {
          * 
          * @param[in] targetValue Option will be set to this targetValue
          * 
-         * @details This override `UndoableOption`. `UndoableOption`
+         * @details This overrides `UndoableOption`. `UndoableOption`
          * frees us from overriding the original `Option` method `doSet()`
          * and requires us to provide `setTo()` instead. 
          * `UndoableOption` calls `setTo()` parameterized to specify if a command
          * shall be done or undone.
          */
         void setTo(bool targetValue) override;
+
+        /**
+         * @brief Returns the value of the CURLOPT_NOBODY option in the curl interface
+         *
+         * @return The value of the CURLOPT_NOBODY option
+         */
+        [[nodiscard]] bool getActualValue() const;
 
 		friend class unit_test::NobodyTest; ///< Allow unit test to access private members
 

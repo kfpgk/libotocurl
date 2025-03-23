@@ -27,7 +27,7 @@ namespace otocurl::wrapper {
         }
     }
 
-    SList::SList(SList&& rhs) {
+    SList::SList(SList&& rhs) noexcept {
         using std::swap;
         swap(*this, rhs);
     }

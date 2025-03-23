@@ -2,13 +2,17 @@
 #define LIBOTOCURL_WRAPPER_EASY_HPP
 
 #include <libotocurl/wrapper/Base.hpp>
+#include <libotocurl/wrapper/OptionValues.hpp>
 #include <libotocurl/Exception.hpp>
 
 #include <curl/curl.h>
 
+#include <any>
 #include <array>
 #include <cstdarg>
 #include <cstdio>
+#include <memory>
+#include <optional>
 #include <string>
 
 namespace otocurl::wrapper {
@@ -53,29 +57,34 @@ namespace otocurl::wrapper {
      */
     class Easy : public Base {
 
-        public:
-            Easy();
-            virtual ~Easy();
-            Easy(const Easy& rhs);
-            Easy(Easy&& rhs) noexcept;
-            Easy& operator=(Easy rhs);
-            friend void swap(Easy& lhs, Easy& rhs) noexcept;
+    public:
+        Easy();
+        virtual ~Easy();
+        Easy(const Easy& rhs);
+        Easy(Easy&& rhs) noexcept;
+        Easy& operator=(Easy rhs);
+        friend void swap(Easy& lhs, Easy& rhs) noexcept;
 
-            friend size_t easyDefaultWriteCallback(
-                char *contents, size_t size, size_t count, FILE *target);  
+        friend size_t easyDefaultWriteCallback(
+            char *contents, size_t size, size_t count, FILE *target);  
 
-            friend size_t easyDefaultReadCallback(
-                char *buffer, size_t size, size_t count, FILE *contents);
+        friend size_t easyDefaultReadCallback(
+            char *buffer, size_t size, size_t count, FILE *contents);
 
-            template<typename... Args> 
-            void setOption(CURLoption option, Args&&... args);
+        template<typename... Args> 
+        void setOption(CURLoption option, Args&&... args);
 
-            virtual void perform() const;
+		std::any getOptionValue(CURLoption option) const;
 
-        private:
-            CURL* handle;
-            CURLcode rc;
-            std::array<char, CURL_ERROR_SIZE> errorBuffer;
+        virtual void perform() const;
+
+    private:
+        CURL* handle;
+        CURLcode rc;
+        std::array<char, CURL_ERROR_SIZE> errorBuffer;
+		std::unique_ptr<OptionValues> optionValues;
+
+		virtual void storeOptionValue(CURLoption option, std::any value);
             
     };
 

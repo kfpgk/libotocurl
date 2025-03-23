@@ -3,7 +3,8 @@ target_sources(libotocurl
         Base.cpp
         Easy.cpp
         Exception.cpp
-        GlobalSetup.cpp        
+        GlobalSetup.cpp
+        OptionValues.cpp
         SList.cpp
         Url.cpp
 )

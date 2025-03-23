@@ -30,7 +30,7 @@ namespace otocurl::unit_test {
             void doDeleteRemoteFile() override {} ;
             void doCreateRemoteDir() override {} ;
             void doDeleteRemoteDir() override {} ;
-            void doSetCreateMissingDirs([[maybe_unused]] bool value) override {} ;
+            void doSetCreateMissingDirs([[maybe_unused]] bool targetValue) override {} ;
             
     };
 

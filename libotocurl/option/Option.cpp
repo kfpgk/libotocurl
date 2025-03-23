@@ -16,4 +16,8 @@ namespace otocurl::option {
         doSet();
     }
 
+	wrapper::Easy& Option::getInterface() const noexcept {
+		return curlInterface.get();
+	}
+
 }

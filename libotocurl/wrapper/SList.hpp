@@ -21,7 +21,7 @@ namespace otocurl::wrapper {
             SList(const std::string& content);
             ~SList();
             SList(const SList&);
-            SList(SList&& rhs);
+            SList(SList&& rhs) noexcept;
             SList& operator=(SList);
             friend void swap(SList& lhs, SList& rhs);
 

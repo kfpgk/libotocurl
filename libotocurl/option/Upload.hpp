@@ -5,13 +5,20 @@
 #include <libotocurl/option/UndoableOptionImpl.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
+#include <curl/curl.h>
+
 namespace otocurl::option {
+
+    namespace unit_test {
+        class UploadTest; ///< Forward declaration for unit test
+    }
 
     /**
      * @brief Wrapper for CURLOPT_UPLOAD
      * 
      * Patterns:
      *  - Command
+     *  - Template
      */
     class Upload : public ResettableOption<bool>, public UndoableOptionImpl<bool> {
 
@@ -41,6 +48,9 @@ namespace otocurl::option {
         ~Upload();
 
     private:
+        /// @brief The CURLOPT identifier
+        static constexpr CURLoption curlOption = CURLOPT_UPLOAD;
+
         bool targetValue; ///< The target targetValue of the option when being set
 
         /**
@@ -55,7 +65,7 @@ namespace otocurl::option {
          * 
          * @param[in] targetValue Option will be set to this targetValue
          * 
-         * @details This override `UndoableOption`. `UndoableOption`
+         * @details This overrides `UndoableOption`. `UndoableOption`
          * frees us from overriding the original `Option` method `doSet()`
          * and requires us to provide `setTo()` instead. 
          * `UndoableOption` calls `setTo()` parameterized to specify if a command
@@ -63,6 +73,14 @@ namespace otocurl::option {
          */
         void setTo(bool targetValue) override;
 
+        /**
+         * @brief Returns the value of the CURLOPT_UPLOAD option in the curl interface
+         *
+         * @return The value of the CURLOPT_UPLOAD option
+         */
+        [[nodiscard]] bool getActualValue() const;
+
+        friend class unit_test::UploadTest; ///< Allow unit test to access private members
     };
 
 }

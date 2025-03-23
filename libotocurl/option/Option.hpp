@@ -24,7 +24,7 @@ namespace otocurl::option {
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set
          */
-        Option(wrapper::Easy& curlInterface) noexcept;
+        explicit Option(wrapper::Easy& curlInterface) noexcept;
 
         /**
          * @brief Virtual default destructor
@@ -46,10 +46,15 @@ namespace otocurl::option {
         void set();
 
     protected:
-        /// @brief The curl interface for which this option shall be set
-        std::reference_wrapper<wrapper::Easy> curlInterface; 
+        /*
+		 * @brief Get the curl interface
+         */
+		wrapper::Easy& getInterface() const noexcept;
 
     private:
+        /// @brief The curl interface for which this option shall be set
+        std::reference_wrapper<wrapper::Easy> curlInterface;
+
         /**
          * @brief Pure virtual command method to perform the actual setting of an option
          * 
