@@ -3,6 +3,7 @@
 
 #include <curl/curl.h>
 
+#include <functional>
 #include <tuple>
 #include <type_traits>
 
@@ -15,8 +16,8 @@ namespace otocurl::option {
     template<typename... Args> 
     Generic<Args...>::Generic(wrapper::Easy& curlInterface,
         CURLoption curlOption, Args&&... args) :
-            Option(curlInterface),
             curlOption{ curlOption },
+            curlInterface{ curlInterface },
             args{std::make_tuple(std::forward<Args>(args)...)} {
 
     }
@@ -32,9 +33,9 @@ namespace otocurl::option {
     void Generic<Args...>::doSet() {
         auto optionAndArgs = std::tuple_cat(std::make_tuple(curlOption), args);
         std::apply([this](auto &&... args) 
-            -> decltype(getInterface().setOption(std::forward<decltype(args)>(args)...))
+            -> decltype(curlInterface.get().setOption(std::forward<decltype(args)>(args)...))
             { 
-                getInterface().setOption(std::forward<decltype(args)>(args)...);
+                curlInterface.get().setOption(std::forward<decltype(args)>(args)...);
             },
             optionAndArgs);
     }

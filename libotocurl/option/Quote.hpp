@@ -6,6 +6,9 @@
 #include <libotocurl/wrapper/Easy.hpp>
 #include <libotocurl/wrapper/SList.hpp>
 
+#include <curl/curl.h>
+
+#include <functional>
 #include <string_view>
 
 namespace otocurl::option {
@@ -63,6 +66,9 @@ namespace otocurl::option {
     private:
         /// @brief The CURLOPT identifier
         static constexpr CURLoption curlOption = CURLOPT_QUOTE;
+
+        /// @brief The curl interface for which this option shall be set
+        std::reference_wrapper<wrapper::Easy> curlInterface;
 
         wrapper::SList* commands; ///< Container for commands
 

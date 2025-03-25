@@ -3,10 +3,12 @@
 #include <libotocurl/option/ResettableOption.hpp>
 #include <libotocurl/wrapper/Easy.hpp>
 
+#include <functional>
+
 namespace otocurl::option {
 
     Upload::Upload(wrapper::Easy& curlInterface, bool targetValue) :
-        Option(curlInterface),
+        curlInterface{ curlInterface },
         targetValue{targetValue} {
 
         try {
@@ -17,8 +19,8 @@ namespace otocurl::option {
     }
 
     Upload::Upload(wrapper::Easy& curlInterface, bool targetValue, bool resetValue) :
-        Option(curlInterface),
         ResettableOption(resetValue),
+        curlInterface{ curlInterface },
         targetValue{targetValue} {
 
         try {
@@ -38,14 +40,14 @@ namespace otocurl::option {
 
     void Upload::setTo(bool targetValue) {
         if (targetValue) {
-            getInterface().setOption(curlOption, 1L);
+            curlInterface.get().setOption(curlOption, 1L);
         } else {
-            getInterface().setOption(curlOption, 0L);
+            curlInterface.get().setOption(curlOption, 0L);
         }
     }
 
     bool Upload::getActualValue() const {
-        auto value = std::any_cast<long>(getInterface().getOptionValue(curlOption));
+        auto value = std::any_cast<long>(curlInterface.get().getOptionValue(curlOption));
         return value == 1L;
     }
 

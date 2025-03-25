@@ -1,10 +1,6 @@
 #ifndef LIBOTOCURL_OPTION_OPTION_HPP
 #define LIBOTOCURL_OPTION_OPTION_HPP
 
-#include <libotocurl/wrapper/Easy.hpp>
-
-#include <functional>
-
 namespace otocurl::option {
 
     /**
@@ -20,23 +16,9 @@ namespace otocurl::option {
 
     public:
         /**
-         * @brief Constructor
-         * 
-         * @param[in] curlInterface The curl interface for which this option shall be set
-         */
-        explicit Option(wrapper::Easy& curlInterface) noexcept;
-
-        /**
          * @brief Virtual default destructor
          */
         virtual ~Option() = default;
-
-        /**
-         * @brief Reset the curl interface
-         * 
-         * @param[in] curlInterface The curl interface for which this option shall be set
-         */
-        void setInterface(wrapper::Easy& curlInterface) noexcept;
 
         /**
          * @brief Command method to set the specific command
@@ -44,16 +26,6 @@ namespace otocurl::option {
          * @details Calls virtual function `doSet()`
          */
         void set();
-
-    protected:
-        /*
-		 * @brief Get the curl interface
-         */
-		wrapper::Easy& getInterface() const noexcept;
-
-    private:
-        /// @brief The curl interface for which this option shall be set
-        std::reference_wrapper<wrapper::Easy> curlInterface;
 
         /**
          * @brief Pure virtual command method to perform the actual setting of an option

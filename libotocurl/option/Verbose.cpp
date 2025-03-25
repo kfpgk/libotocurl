@@ -5,10 +5,12 @@
 
 #include <curl/curl.h>
 
+#include <functional>
+
 namespace otocurl::option {
 
     Verbose::Verbose(wrapper::Easy& curlInterface, bool targetValue) :
-        Option(curlInterface),
+        curlInterface{ curlInterface },
         targetValue{targetValue} {
 
         try {
@@ -19,8 +21,8 @@ namespace otocurl::option {
     }
 
     Verbose::Verbose(wrapper::Easy& curlInterface, bool targetValue, bool resetValue) :
-        Option(curlInterface),
         ResettableOption(resetValue),
+        curlInterface{ curlInterface },
         targetValue{targetValue} {
 
         try {
@@ -40,14 +42,14 @@ namespace otocurl::option {
 
     void Verbose::setTo(bool targetValue) {
         if (targetValue) {
-            getInterface().setOption(curlOption, 1L);
+            curlInterface.get().setOption(curlOption, 1L);
         } else {
-            getInterface().setOption(curlOption, 0L);
+            curlInterface.get().setOption(curlOption, 0L);
         }        
     }
 
     bool Verbose::getActualValue() const {
-        auto value = std::any_cast<long>(getInterface().getOptionValue(curlOption));
+        auto value = std::any_cast<long>(curlInterface.get().getOptionValue(curlOption));
         return value == 1L;
     }
 

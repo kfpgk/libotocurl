@@ -4,13 +4,14 @@
 #include <libotocurl/wrapper/SList.hpp>
 
 #include <any>
+#include <functional>
 #include <string_view>
 
 namespace otocurl::option {
 
     Quote::Quote(wrapper::Easy& curlInterface, const std::string_view command) :
-        Option(curlInterface),
-        commands{new wrapper::SList()} {
+        curlInterface { curlInterface },
+        commands{ new wrapper::SList() } {
         
         addCommand(command);
 		if (!actualOptionHoldsList()) {
@@ -21,8 +22,8 @@ namespace otocurl::option {
     Quote::Quote(wrapper::Easy& curlInterface,
         const std::string_view command,
         wrapper::SList* resetValue) :
-            Option(curlInterface),
             ResettableOption(resetValue),
+            curlInterface{ curlInterface },
             commands{new wrapper::SList()}  {
 
         addCommand(command);
@@ -48,15 +49,16 @@ namespace otocurl::option {
 
     void Quote::setTo(wrapper::SList* targetValue) {
         if (targetValue) {
-            getInterface().setOption(CURLOPT_QUOTE, targetValue->getSListPointer());
+            curlInterface.get().setOption(CURLOPT_QUOTE, targetValue->getSListPointer());
         } else {
-            getInterface().setOption(CURLOPT_QUOTE, NULL);
+            curlInterface.get().setOption(CURLOPT_QUOTE, NULL);
         }
     }
 
     bool Quote::actualOptionHoldsList() const {
         try {
-			auto value = std::any_cast<curl_slist*>(getInterface().getOptionValue(curlOption));
+			auto value = std::any_cast<curl_slist*>(
+                curlInterface.get().getOptionValue(curlOption));
 			return value != nullptr;
 		}
         catch (const std::bad_any_cast& e) {

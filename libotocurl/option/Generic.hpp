@@ -6,6 +6,7 @@
 
 #include <curl/curl.h>
 
+#include <functional>
 #include <tuple>
 #include <type_traits>
 		
@@ -36,6 +37,9 @@ namespace otocurl::option {
 
     private:
         CURLoption curlOption; ///< The CURLOPT that shall be set
+
+        /// @brief The curl interface for which this option shall be set
+        std::reference_wrapper<wrapper::Easy> curlInterface;
 
         /**
          * @brief Storage for variadic template arguments

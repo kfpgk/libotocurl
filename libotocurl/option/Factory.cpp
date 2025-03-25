@@ -17,7 +17,7 @@ namespace otocurl::option {
     }
 
     std::unique_ptr<Collection> Factory::createCollection() const {
-        return std::make_unique<Collection>(curlInterface);
+        return std::make_unique<Collection>();
     }
 
     std::unique_ptr<Nobody> Factory::createNobody() const {
@@ -29,13 +29,10 @@ namespace otocurl::option {
     }
 
     std::unique_ptr<Quote> Factory::createQuote() const {
-
         return std::make_unique<Quote>(curlInterface, "");
     }
 
-    std::unique_ptr<Quote> Factory::createQuote(
-        const std::string& command) const {
-
+    std::unique_ptr<Quote> Factory::createQuote(const std::string& command) const {
         return std::make_unique<Quote>(curlInterface, command);
     }
 
@@ -44,21 +41,15 @@ namespace otocurl::option {
         return std::make_unique<Quote>(curlInterface, "", nullptr);
     }
 
-    std::unique_ptr<Quote> Factory::createVolatileQuote(
-        const std::string& command) const {
-
+    std::unique_ptr<Quote> Factory::createVolatileQuote(const std::string& command) const {
         return std::make_unique<Quote>(curlInterface, command, nullptr);
     }
 
-    std::unique_ptr<Upload> Factory::createUpload(
-        bool targetValue) const {
-        
+    std::unique_ptr<Upload> Factory::createUpload(bool targetValue) const {
         return std::make_unique<Upload>(curlInterface, targetValue);
     }
 
-    std::unique_ptr<Upload> Factory::createVolatileUpload(
-        bool targetValue) const {
-        
+    std::unique_ptr<Upload> Factory::createVolatileUpload(bool targetValue) const {
         return std::make_unique<Upload>(curlInterface, targetValue, false);
     }
 

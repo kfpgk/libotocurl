@@ -6,13 +6,7 @@ package option {
 
     interface "Option" as CurlOption {
         == public ==
-        Option(wrapper::Easy&)
-        ..
-        + setInterface(wrapper::Easy&) : void
-        + set() : void
-        == private ==
-        - curlInterface : wrapper::Easy&
-        
+        + set() : void      
     }
 
     class "OptionFactory" as CurlOptionFactory {
@@ -61,7 +55,7 @@ package option {
         == private ==
         - previous : T
         - {abstract} setTo(T) : void
-        - {abstract} getValue() : T
+        - {abstract} getTargetValue() : T
     }
 
     class "OptionCollection" as CurlOptionCollection {
@@ -78,6 +72,7 @@ package option {
         ..
         + set() : void
         == private ==
+        - curlInterface : wrapper::Easy&
         - value : string
     }
     class "<<Option2>>" as CurlConcreteOption2 {
@@ -88,6 +83,7 @@ package option {
         + set() : void
         + reset() : void
         == private ==
+        - curlInterface : wrapper::Easy&
         - value : bool
         - setTo(bool) : void
     }
@@ -100,9 +96,10 @@ package option {
         + undo() : void
         + reset() : void
         == private ==
+        - curlInterface : wrapper::Easy&
         - value : A
         - setTo(A) : void
-        - getValue() : A
+        - getTargetValue() : A
     }
     class "<<Option4>>" as CurlConcreteOption4 {
         == public ==
@@ -110,10 +107,11 @@ package option {
         ..
         + set() : void
         + undo() : void
+        - curlInterface : wrapper::Easy&
         == private ==
         - value : string
         - setTo(string) : void
-        - getValue() : string
+        - getTargetValue() : string
     }
 }
 

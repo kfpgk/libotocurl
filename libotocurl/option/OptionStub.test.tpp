@@ -7,7 +7,6 @@ namespace otocurl::option::unit_test {
 
     template<typename T>
     OptionStub<T>::OptionStub(T targetValue, T initialValue) noexcept :
-        Option(easyStub),
         UndoableOptionImpl<T>(initialValue),
         targetValue{ targetValue },
         stubbedCURLOPTvalue{ initialValue } {
@@ -16,9 +15,8 @@ namespace otocurl::option::unit_test {
 
     template<typename T>
     OptionStub<T>::OptionStub(T targetValue, T initialValue, T resetValue) noexcept:
-        Option(easyStub),
-        ResettableOption(resetValue),
-        UndoableOptionImpl(initialValue),
+        ResettableOption<T>(resetValue),
+        UndoableOptionImpl<T>(initialValue),
         targetValue{ targetValue },
         stubbedCURLOPTvalue{ initialValue } {
 

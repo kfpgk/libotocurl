@@ -2,7 +2,6 @@
 #define LIBOTOCURL_OPTION_COLLECTION_HPP
 
 #include <libotocurl/option/Option.hpp>
-#include <libotocurl/wrapper/Easy.hpp>
 
 #include <memory>
 #include <deque>
@@ -25,13 +24,6 @@ namespace otocurl::option {
     class Collection : public Option {
 
     public:
-        /**
-         * @brief Constructor
-         * 
-         * @param[in] curlInterface The curl interface for which all options will be set
-         */
-        explicit Collection(wrapper::Easy& curlInterface) noexcept;
-
         /**
          * @brief Add an option to the collection
          * 

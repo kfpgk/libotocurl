@@ -7,6 +7,8 @@
 
 #include <curl/curl.h>
 
+#include <functional>
+
 namespace otocurl::option {
 
     namespace unit_test {
@@ -50,6 +52,9 @@ namespace otocurl::option {
     private:
         /// @brief The CURLOPT identifier
         static constexpr CURLoption curlOption = CURLOPT_VERBOSE;
+
+        /// @brief The curl interface for which this option shall be set
+        std::reference_wrapper<wrapper::Easy> curlInterface;
 
         bool targetValue; ///< The target targetValue of the option when being set
 

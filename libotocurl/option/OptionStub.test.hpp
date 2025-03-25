@@ -3,7 +3,6 @@
 
 #include <libotocurl/option/ResettableOption.hpp>
 #include <libotocurl/option/UndoableOptionImpl.hpp>
-#include <libotocurl/wrapper/EasyStub.test.hpp>
 
 namespace otocurl::option::unit_test {
 
@@ -55,9 +54,6 @@ namespace otocurl::option::unit_test {
         T targetValue; ///< The target value of the option when being set
 
         T stubbedCURLOPTvalue; ///< Represents the targetValue of a CURLOPT in libcurl for testing
-
-        /// @brief Stub for curl easys interface, needed by base class
-        wrapper::unit_test::EasyStub easyStub; 
 
         /**
          * @brief Returns the target targetValue
