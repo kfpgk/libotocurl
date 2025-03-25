@@ -18,6 +18,9 @@ int main(int argc, char* argv[]) {
 
 	test.testUndo();
 	
+	test.testReset();
+	test.testResetWithoutResetValue();
+
 	log(LogLevel::Result, "option::Quote: passed");
 	return 0;
 }
@@ -56,6 +59,35 @@ namespace otocurl::option::unit_test {
 		option.undo();
 
 		assert(!option.actualOptionHoldsList());
+	}
+
+	void QuoteTest::testReset() const {
+		log("Running ", LogRequest::functionName());
+
+		bool value = false;
+		bool resetValue = true;
+
+		wrapper::unit_test::EasyStub easyStub;
+		option::Quote option(option::Quote(easyStub, "CWD /", NULL));
+
+		option.set();
+		option.reset();
+
+		assert(!option.actualOptionHoldsList());
+	}
+
+	void QuoteTest::testResetWithoutResetValue() const {
+		log("Running ", LogRequest::functionName());
+
+		bool value = true;
+
+		wrapper::unit_test::EasyStub easyStub;
+		option::Quote option(option::Quote(easyStub, "CWD /"));
+
+		option.set();
+		option.reset();
+
+		assert(option.actualOptionHoldsList());
 	}
 
 }

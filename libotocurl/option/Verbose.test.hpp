@@ -34,6 +34,15 @@ namespace otocurl::option::unit_test {
 		 */
 		void testUndo() const;
 
+		/**
+		 * @brief Test `reset()`
+		 */
+		void testReset() const;
+
+		/**
+		 * @brief Test `reset()` without reset value
+		 */
+		void testResetWithoutResetValue() const;
 	};
 
 }

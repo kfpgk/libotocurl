@@ -19,6 +19,9 @@ int main(int argc, char* argv[]) {
 	test.testSetToTrue();
 
 	test.testUndo();
+
+	test.testReset();
+	test.testResetWithoutResetValue();
 	
 	log(LogLevel::Result, "option::Nobody: passed");
 	return 0;
@@ -86,6 +89,35 @@ namespace otocurl::option::unit_test {
 		option.undo();
 
 		assert(option.getActualValue() == false);
+	}
+
+	void NobodyTest::testReset() const {
+		log("Running ", LogRequest::functionName());
+
+		bool value = false;
+		bool resetValue = true;
+
+		wrapper::unit_test::EasyStub easyStub;
+		option::Nobody option(option::Nobody(easyStub, value, resetValue));
+
+		option.set();
+		option.reset();
+
+		assert(option.getActualValue() == true);
+	}
+
+	void NobodyTest::testResetWithoutResetValue() const {
+		log("Running ", LogRequest::functionName());
+
+		bool value = true;
+
+		wrapper::unit_test::EasyStub easyStub;
+		option::Nobody option(option::Nobody(easyStub, value));
+
+		option.set();
+		option.reset();
+
+		assert(option.getActualValue() == true);
 	}
 
 }

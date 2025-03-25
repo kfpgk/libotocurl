@@ -14,8 +14,26 @@ target_sources(libotocurl
 if(BUILD_UNIT_TESTS)
     enable_testing()
 
+    add_executable(OptionCollection_test
+        ../wrapper/EasyStub.test.cpp
+        Collection.test.cpp
+    )
+    target_include_directories(OptionCollection_test
+        PRIVATE
+            ${CMAKE_SOURCE_DIR}
+            ${LIBCURL_INCLUDE_DIR}
+    )
+    target_link_libraries(OptionCollection_test
+        PRIVATE
+            libotocurl
+    )
+    add_test(
+        NAME "UT option::Collection"
+        COMMAND OptionCollection_test
+    )
+
     add_executable(OptionInvoker_test
-    ../wrapper/EasyStub.test.cpp
+        ../wrapper/EasyStub.test.cpp
         Invoker.test.cpp
     )
     target_include_directories(OptionInvoker_test
