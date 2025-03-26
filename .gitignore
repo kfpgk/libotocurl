@@ -3,3 +3,7 @@ out
 
 .vs
 .vscode
+
+doxygen
+
+CMakeSettings.json
