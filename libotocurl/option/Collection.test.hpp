@@ -3,9 +3,15 @@
 
 namespace otocurl::option::unit_test {
 
+	/**
+     * @brief Unit test `Collection`
+     */
 	class CollectionTest {
 
 	public:
+		/*
+		 * @brief Test setting multiple options as part of a `Collection`
+		 */
 		void testSet() const;
 
 	};

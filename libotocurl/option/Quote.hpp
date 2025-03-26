@@ -20,7 +20,9 @@ namespace otocurl::option {
     /**
      * @brief Wrapper for CURLOPT_QUOTE
      * 
-     * This option is both resettable and undoable.
+     * This option is both resettable and undoable. A CURLOPT_QUOTE holds a list
+     * of protocol specific commands. These commands will be executed upon the next
+     * `perform` action, before starting the actual transfer.
      * 
      * @details
      * Patterns:
@@ -37,7 +39,8 @@ namespace otocurl::option {
          * destruction.
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set 
-         * @param[in] targetValue The target value of the option when being set
+         * @param[in] command An initial command added to the option. Additional commands 
+         * can be added using the `addCommand()` method.
          */
         explicit Quote(wrapper::Easy& curlInterface, const std::string_view command);
 
@@ -46,7 +49,8 @@ namespace otocurl::option {
          * object destruction.
          * 
          * @param[in] curlInterface The curl interface for which this option shall be set 
-         * @param[in] targetValue The target value of the option when being set
+         * @param[in] command An initial command added to the option. Additional commands
+         * can be added using the `addCommand()` method.
          * @param[in] resetValue The reset value of the option when being destructed
          */
         Quote(wrapper::Easy& curlInterface,
@@ -60,6 +64,8 @@ namespace otocurl::option {
 
         /**
          * @brief Add a command to the CURLOPT_QUOTE option
+         * 
+         * @parami[in] command The command to be added to the list of commands
          */
         void addCommand(const std::string_view command);
 
@@ -76,6 +82,8 @@ namespace otocurl::option {
          * @brief Returns the target targetValue
          * 
          * Needed for undo functionality
+         * 
+         * @return A pointer to a command list data structure
          */
         [[nodiscard]] wrapper::SList* getTargetValue() const override;
 
