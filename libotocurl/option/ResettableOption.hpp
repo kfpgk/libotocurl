@@ -9,6 +9,11 @@ namespace otocurl::option {
 
     /**
      * @brief Implementation of a CURLOPT that supports reset functionality
+     * 
+     * @details
+     * Patterns
+     *  - Command
+     *  - Template
      */
     template<typename T> 
     class ResettableOption : virtual public Option {

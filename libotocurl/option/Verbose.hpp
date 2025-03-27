@@ -18,6 +18,7 @@ namespace otocurl::option {
     /**
      * @brief Wrapper for CURLOPT_VERBOSE
      * 
+     * @details
      * Patterns:
      *  - Command
      *  - Template
