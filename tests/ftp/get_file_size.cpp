@@ -1,13 +1,13 @@
 #include <tests/ftp/GetFileSize.hpp>
-#include <tests/config/config.h>
+#include <tests/config/config.hpp>
 
-namespace test = filesync::integration_test;
+namespace test = otocurl::integration_test;
 
 int main(int argc, char* argv[]) {
 
-    test::curl::ftp::GetFileSize test("curl ftp get file size",
-        LIBFILESYNC_TEST_FTP_SERVER,
-        LIBFILESYNC_TEST_FTP_SERVER_DIR);
+    test::ftp::GetFileSize test("curl ftp get file size",
+        std::string(test::config::testFtpServer),
+        std::string(test::config::testFtpServerDir));
 
     test.run();
 

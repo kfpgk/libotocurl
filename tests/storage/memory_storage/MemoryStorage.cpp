@@ -1,23 +1,26 @@
 #include <tests/storage/memory_storage/MemoryStorage.hpp>
 #include <libotocurl/FtpClient.hpp>
-#include <libotocurl/FileSyncException.hpp>
+#include <libotocurl/Exception.hpp>
 #include <libotocurl/utility/Literals.hpp>
 
 #include <filesystem>
 #include <fstream>
+#include <iostream>
 #include <memory>
 #include <string>
 
-using namespace filesync::utility::literals;
+using namespace otocurl::utility::literals;
 
-namespace filesync::integration_test::curl::storage::memory_storage {
+namespace otocurl::integration_test::storage::memory_storage {
+
+    using namespace cpptest::integration_test;
 
     constexpr auto separator = std::filesystem::path::preferred_separator;
 
     MemoryStorage::MemoryStorage(const std::string& name,
         const std::string& server,
         const std::string& pathOnServer) :
-            IntegrationTest{name},
+            MultiTest{ name },
             server{server},
             pathOnServer{pathOnServer},
             file1Name{"file1"},
@@ -71,15 +74,17 @@ namespace filesync::integration_test::curl::storage::memory_storage {
             file1 << file1Content;
         }
         {
-            filesync::curl::FtpClient curlProto(server);
+            otocurl::FtpClient curlProto(server);
             curlProto.setLocalFileForUpload(file1Name);
-            curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+            curlProto.setRemoteFile(
+                (std::filesystem::path(pathOnServer) / file1Name).string());
             curlProto.upload();
         }
 
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         data1 = curlProto.getDownloadAsCharVector();
     }
@@ -106,24 +111,25 @@ namespace filesync::integration_test::curl::storage::memory_storage {
                 std::cout << i;
             }
             std::cout << std::endl;
-            throw FileSyncException("Download to memory does not have correct content.",
-                __FILE__, __LINE__);
+            throw Exception("Download to memory does not have correct content.");
         }
     }
 
     void MemoryStorage::performUpload() {
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
 
         expectedRef2 = {testCase2Content.begin(), testCase2Content.end()};
         curlProto.setInMemoryDataForUpload(expectedRef2);
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.upload();
     }
 
     void MemoryStorage::evaluateUpload() {
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         dataHandle1 = curlProto.takeDownloadMemory();
 
@@ -149,8 +155,7 @@ namespace filesync::integration_test::curl::storage::memory_storage {
                 std::cout << i;
             }
             std::cout << std::endl;
-            throw FileSyncException("Upload from memory does not have correct content.",
-                __FILE__, __LINE__);
+            throw Exception("Upload from memory does not have correct content.");
         }
     }
 
@@ -160,32 +165,37 @@ namespace filesync::integration_test::curl::storage::memory_storage {
             file1 << file1Content;
         }
         {
-            filesync::curl::FtpClient curlProto(server);
+            otocurl::FtpClient curlProto(server);
             curlProto.setLocalFileForUpload(file1Name);
-            curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+            curlProto.setRemoteFile(
+                (std::filesystem::path(pathOnServer) / file1Name).string());
             curlProto.upload();
         }
 
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         dataHandle1 = curlProto.takeDownloadMemory();
 
         curlProto.setInMemoryDataForUpload(dataHandle1->data());
-        curlProto.setRemoteFile(pathOnServer + separator + file2Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file2Name).string());
         curlProto.upload();
     }
 
     void MemoryStorage::evaluateReUpload() {
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         dataHandle1 = curlProto.takeDownloadMemory();
 
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file2Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file2Name).string());
         curlProto.download();
         dataHandle2 = curlProto.takeDownloadMemory();
 
@@ -213,8 +223,7 @@ namespace filesync::integration_test::curl::storage::memory_storage {
                 std::cout << i;
             }
             std::cout << std::endl;
-            throw FileSyncException("Re-Upload from memory does not have correct content.",
-                __FILE__, __LINE__);
+            throw Exception("Re-Upload from memory does not have correct content.");
         }
     }
 
@@ -224,25 +233,29 @@ namespace filesync::integration_test::curl::storage::memory_storage {
             file1 << file1Content;
         }
         {
-            filesync::curl::FtpClient curlProto(server);
+            otocurl::FtpClient curlProto(server);
             curlProto.setLocalFileForUpload(file1Name);
-            curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+            curlProto.setRemoteFile(
+                (std::filesystem::path(pathOnServer) / file1Name).string());
             curlProto.upload();
         }
 
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
 
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         dataHandle2 = curlProto.takeDownloadMemory();
 
         curlProto.setInMemoryDataForUpload(dataHandle1->data());
-        curlProto.setRemoteFile(pathOnServer + separator + file2Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file2Name).string());
         curlProto.upload();
 
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file2Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file2Name).string());
         curlProto.download();
         dataHandle2 = curlProto.takeDownloadMemory();
     }
@@ -272,8 +285,7 @@ namespace filesync::integration_test::curl::storage::memory_storage {
                 std::cout << i;
             }
             std::cout << std::endl;
-            throw FileSyncException("Re-Upload from memory does not have correct content.",
-                __FILE__, __LINE__);
+            throw Exception("Re-Upload from memory does not have correct content.");
         }
     }
 
@@ -285,15 +297,17 @@ namespace filesync::integration_test::curl::storage::memory_storage {
             file1Size = std::filesystem::file_size(file1Name);
         }
         {
-            filesync::curl::FtpClient curlProto(server);
+            otocurl::FtpClient curlProto(server);
             curlProto.setLocalFileForUpload(file1Name);
-            curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+            curlProto.setRemoteFile(
+                (std::filesystem::path(pathOnServer) / file1Name).string());
             curlProto.upload();
         }
         
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         dataHandle1 = curlProto.takeDownloadMemory();
 
@@ -331,8 +345,7 @@ namespace filesync::integration_test::curl::storage::memory_storage {
                 std::cout << i;
             }
             std::cout << std::endl;
-            throw FileSyncException("Re-Upload from memory does not have correct content.",
-                __FILE__, __LINE__);
+            throw Exception("Re-Upload from memory does not have correct content.");
         }
     }
 
@@ -345,34 +358,39 @@ namespace filesync::integration_test::curl::storage::memory_storage {
             file1Size = std::filesystem::file_size(file1Name);
         }
         {
-            filesync::curl::FtpClient curlProto(server);
+            otocurl::FtpClient curlProto(server);
 
             curlProto.setLocalFileForUpload(file1Name);
-            curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+            curlProto.setRemoteFile(
+                (std::filesystem::path(pathOnServer) / file1Name).string());
             curlProto.upload();
             
             curlProto.prepareDownloadToMemory();
-            curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+            curlProto.setRemoteFile(
+                (std::filesystem::path(pathOnServer) / file1Name).string());
             curlProto.download();
             dataHandle1 = curlProto.takeDownloadMemory();
         }
 
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.setInMemoryDataForUpload(dataHandle1->data());
-        curlProto.setRemoteFile(pathOnServer + separator + file2Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file2Name).string());
         curlProto.upload();
 
     }
 
     void MemoryStorage::evaluateLargeUpload() {
-        filesync::curl::FtpClient curlProto(server);
+        otocurl::FtpClient curlProto(server);
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file1Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file1Name).string());
         curlProto.download();
         dataHandle1 = curlProto.takeDownloadMemory();
 
         curlProto.prepareDownloadToMemory();
-        curlProto.setRemoteFile(pathOnServer + separator + file2Name);
+        curlProto.setRemoteFile(
+            (std::filesystem::path(pathOnServer) / file2Name).string());
         curlProto.download();
         dataHandle2 = curlProto.takeDownloadMemory();
 
@@ -400,8 +418,7 @@ namespace filesync::integration_test::curl::storage::memory_storage {
                 std::cout << i;
             }
             std::cout << std::endl;
-            throw FileSyncException("Large upload from memory does not have correct content.",
-                __FILE__, __LINE__);
+            throw Exception("Large upload from memory does not have correct content.");
         }
     }
 

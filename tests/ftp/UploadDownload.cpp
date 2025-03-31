@@ -1,30 +1,36 @@
 #include <tests/ftp/UploadDownload.hpp>
 #include <libotocurl/FtpClient.hpp>
-#include <libotocurl/FileSyncException.hpp>
+#include <libotocurl/Exception.hpp>
 
-#include <iostream>
+#include <libcpptest/integration_test/MultiTest.hpp>
+
+#include <filesystem>
 #include <fstream>
 #include <functional>
-#include <filesystem>
+#include <iostream>
+#include <string>
 
-namespace filesync::integration_test::curl::ftp {
+namespace otocurl::integration_test::ftp {
 
-    constexpr auto separator = std::filesystem::path::preferred_separator;
+    using namespace cpptest::integration_test;
 
     UploadDownload::UploadDownload(const std::string& testName,
         const std::string& server,
         const std::string& pathOnServer) :
-            IntegrationTest(testName),
+            MultiTest(testName),
             server{server},
             pathOnServer{pathOnServer},
             file1Name{"file1"},
-            file1RemotePath{pathOnServer + separator + file1Name},
+            file1RemotePath{ 
+                (std::filesystem::path(pathOnServer) / file1Name).string() },
             file1Content{"file1 content"},
             file2Name{"file2"},
-            file2RemotePath{pathOnServer + separator + file2Name},
+            file2RemotePath{
+                (std::filesystem::path(pathOnServer) / file2Name).string() },
             file2Content{"file2 content"},
             binaryFile1Name{"file1.bin"},
-            binaryFile1RemotePath{pathOnServer + separator + binaryFile1Name},
+            binaryFile1RemotePath{
+                (std::filesystem::path(pathOnServer) / binaryFile1Name).string() },
             binaryFile1Content{42},
             binaryFile2Name{"file2.bin"} {
 
@@ -117,8 +123,7 @@ namespace filesync::integration_test::curl::ftp {
     void UploadDownload::setup() {
         std::ofstream localFile(file1Name);
         if (!localFile.is_open()) {
-            throw FileSyncException("Cannot open local file for writing.",
-                __FILE__, __LINE__);
+            throw Exception("Cannot open local file for writing.");
         }
         localFile << file1Content << std::endl;
         localFile.close();
@@ -128,7 +133,7 @@ namespace filesync::integration_test::curl::ftp {
     }
 
     void UploadDownload::performUploadUninitialized() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         exceptionThrown = false;
         try {
@@ -140,13 +145,12 @@ namespace filesync::integration_test::curl::ftp {
 
     void UploadDownload::evaluateUploadUninitialized() {
         if (!exceptionThrown) {
-            throw FileSyncException("Uninitialized upload() unexpectedly did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("Uninitialized upload() unexpectedly did not throw exception.");
         }          
     }
 
     void UploadDownload::performUploadInitNonExistingLocal() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file2RemotePath);
        
@@ -162,14 +166,13 @@ namespace filesync::integration_test::curl::ftp {
 
     void UploadDownload::evaluateUploadInitNonExistingLocal() {
         if (!exceptionThrown) {
-            throw FileSyncException("upload() with non existing local file during "\
-                "initialization unexpectedly did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("upload() with non existing local file during "\
+                "initialization unexpectedly did not throw exception.");
         }          
     }
 
     void UploadDownload::performUploadNonExistingLocal() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file2RemotePath);
         std::ofstream localFile(file2Name);
@@ -182,18 +185,17 @@ namespace filesync::integration_test::curl::ftp {
     }
 
     void UploadDownload::evaluateUploadNonExistingLocal() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
         client.setRemoteFile(file2RemotePath);
         if (!client.remoteEntryExists()) {
-            throw FileSyncException("upload() with non existing local file during "\
-                "upload did not upload empty file as expected.",
-                __FILE__, __LINE__);
+            throw Exception("upload() with non existing local file during "\
+                "upload did not upload empty file as expected.");
         }
         client.deleteRemoteFile();          
     }
 
     void UploadDownload::performUploadInitializedForDownload() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file2RemotePath);
         client.createLocalFileForDownload(file2Name);
@@ -207,14 +209,13 @@ namespace filesync::integration_test::curl::ftp {
 
     void UploadDownload::evaluateUploadInitializedForDownload() {
         if (!exceptionThrown) {
-            throw FileSyncException("upload() with local file path initialized "\
-            "for download unexpectedly did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("upload() with local file path initialized " \
+            "for download unexpectedly did not throw exception.");
         }        
     }
 
     void UploadDownload::performDownloadUninitialized() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         exceptionThrown = false;
         try {
@@ -226,14 +227,13 @@ namespace filesync::integration_test::curl::ftp {
 
     void UploadDownload::evaluateDownloadUninitialized() {
         if (!exceptionThrown) {
-            throw FileSyncException("download() with uninitialized local and remote paths"\
-            "unexpectedly did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("download() with uninitialized local and remote paths" \
+            "unexpectedly did not throw exception.");
         }            
     }
 
     void UploadDownload::performDownloadNonExistingRemote() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file2RemotePath);
         client.createLocalFileForDownload(file2Name);
@@ -249,14 +249,13 @@ namespace filesync::integration_test::curl::ftp {
 
     void UploadDownload::evaluateDownloadNonExistingRemote() {
         if (!exceptionThrown) {
-            throw FileSyncException("download() non existing remote file unexpectedly "\
-                "did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("download() non existing remote file unexpectedly "\
+                "did not throw exception.");
         }          
     }
 
     void UploadDownload::performDownloadUndefinedRemote() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.createLocalFileForDownload(file2Name);
 
@@ -272,14 +271,13 @@ namespace filesync::integration_test::curl::ftp {
     void UploadDownload::evaluateDownloadUndefinedRemote() {
         std::remove("localfile"); 
         if (!exceptionThrown) {
-            throw FileSyncException("download() with undefined remote path"\
-                "unexpectedly did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("download() with undefined remote path" \
+                "unexpectedly did not throw exception.");
         }     
     }
 
     void UploadDownload::performDownloadInitializedForUpload() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         std::ofstream localFile(file2Name);
         client.setLocalFileForUpload(file2Name);
@@ -296,14 +294,13 @@ namespace filesync::integration_test::curl::ftp {
 
     void UploadDownload::evaluateDownloadInitializedForUpload() {
         if (!exceptionThrown) {
-            throw FileSyncException("download() with local path initialized for "\
-                "upload unexpectedly did not throw exception.",
-                __FILE__, __LINE__);
+            throw Exception("download() with local path initialized for " \
+                "upload unexpectedly did not throw exception.");
         }         
     }
 
     void UploadDownload::performUpload() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setLocalFileForUpload(file1Name);
         client.setRemoteFile(file1RemotePath);
@@ -311,12 +308,11 @@ namespace filesync::integration_test::curl::ftp {
     }
 
     void UploadDownload::evaluateUpload() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file1RemotePath);
         if (!client.remoteEntryExists()) {
-            throw FileSyncException("File not found on server after upload",
-                __FILE__, __LINE__);
+            throw Exception("File not found on server after upload");
         }
         client.deleteRemoteFile();
     }
@@ -324,7 +320,7 @@ namespace filesync::integration_test::curl::ftp {
     void UploadDownload::performDownload() {
         
         auto localSetup = [this]() {
-            filesync::curl::FtpClient client(server);
+            otocurl::FtpClient client(server);
             client.setLocalFileForUpload(file1Name);
             client.setRemoteFile(file1RemotePath);
             client.upload();
@@ -332,7 +328,7 @@ namespace filesync::integration_test::curl::ftp {
 
         localSetup();
 
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
         client.createLocalFileForDownload(file2Name);
         client.setRemoteFile(file1RemotePath);
         client.download();
@@ -342,19 +338,18 @@ namespace filesync::integration_test::curl::ftp {
     void UploadDownload::evaluateDownload() {
         std::ifstream localFile(file2Name);
         if (!localFile.is_open()) {
-            throw FileSyncException("Could not open file for reading",
-                __FILE__, __LINE__);
+            throw Exception("Could not open file for reading");
         }
         std::string line;
         std::getline(localFile, line);
         if (line != file1Content) {
-            throw FileSyncException("Content of downloaded file did not meet expectation");
+            throw Exception("Content of downloaded file did not meet expectation");
         }
     }
 
     void UploadDownload::performUploadBinaryFile() {
 
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setLocalFileForUpload(binaryFile1Name);
         client.setRemoteFile(binaryFile1RemotePath);
@@ -363,12 +358,11 @@ namespace filesync::integration_test::curl::ftp {
     }
 
     void UploadDownload::evaluateUploadBinaryFile() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(binaryFile1RemotePath);
         if (!client.remoteEntryExists()) {
-            throw FileSyncException("File not found on server after upload",
-                __FILE__, __LINE__);
+            throw Exception("File not found on server after upload");
         }
         client.deleteRemoteFile();
     }
@@ -376,7 +370,7 @@ namespace filesync::integration_test::curl::ftp {
     void UploadDownload::performDownloadBinaryFile() {
 
         auto localSetup = [this]() {
-            filesync::curl::FtpClient client(server);
+            otocurl::FtpClient client(server);
             client.setLocalFileForUpload(binaryFile1Name);
             client.setRemoteFile(binaryFile1RemotePath);
             client.upload();
@@ -384,7 +378,7 @@ namespace filesync::integration_test::curl::ftp {
 
         localSetup();
 
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
         client.createLocalFileForDownload(binaryFile2Name);
         client.setRemoteFile(binaryFile1RemotePath);
         client.download();
@@ -396,13 +390,12 @@ namespace filesync::integration_test::curl::ftp {
         binFile.read(reinterpret_cast<char*>(&content), sizeof(int));
 
         if (content != binaryFile1Content) {
-            throw FileSyncException("Content of downloaded binary file is not as expected",
-                __FILE__, __LINE__);            
+            throw Exception("Content of downloaded binary file is not as expected");            
         }
     }
 
     void UploadDownload::cleanUp() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file1RemotePath);
         client.deleteRemoteFile();     

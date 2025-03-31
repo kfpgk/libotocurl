@@ -1,15 +1,18 @@
 #include <tests/storage/file_storage/FileStorage.hpp>
+#include <tests/storage/utility/FileOperations.hpp>
 #include <libotocurl/storage/FileStorage.hpp>
-#include <libotocurl/data/Data.hpp>
-#include <libotocurl/FileSyncException.hpp>
+#include <libotocurl/Exception.hpp>
 
 #include <filesystem>
 #include <fstream>
+#include <string>
 
-namespace filesync::integration_test::curl::storage::file_storage {
+namespace otocurl::integration_test::storage::file_storage {
+
+    using namespace cpptest::integration_test;
 
     FileStorage::FileStorage(const std::string& testName) :
-        IntegrationTest(testName),
+        MultiTest(testName),
         inputFile1Name{"file1"},
         inputFile1Content{"file 1 content"},
         inputFile2Name{"file2"},
@@ -60,9 +63,8 @@ namespace filesync::integration_test::curl::storage::file_storage {
     }
 
     void FileStorage::performSwap() {
-        namespace filesync = filesync::curl::storage;
-        filesync::FileStorage storage1(inputFile1Name);
-        filesync::FileStorage storage2(inputFile2Name);
+        otocurl::storage::FileStorage storage1(inputFile1Name);
+        otocurl::storage::FileStorage storage2(inputFile2Name);
 
         using std::swap;
         swap(storage1, storage2);
@@ -73,48 +75,43 @@ namespace filesync::integration_test::curl::storage::file_storage {
 
     void FileStorage::evaluateSwap() {
         if (!resultOfPath1 || !resultOfPath2) {
-            throw FileSyncException("File paths not as expected after swapping",
-                __FILE__, __LINE__);          
+            throw Exception("File paths not as expected after swapping");          
         }     
     }
 
     void FileStorage::performCopyConstruction() {
-        namespace filesync = filesync::curl::storage;
-        filesync::FileStorage storage1(inputFile1Name);
+        otocurl::storage::FileStorage storage1(inputFile1Name);
 
-        filesync::FileStorage storage2(storage1);
+        otocurl::storage::FileStorage storage2(storage1);
 
         std::filesystem::path file1FsPath(inputFile1Name);
         resultOfPath1 = storage1.getPath() == inputFile1Name;
         resultOfPath2 = 
             storage2.getPath() == 
-                std::string(file1FsPath.stem()) + 
+                file1FsPath.stem().string() +
                 "_copy" + 
-                std::string(file1FsPath.extension());
+                file1FsPath.extension().string();
         
-        resultOfIsEqual = data::areEqual(storage1.getPath(), storage2.getPath());
+        using namespace utility::file_operations;
+        resultOfIsEqual = areEqual(storage1.getPath(), storage2.getPath());
     }
 
     void FileStorage::evaluateCopyConstruction() {
         if (!resultOfPath1) {
-            throw FileSyncException("File path of constructed from object not as expected.",
-                __FILE__, __LINE__);          
+            throw Exception("File path of constructed from object not as expected.");          
         }     
         if (!resultOfPath2) {
-            throw FileSyncException("File path of constructed object not as expected.",
-                __FILE__, __LINE__);          
+            throw Exception("File path of constructed object not as expected.");          
         }        
         if (!resultOfIsEqual) {
-            throw FileSyncException("File contents are not equal after copy construction",
-                __FILE__, __LINE__);          
+            throw Exception("File contents are not equal after copy construction");          
         }
     }
 
     void FileStorage::performMoveConstruction() {
-        namespace filesync = filesync::curl::storage;
-        filesync::FileStorage storage1(inputFile1Name);
+        otocurl::storage::FileStorage storage1(inputFile1Name);
 
-        filesync::FileStorage storage2(std::move(storage1));
+        otocurl::storage::FileStorage storage2(std::move(storage1));
 
         resultOfPath1 = storage1.getPath() == "";
         resultOfPath2 = storage2.getPath() == inputFile1Name;
@@ -122,16 +119,14 @@ namespace filesync::integration_test::curl::storage::file_storage {
 
     void FileStorage::evaluateMoveConstruction() {
         if (!resultOfPath1 || !resultOfPath2) {
-            throw FileSyncException("File paths not as expected after move construction",
-                __FILE__, __LINE__);          
+            throw Exception("File paths not as expected after move construction");          
         }     
     }
 
     void FileStorage::performCopyAssignment() {
-        namespace filesync = filesync::curl::storage;
-        filesync::FileStorage storage1(inputFile1Name);
+        otocurl::storage::FileStorage storage1(inputFile1Name);
 
-        filesync::FileStorage storage2(inputFile2Name);
+        otocurl::storage::FileStorage storage2(inputFile2Name);
 
         storage2 = storage1;
 
@@ -139,33 +134,30 @@ namespace filesync::integration_test::curl::storage::file_storage {
         resultOfPath1 = storage1.getPath() == inputFile1Name;
         resultOfPath2 = 
             storage2.getPath() == 
-                std::string(file1FsPath.stem()) + 
+                file1FsPath.stem().string() +
                 "_copy" + 
-                std::string(file1FsPath.extension());
+                file1FsPath.extension().string();
         
-        resultOfIsEqual = data::areEqual(storage1.getPath(), storage2.getPath());
+        using namespace utility::file_operations;
+        resultOfIsEqual = areEqual(storage1.getPath(), storage2.getPath());
     }
 
     void FileStorage::evaluateCopyAssignment() {
         if (!resultOfPath1) {
-            throw FileSyncException("File path of constructed from object not as expected.",
-                __FILE__, __LINE__);          
+            throw Exception("File path of constructed from object not as expected.");          
         }     
         if (!resultOfPath2) {
-            throw FileSyncException("File path of constructed object not as expected.",
-                __FILE__, __LINE__);          
+            throw Exception("File path of constructed object not as expected.");          
         }         
         if (!resultOfIsEqual) {
-            throw FileSyncException("File contents are not equal after copy assignment",
-                __FILE__, __LINE__);          
+            throw Exception("File contents are not equal after copy assignment");          
         }
     }
 
     void FileStorage::performMoveAssignment() {
-        namespace filesync = filesync::curl::storage;
-        filesync::FileStorage storage1(inputFile1Name);
+        otocurl::storage::FileStorage storage1(inputFile1Name);
 
-        filesync::FileStorage storage2(inputFile2Name);
+        otocurl::storage::FileStorage storage2(inputFile2Name);
 
         storage2 = std::move(storage1);
 
@@ -175,8 +167,7 @@ namespace filesync::integration_test::curl::storage::file_storage {
 
     void FileStorage::evaluateMoveAssignment() {
         if (!resultOfPath1 || !resultOfPath2) {
-            throw FileSyncException("File paths not as expected after move construction",
-                __FILE__, __LINE__);          
+            throw Exception("File paths not as expected after move construction");          
         }     
     }
 

@@ -1,25 +1,30 @@
 #include <tests/ftp/GetFileSize.hpp>
 #include <libotocurl/FtpClient.hpp>
-#include <libotocurl/FileSyncException.hpp>
+#include <libotocurl/Exception.hpp>
+
+#include <libcpptest/integration_test/SingleTest.hpp>
 
 #include <filesystem>
 #include <fstream>
+#include <string>
 
-namespace filesync::integration_test::curl::ftp {
+namespace otocurl::integration_test::ftp {
 
-    constexpr auto separator = std::filesystem::path::preferred_separator;
+    using namespace cpptest::integration_test;
 
     GetFileSize::GetFileSize(const std::string& testName,
         const std::string& server,
         const std::string& pathOnServer) :
-            IntegrationTest(testName),
+            SingleTest(testName),
             server{server},
             pathOnServer{pathOnServer},
             file1Name{"file1"},
-            file1RemotePath{pathOnServer + separator + file1Name},
+            file1RemotePath{
+                (std::filesystem::path(pathOnServer) / file1Name).string() },
             file1Content{"file1 content"},
             binaryFile1Name{"file1.bin"},
-            binaryFile1RemotePath{pathOnServer + separator + binaryFile1Name},
+            binaryFile1RemotePath{
+                (std::filesystem::path(pathOnServer) / binaryFile1Name).string() },
             binaryFile1Content{42} {
 
     }
@@ -27,8 +32,7 @@ namespace filesync::integration_test::curl::ftp {
     void GetFileSize::setup() {
         std::ofstream localFile(file1Name);
         if (!localFile.is_open()) {
-            throw FileSyncException("Cannot open local file for writing.",
-                __FILE__, __LINE__);
+            throw Exception("Cannot open local file for writing.");
         }
         localFile << file1Content << std::endl;
         localFile.close();
@@ -39,7 +43,7 @@ namespace filesync::integration_test::curl::ftp {
         std::filesystem::resize_file(file1Name, file1Size);
         std::filesystem::resize_file(binaryFile1Name, binaryFile1Size);
 
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file1RemotePath);
         client.setLocalFileForUpload(file1Name);
@@ -52,7 +56,7 @@ namespace filesync::integration_test::curl::ftp {
 
     void GetFileSize::perform() {
 
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file1RemotePath);
         file1RetrievedSize = client.getRemoteFileSize();
@@ -64,17 +68,15 @@ namespace filesync::integration_test::curl::ftp {
 
     void GetFileSize::evaluate() {
         if (file1RetrievedSize != file1Size) {
-            throw FileSyncException("Retrieved text file size did not match.",
-                __FILE__, __LINE__);
+            throw Exception("Retrieved text file size did not match.");
         }
         if (binaryFile1RetrievedSize != binaryFile1Size) {
-            throw FileSyncException("Retrieved binary file size did not match.",
-                __FILE__, __LINE__);
+            throw Exception("Retrieved binary file size did not match.");
         }
     }
 
     void GetFileSize::cleanUp() {
-        filesync::curl::FtpClient client(server);
+        otocurl::FtpClient client(server);
 
         client.setRemoteFile(file1RemotePath);
         client.deleteRemoteFile();

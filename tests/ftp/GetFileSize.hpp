@@ -1,17 +1,18 @@
-#ifndef LIBFILESYNC_TESTS_CURL_FTP_GET_FILE_SIZE_HPP
-#define LIBFILESYNC_TESTS_CURL_FTP_GET_FILE_SIZE_HPP
+#ifndef LIBOTOCURL_TESTS_CURL_FTP_GET_FILE_SIZE_HPP
+#define LIBOTOCURL_TESTS_CURL_FTP_GET_FILE_SIZE_HPP
 
-#include <tests/template/IntegrationTest.hpp>
 #include <libotocurl/utility/Literals.hpp>
+
+#include <libcpptest/integration_test/SingleTest.hpp>
 
 #include <cstddef>
 #include <string>
 
-using namespace filesync::utility::literals;
+using namespace otocurl::utility::literals;
 
-namespace filesync::integration_test::curl::ftp {
+namespace otocurl::integration_test::ftp {
 
-    class GetFileSize : public IntegrationTest {
+    class GetFileSize : public cpptest::integration_test::SingleTest {
 
         public:
             explicit GetFileSize(const std::string& testName,
