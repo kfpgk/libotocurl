@@ -10,39 +10,30 @@ find_package(curl
     REQUIRED
 )
 
-find_path(LIBCURL_INCLUDE_DIR
+find_path(libcurl_INCLUDE_DIR
     "curl/curl.h"
     REQUIRED
 )
 
-find_package(LIBCPPLOG
+find_package(libcpplog
     NAMES
         cpplog
         libcpplog
     REQUIRED
 )
 
-find_package(LIBCPPTEST
-    NAMES
-        cpptest
-        libcpptest
-    REQUIRED
-)
+get_target_property(libcpplog_INCLUDE_DIR CPPLOG::libcpplog INTERFACE_INCLUDE_DIRECTORIES)
 
 target_include_directories(libotocurl
-    PUBLIC
-        ${LIBCPPLOG_INCLUDE_DIR}
     PRIVATE
-        ${CMAKE_SOURCE_DIR}
-        ${LIBCURL_INCLUDE_DIR}
-        ${LIBCPPTEST_INCLUDE_DIR}
+        "${CMAKE_SOURCE_DIR}"
+        "${libcpplog_INCLUDE_DIR}"
+        "${libcurl_INCLUDE_DIR}"
 )
 
 target_link_libraries(libotocurl
-    PUBLIC
-        ${LIBCPPLOG}
     PRIVATE
-        ${LIBCPPTEST}
+        CPPLOG::libcpplog
         CURL::libcurl
 )
 
@@ -61,8 +52,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(ProtocolClient_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(ProtocolClient_test
         PRIVATE

@@ -15,8 +15,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(FileStorage_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(FileStorage_test
         PRIVATE
@@ -32,8 +33,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(MemoryStorage_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(MemoryStorage_test
         PRIVATE
@@ -49,8 +51,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(MemoryStorageHandle_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(MemoryStorageHandle_test
         PRIVATE

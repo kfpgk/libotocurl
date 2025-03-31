@@ -20,8 +20,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(OptionCollection_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(OptionCollection_test
         PRIVATE
@@ -38,8 +39,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(OptionInvoker_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(OptionInvoker_test
         PRIVATE
@@ -56,8 +58,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(OptionNobody_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(OptionNobody_test
         PRIVATE
@@ -74,8 +77,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(OptionQuote_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(OptionQuote_test
         PRIVATE
@@ -92,8 +96,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(OptionUpload_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(OptionUpload_test
         PRIVATE
@@ -110,8 +115,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(OptionVerbose_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(OptionVerbose_test
         PRIVATE

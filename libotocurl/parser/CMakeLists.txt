@@ -14,8 +14,9 @@ if(BUILD_UNIT_TESTS)
     )
     target_include_directories(ParserStringOperations_test
         PRIVATE
-            ${CMAKE_SOURCE_DIR}
-            ${LIBCURL_INCLUDE_DIR}
+            "${CMAKE_SOURCE_DIR}"
+            "${libcpplog_INCLUDE_DIR}"
+            "${libcurl_INCLUDE_DIR}"
     )
     target_link_libraries(ParserStringOperations_test
         PRIVATE

@@ -21,3 +21,7 @@ add_subdirectory(libotocurl)
 if(BUILD_UNIT_TESTS OR BUILD_INTEGRATION_TESTS)
     enable_testing()
 endif()
+
+if(BUILD_INTEGRATION_TESTS)
+    add_subdirectory(tests)
+endif()
