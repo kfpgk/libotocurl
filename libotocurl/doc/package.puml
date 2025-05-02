@@ -48,7 +48,9 @@ ProtocolClient ..> wrapper : <<access>
 
 FileStorage ..> visitor : <<import>>
 MemoryStorage ..> visitor : <<import>>
-MemoryStorage ..> MemoryStorageHandle
+MemoryStorage ..> CharBuffer : <<access>>
+
+MemoryStorageHandle ..> MemoryStorage : <<access>>
 
 wrapper ..> libcurl : <<access>>
 
