@@ -1,0 +1,55 @@
+@startuml libfilesync-package
+
+title libfilesync Package Diagram
+
+package "Public Interface" as API
+
+package "protocol" {
+    [ProtocolClient]
+}
+
+package "option" {
+    [Factory]
+    [Option]
+}
+
+package "wrapper" {
+    [GlobalSetup]
+    [Easy]
+    [Base]
+    [Url]
+    [SList]
+}
+
+package "storage" {
+    [FileStorage]
+    [MemoryStorage]
+    [MemoryStorageHandle]
+    [CharBuffer]
+    package "visitor" {
+        [SetupWrite]
+        [SetupRead]
+        [Flush]
+    }
+}
+
+package "<<external>>" {
+    [libcurl]
+}
+
+API ..> ProtocolClient : <<access>>
+
+ProtocolClient ..> FileStorage : <<access>>
+ProtocolClient ..> MemoryStorage : <<access>>
+ProtocolClient ..> MemoryStorageHandle : <<import>>
+
+ProtocolClient ..> option : <<access>>
+ProtocolClient ..> wrapper : <<access>
+
+FileStorage ..> visitor : <<import>>
+MemoryStorage ..> visitor : <<import>>
+MemoryStorage ..> MemoryStorageHandle
+
+wrapper ..> libcurl : <<access>>
+
+@enduml
