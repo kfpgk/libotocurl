@@ -1,6 +1,6 @@
-@startuml curl-option-class-diagram
+@startuml option-class-diagram
 
-title CURL Option Class Diagram
+title libotocurl Option Class Diagram
 
 package option {
 
@@ -121,18 +121,18 @@ package wrapper {
     hide Easy methods
 }
 
-CurlOption <|.. CurlOptionCollection
-CurlOption "*" --o CurlOptionCollection
+CurlOptionCollection .|> CurlOption
+CurlOptionCollection o- "*" CurlOption
 
-CurlOption <|.. CurlResettableOption 
-CurlOption <|.. CurlUndoableOption
-CurlUndoableOption <|.. CurlUndoableOptionImpl
+CurlOption <|. CurlResettableOption 
+CurlOption <|. CurlUndoableOption
+CurlUndoableOption <|. CurlUndoableOptionImpl
 
 CurlOption <|.. CurlConcreteOption1
 CurlResettableOption <|-- CurlConcreteOption2
 CurlResettableOption <|-- CurlConcreteOption3
 CurlUndoableOptionImpl <|-- CurlConcreteOption3
-CurlUndoableOptionImpl <|-- CurlConcreteOption4
+CurlUndoableOptionImpl <|- CurlConcreteOption4
 
 CurlOptionCollection <-- "creates" CurlOptionFactory
 CurlConcreteOption1 <-- "creates" CurlOptionFactory
