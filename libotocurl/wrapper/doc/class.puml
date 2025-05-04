@@ -1,0 +1,54 @@
+@startuml wrapper-class-diagram
+
+title libotocurl wrapper Class Diagram
+
+package wrapper {
+    class "Url" as CurlUrl {
+        - handle : CURLU*
+        - urlPointer : char*
+        + getUrl() : char*
+        + getHost() : char*
+        + getScheme() : char*
+        + getPath() : char*
+        + setHost(string) : void
+        + setScheme(string) : void
+        + setPath(string) : void
+        + validate() : void
+    }
+    class "SList" as CurlSList {
+        - handle : curl_slist*
+        - contents : string[]
+        + isEmpty() : bool
+        + getSListPointer() : curl_slist*
+        + append(string) : void
+    }
+    class "Easy" as CurlEasy {
+        - handle : CURL*
+        - rc : CURLcode
+        - errorBuffer char[];
+        + setOption(CURLoption, Args&&...) : void
+        + run() : void
+    }
+    class "GlobalSetup\n<<Singleton>>" as CurlGlobalSetup {
+        + init() : void static
+    }
+    class "Base" as CurlBase
+}
+
+
+package "<<external/third_party>>\nlibcurl" as libcurl {}
+
+CurlBase <|-- CurlEasy  
+CurlBase <|-- CurlUrl
+CurlBase <|-- CurlSList
+CurlBase -> CurlGlobalSetup : init()
+
+ProtocolClient "1" o-- "1" CurlUrl
+ProtocolClient "1" o-- "1" CurlEasy
+
+CurlUrl --> libcurl
+CurlSList --> libcurl
+CurlEasy --> libcurl
+CurlGlobalSetup --> libcurl : curl_global_init()\ncurl_global_cleanup()
+
+@enduml
