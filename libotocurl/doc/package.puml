@@ -1,6 +1,6 @@
-@startuml libfilesync-package
+@startuml libotocurl-package
 
-title libfilesync Package Diagram
+title libotocurl Package Diagram
 
 package "Public Interface" as API
 
